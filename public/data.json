@@ -1,0 +1,110 @@
+{
+  "news": [
+    {
+      "title": "Por que o Brasil tem caído em ranking global de desigualdade de gênero",
+      "date": "06/03/2023",
+      "image": "n1",
+      "description": "'Progresso no mundo é lento, mas Brasil avança ainda mais devagar no combate à desigualdade de gênero', resume economista.",
+      "link": "https://g1.globo.com/mundo/noticia/2023/03/06/por-que-brasil-tem-caido-em-ranking-global-de-desigualdade-de-genero.ghtml"
+    },
+    {
+      "title": "Diferença salarial entre homens e mulheres vai a 22%, diz IBGE",
+      "date": "08/03/2023",
+      "image": "n2",
+      "description": "Mulheres brasileiras recebem, em média, 78% do salário masculino. A diferença de remuneração entre homens e mulheres, que vinha em tendência de queda até 2020, voltou a subir no país e atingiu 22% no fim de 2022",
+      "link": "https://www.cnnbrasil.com.br/economia/diferenca-salarial-entre-homens-e-mulheres-vai-a-22-diz-ibge/"
+    },
+    {
+      "title": "Os desafios do mercado de trabalho para as mulheres trans",
+      "date": "24/02/2022",
+      "image": "n3",
+      "description": "Thara Wells, ativista pelos direitos das pessoas trans, transgênero e travestis e presidente da Associação Transgêneros de Sorocaba, fala sobre preconceito que ainda existe contra trans, transgêneros e travestis na sociedade e, consequentemente, no mercado de trabalho.",
+      "link": "https://www.smetal.org.br/imprensa/opiniao-os-desafios-do-mercado-de-trabalho-para-as-mulheres-trans/20210322-103207-u586"
+    },
+    {
+      "title": "Dia da Mulher: preconceito dificulta inserção de mulheres trans no mercado de trabalho formal.",
+      "date": "08/03/2023",
+      "image": "n4",
+      "description": "Elas contaram suas histórias, dificuldades e sobre como superaram os obstáculos para entrar no mercado de trabalho. O G1 também ouviu especialistas que apontaram soluções.",
+      "link": "https://g1.globo.com/se/sergipe/noticia/2023/03/08/dia-da-mulher-preconceito-dificulta-insercao-de-mulheres-trans-no-mercado-de-trabalho-formal.ghtml"
+    },
+    {
+      "title": "Mulheres trans são proibidas de jogar na liga internacional de rugby feminino.",
+      "date": "21/06/2022",
+      "image": "n5",
+      "description": "Órgão global da Liga de Rugby proibiu mulheres transgênero de jogar em partidas internacionais femininas até novo aviso.",
+      "link": "https://www.cnnbrasil.com.br/esportes/mulheres-trans-sao-proibidas-de-jogar-na-liga-internacional-de-rugby-feminino/"
+    },
+    {
+      "title": " Mulheres negras perdem vagas de emprego durante a pandemia, aponta estudos.",
+      "date": "15/08/2021",
+      "image": "n6",
+      "description": " A pandemia do novo Coronavírus reduziu ainda mais a participação de mulheres negras no mercado de trabalho.",
+      "link": "https://www.cnnbrasil.com.br/economia/rio-atuacao-de-negras-no-mercado-de-trabalho-diminuiu-na-pandemia-diz-estudo/"
+    },
+    {
+      "title": "63% das mulheres negras já sofreram preconceitos em seleções de emprego, mostra pesquisa.",
+      "date": "03/06/2022",
+      "image": "n7",
+      "description": "89% das mulheres entrevistadas para seleção de emprego já tiveram alguma dificuldade no mercado de trabalho.",
+      "link": "https://g1.globo.com/trabalho-e-carreira/noticia/2022/06/03/63percent-das-mulheres-negras-ja-sofreram-preconceito-em-selecoes-de-emprego-mostra-pesquisa.ghtml"
+    },
+    {
+      "title": "Nefrologista carioca descobre a primeira médica negra do Brasil e fala de representatividade: 'O número ainda é baixo'.",
+      "date": "19/11/2020",
+      "image": "n8",
+      "description": "“O números de médicos negros ainda é baixo”, diz a médica cariosa Scyla Maria Reis.",
+      "link": "https://g1.globo.com/consciencia-negra/noticia/2020/11/19/nefrologista-carioca-descobre-a-primeira-medica-negra-do-brasil-e-fala-de-representatividade-numero-ainda-e-baixo.ghtml"
+    },
+    {
+      "title": "Conheça Alva Rosa, a primeira mulher indigena a obter o título de doutorado pela a Ufam. ",
+      "date": "08/03 /2023",
+      "image": "n9",
+      "description": "Alva dedica sua vida e profissão à luta pela educação indígena no Amazonas.",
+      "link": "https://g1.globo.com/am/amazonas/noticia/2023/03/08/conheca-alva-rosa-a-primeira-mulher-indigena-a-obter-o-titulo-de-doutorado-pela-ufam.ghtml"
+    },
+    {
+      "title": "Eleição 2022: Mulheres indígenas buscam mais representatividade na política.",
+      "date": "16/08/2022",
+      "image": "n10",
+      "description": "A busca de mulheres indígenas por mais espaço na política. A segunda reportagem da série especial do Jornal Hoje sobre eleições e representatividade fala sobre a busca de mulheres e indígenas por mais espaço na política.",
+      "link": "https://g1.globo.com/jornal-hoje/noticia/2022/08/16/eleicoes-2022-mulheres-e-indigenas-buscam-mais-representatividade-na-politica.ghtml"
+    },
+    {
+      "title": "Com deficiência e empoderadas: Mulheres refugiadas e migrantes recebem capacitação para o mercado de trabalho no Brasil.",
+      "date": "03/12/2020",
+      "image": "n11",
+      "description": "Aborda o tema da capacitação profissional de mulheres refugiadas e migrantes no Brasil, com o objetivo de empoderá-las e promover sua independência financeira. Além disso, destaca a importância de incluir mulheres com deficiência nesse processo de capacitação e inserção no mercado de trabalho",
+      "link": "https://www.acnur.org/portugues/2020/12/03/com-deficiencia-e-empoderadas-mulheres-refugiadas-e-migrantes-recebem-capacitacao-para-o-mercado-de-trabalho-no-brasil/"
+    },
+    {
+      "title": "Maioria de mulheres refugiadas está fora do mercado de trabalho em SP.",
+      "date": "19/06/2018",
+      "image": "n12",
+      "description": "O site agenciabrasil.ebc.com destaca que a maioria das mulheres refugiadas em São Paulo está fora do mercado de trabalho. Segundo dados de um relatório da Acnur e do Cáritas, apenas 14% das mulheres refugiadas em idade ativa estão empregadas. O artigo discute os desafios enfrentados por essas mulheres para conseguir trabalho, como a falta de qualificação profissional, a discriminação e a dificuldade em validar diplomas estrangeiros. Além disso, o texto ressalta a importância da capacitação profissional e da inclusão dessas mulheres no mercado de trabalho para promover sua autonomia e independência financeira.",
+      "link": "https://agenciabrasil.ebc.com.br/internacional/noticia/2018-06/maioria-de-mulheres-refugiadas-esta-fora-do-mercado-de-trabalho-em-sp"
+    },
+    {
+      "title": "Mulher com deficiência é mais vulnerável ao desemprego, baixa remuneração e violência",
+      "date": "14/07/2020",
+      "image": "n13",
+      "description": "O site institutoclaro.org.br aborda a vulnerabilidade das mulheres com deficiência no mercado de trabalho. O artigo destaca que essas mulheres enfrentam uma série de obstáculos, como a falta de acessibilidade, a discriminação e a falta de oportunidades de capacitação. Além disso, o texto aponta que as mulheres com deficiência têm mais dificuldade em encontrar empregos com remuneração adequada e sofrem mais violência no ambiente de trabalho. O artigo destaca a importância de políticas públicas e ações para promover a inclusão dessas mulheres no mercado de trabalho e garantir seus direitos",
+      "link": "https://www.institutoclaro.org.br/cidadania/nossas-novidades/reportagens/mulher-com-deficiencia-e-mais-vulneravel-ao-desemprego-baixa-remuneracao-e-violencia/"
+    },
+    {
+      "title": "A difícil inserção de pessoas com deficiência no mercado de trabalho.",
+      "date": "23/09/2020",
+      "image": "n14",
+      "description": "O site unicamp.br trata da dificuldade de inserção de pessoas com deficiência no mercado de trabalho. O artigo destaca que essas pessoas enfrentam uma série de obstáculos, como a falta de acessibilidade nas empresas e a discriminação no processo seletivo. Além disso, o texto aborda a importância da capacitação profissional e do desenvolvimento de habilidades para aumentar as chances de sucesso na busca por emprego. O artigo também ressalta a importância de políticas públicas e iniciativas privadas para promover a inclusão de pessoas com deficiência no mercado de trabalho.",
+      "link": "https://www.unicamp.br/unicamp/index.php/ju/noticias/2020/09/23/dificil-insercao-de-pessoas-com-deficiencia-no-mercado-de-trabalho"
+    },
+    {
+      "title": "Mulheres com deficiência contam: “fui contratada, mas a empresa me desprezou…”",
+      "date": "21/08/2018",
+      "image": "n15",
+      "description": "O site uol.com.br traz depoimentos de mulheres com deficiência que foram contratadas, mas sofreram discriminação e exclusão no ambiente de trabalho. O artigo destaca que essas mulheres enfrentam uma série de desafios, como a falta de acessibilidade e a discriminação no processo de seleção e promoção.",
+      "link": "https://www.uol.com.br/universa/noticias/redacao/2018/08/21/mulheres-com-deficiencia-contam-que-sao-desconsideradas-pelos-empregadores.htm?cmpid=copiaecola"
+    }
+  ],
+  "users":[]
+}
