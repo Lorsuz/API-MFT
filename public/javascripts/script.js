@@ -18,8 +18,6 @@ const response = await fetch('./../jsons/data.json');
 const data = await response.json();
 
 let productsView = '';
-let filteredProducts
-var quantidade = 0
 for (const card of data.news) {
   productsView += getProductView(card);
 }
@@ -31,7 +29,7 @@ document.querySelector('#cardNews').innerHTML = productsView;
 
 
 function searchProducts(query) {
-  const filteredProducts = data.news.filter(card =>
+ const filteredProducts = data.news.filter(card =>
     card.title.toLowerCase().includes(query.toLowerCase())
   );
   return filteredProducts;
@@ -39,7 +37,11 @@ function searchProducts(query) {
 
 function displayProducts(products) {
   const productsView = products.map(getProductView).join('');
-  document.querySelector('#cardNews').innerHTML = productsView;
+  if (products.length == 0) {
+    document.querySelector('#cardNews').innerHTML=`<p>Nenhuma Noticia encontrada!!</p>`
+  }else{
+    document.querySelector('#cardNews').innerHTML = productsView;
+  }
 }
 
 //  DISPLAY THE PRODUCTS
@@ -49,11 +51,10 @@ displayProducts(data.news);
 document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault();
   const query = document.querySelector('#search-box').value;
-  filteredProducts = searchProducts(query);
+  const filteredProducts = searchProducts(query);
   
   displayProducts(filteredProducts);
-  console.log(filteredProducts);
+
+
 });
-if (filteredProducts.length == 0) {
-  document.querySelector('#cardNews').innerHTML+=`<p>Nenhuma Noticia encontrada!!</p>`
-}
+
