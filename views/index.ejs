@@ -153,12 +153,12 @@
 						Precise em "Ler mais" para ser desviado para a Fonte original com
 						conteudo completo
 					</p>
-					<div class="search-box">
-						<input type="text" placeholder="Pesquisar" />
+					<form class="search-box">
+						<input type="text" id="search-box" placeholder="Pesquisar" />
 						<button type="submit">
 							<i class="fa-solid fa-magnifying-glass"></i>
 						</button>
-					</div>
+					</di>
 				</div>
 
 				<div class="container" id="cardNews"></div>
@@ -310,7 +310,7 @@
 		</script>
 		<script>
 			let divNews = document.querySelector("#cardNews");
-			fetch("data.json").then((response) => {
+			fetch("./jsons/data.json").then((response) => {
 				response.json().then((data) => {
 					data.news.map((card) => {
 						divNews.innerHTML += `
@@ -331,5 +331,7 @@
 				});
 			});
 		</script>
+    <script src="./javascripts/script.js" type="module"></script>
+
 	</body>
 </html>
