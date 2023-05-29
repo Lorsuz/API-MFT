@@ -1,7 +1,7 @@
 function getProductView(card) {
   return `<div class="card">
   <div class="box-img">
-    <div class="img"><img src="components/images/image-news/${card.image}.png" target="_blank" alt="">
+    <div class="img"><img src="${card.image}" target="_blank" alt="">
   </div>
   <span class="date">${card.date}</span>
 </div>

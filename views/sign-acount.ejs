@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: a;
+        src: url("Lovely\ Nathalie\ -\ Dafont.ttf");
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        font-family: Arial, Helvetica, sans-serif;
+        transition: 200ms cubic-bezier(0.7, 1.82, 0.965, 1);
+      }
+
+      :root {
+        --color_1: #bb0d0d;
+        --color_2: #960000;
+
+        --white: #ffffff;
+        --white300: #f7fafc;
+
+        --dark: #1a202c;
+        --input: #e8e8e8;
+      }
+
+      body {
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--white300);
+        padding: 100px 0;
+
+        transition: padding 300ms;
+      }
+
+      form {
+        box-sizing: border-box;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #ccc;
+        width: 90%;
+        max-width: 500px;
+        height: auto;
+        padding: 40px 30px;
+        display: flex;
+        background: var(--white);
+        flex-direction: column;
+        transition: 300ms;
+      }
+      form > div {
+        margin-bottom: 10px;
+      }
+
+      form input,
+      form textarea {
+        width: 100%;
+        height: 50px;
+        min-height: 50px;
+        border-radius: 5px;
+        display: block;
+        box-sizing: border-box;
+        resize: vertical;
+        transition: height 100ms, outline 1000ms;
+        transition-timing-function: ease-out;
+        font-size: 20px;
+        border: 1px solid #ccc;
+        padding-left: 15px;
+        margin: 10px 0 15px;
+        border: none;
+        outline: 1px solid var(--color_1);
+      }
+      form input:focus,
+      form textarea:focus {
+        transition: height 100ms, outline 1000ms;
+        transition-timing-function: ease-out;
+        outline: 1px solid var(--color_1);
+      }
+      form input[type="date"] {
+        resize: none;
+      }
+      form textarea {
+        padding-top: 13px;
+        max-height: 250px;
+      }
+
+      form textarea::-webkit-scrollbar {
+        width: 5px;
+      }
+      form textarea::-webkit-scrollbar-track {
+        background: transparent;
+        cursor: default;
+      }
+      form textarea::-webkit-scrollbar-thumb {
+        background-color: var(--color_1);
+        border-radius: 50px;
+      }
+      form textarea:focus::-webkit-scrollbar-thumb {
+        background-color: var(--color_1);
+        border-radius: 50px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        text-align: center;
+        color: var(--color_1);
+      }
+
+      h1 {
+        margin-bottom: 30px;
+        text-align: center;
+        color: var(--color_1);
+      }
+
+      label {
+        margin: 0;
+        display: block;
+        font-size: 20px;
+        color: var(--dark);
+        cursor: pointer;
+      }
+
+      input.submit {
+        font-size: 20px;
+        color: var(--white);
+        background: var(--color_1);
+        margin: 15px 0 20px 0;
+        cursor: pointer;
+        border: none;
+        outline: none;
+      }
+
+      input.submit:hover {
+        background: var(--color_2);
+      }
+
+      a {
+        color: var(--color_1);
+      }
+
+      form > span {
+        text-align: center;
+        margin-top: auto;
+        font-size: 1.2rem;
+        display: block;
+      }
+
+      @media (max-width: 700px) {
+        body {
+          padding: 50px 0;
+        }
+        form {
+          background-color: transparent;
+          box-shadow: none;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/user/register" method="post">
+      <h2>Seja muito bem vindo!</h2>
+      <h1>Registrar nova conta</h1>
+
+      <div>
+        <label for="nickname">Apelido:</label>
+        <input required name="nickname" type="text" id="nickname" value="Administrador" />
+        <span></span>
+      </div>
+
+      <div>
+        <label for="email">E-mail:</label>
+        <input required name="email" type="email" id="email" value="administrador@gmail.com"/>
+        <span></span>
+      </div>
+
+      <div>
+        <label for="password">Senha:</label>
+        <input required name="password" type="password" id="password" value="12345678"/>
+        <span></span>
+      </div>
+
+      <div>
+        <label for="confirmPassword">Confirme a senha:</label>
+        <input required type="password" id="confirmPassword" value="12345678"/>
+        <span></span>
+      </div>
+
+      <div>
+        <label for="birth">Data de nascimento:</label>
+        <input required name="birth" type="date" id="birth" value="2006-04-17"/>
+        <span></span>
+      </div>
+
+      <div>
+        <label for="description">Descrição:</label>
+        <textarea required name="description" id="description">Sou eu que mando aqui</textarea>
+        <span></span>
+      </div>
+
+      <input class="retangle submit" type="submit" value="Cadastrar" />
+
+      <span id="footer">
+        Já tem uma conta? <a href="/user/login">Entrar com existente</a>
+      </span>
+    </form>
+  </body>
+</html>

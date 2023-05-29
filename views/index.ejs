@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>ExistindoNews | HOME: MFT - Movimento_Feminista_Trabalhista</title>
 
-		<link rel="stylesheet" href="components/styles/style.css" />
+		<link rel="stylesheet" href="./stylesheets/style.css" />
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -18,23 +18,94 @@
 			<a href="#"><i class="fa-solid fa-bars"></i></a>
 			<ul>
 				<li><a href="#">Inicio</a></li>
-				<li><a href="#">Pages</a></li>
+				<li><a href="#">Desenvolvedores</a></li>
 				<li><a href="#">Suporte</a></li>
-				<li><a href="#">Contato</a></li>
+				<li><a href="">Apoie-nos</a></li>
 			</ul>
 			<ul class="">
-				<!-- <li>
-					<a href="#"><i class="fa-brands fa-instagram"></i></a>
-				</li>
-				<li>
-					<a href="#"><i class="fa-brands fa-twitter"></i></a>
-				</li>
-				<li>
-					<a href="#"><i class="fa-brands fa-tiktok"></i></a>
-				</li> -->
-				<li>
-					<a href="/users/register"><i class="fa-regular fa-user"></i></i></a>
-				</li>
+				<% if(loggedIn) { %>
+					<li class="profile">
+						<button id="profile">
+							<i class="fa-regular fa-user"></i></i>
+						</button>
+					</li>
+
+					<div class="nav-list">
+						<ul>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-user"></i>
+									<span>Perfil</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-pen-to-square"></i>
+									<span>Editar Perfil</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-image"></i>
+									<span>Galeria</span>
+								</a>
+							</li>
+							<li>
+								<a href="/news/add">
+									<i class="fa-solid fa-square-plus"></i>
+									<span>Adicionar Notícia</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-users"></i>
+									<span>Lista de usuarios</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-circle-info"></i>
+									<span>Suporte</span>
+								</a>
+							</li>
+							<li>
+								<a href="https://github.com/Lorsuz" target="_blank">
+									<i class="fa-sharp fa-solid fa-code"></i>
+									<span>Desenvolvedores</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-circle-dollar-to-slot"></i>
+									<span>Apoie-nos</span>
+								</a>
+							</li>
+						</ul>
+						<div class="log-out">
+							<a href="/user/logout">
+								<i class="fa-solid fa-right-from-bracket"></i>
+								<span>Sair</span>
+							</a>
+						</div>
+						<div class="footer">
+							<p>Copyright &copy; - Todos os direitos reservados!</p>
+						</div>
+					</div>
+				<% }else{ %>
+					<li class="button">
+						<a href="/user/register">
+							<i class="fa-solid fa-user"></i>
+							<span>Cadastrar</span>
+						</a>
+					</li>
+					<li class="button">
+						<a href="/user/login">
+							<i class="fa-solid fa-right-to-bracket"></i>
+							<span>Entrar</span>
+						</a>
+					</li>
+				<% } %>
+
 			</ul>
 		</nav>
 		<header>
@@ -44,7 +115,7 @@
 						<h2>Ultimas notícias</h2>
 						<div class="card">
 							<div class="img">
-								<img src="components/images/image-news/n1.png" alt="" />
+								<img src="images/image-news/n1.png" alt="" />
 							</div>
 							<div class="text">
 								<h3>
@@ -68,7 +139,7 @@
 						</div>
 						<div class="card">
 							<div class="img">
-								<img src="components/images/image-news/n2.png" alt="" />
+								<img src="images/image-news/n2.png" alt="" />
 							</div>
 							<div class="text">
 								<h3>
@@ -150,7 +221,7 @@
 				<div class="header-section">
 					<h1>InfoMais - Você sempre informado!</h1>
 					<p>
-						Precise em "Ler mais" para ser desviado para a Fonte original com
+						Pressione em "Ler mais" para ser desviado para a Fonte original com
 						conteudo completo
 					</p>
 					<form class="search-box">
@@ -158,10 +229,26 @@
 						<button type="submit">
 							<i class="fa-solid fa-magnifying-glass"></i>
 						</button>
-					</di>
+					</form>
+					<p> Total de <%= totalCards%> <%= plural%> </p>
 				</div>
 
-				<div class="container" id="cardNews"></div>
+				<div class="container" id="cardNews">
+					<% cards.forEach(function(card) { %>
+						<div class="card">
+						<div class="box-img">
+							<div class="img"><img src="<%= card.image %>" target="_blank" alt="">
+							</div>
+							<span class="date"><%= card.date %></span>
+						</div>
+						<div class="text">
+							<h3><%= card.title %></h3>
+							<p><%= card.description %></p>
+							<div class="more"><a href="<%= card.link %>" target="_blank"><span>Ler mais</span> <i class="fa-solid fa-arrow-right"></i></a></div>
+						</div>
+					</div>
+					<% }); %>
+				</div>
 			</section>
 		</main>
 
@@ -241,7 +328,7 @@
 				<p>Copyright © - Todos os direitos reservados.</p>
 			</div>
 		</footer>
-		<!-- <script src="components/scripts/script.js"></script> -->
+		<!-- <script src="scripts/script.js"></script> -->
 		<script>
 			var menuLinks = document.querySelectorAll('.right a[href^="#"]');
 
@@ -309,29 +396,50 @@
 			});
 		</script>
 		<script>
-			let divNews = document.querySelector("#cardNews");
-			fetch("./jsons/data.json").then((response) => {
-				response.json().then((data) => {
-					data.news.map((card) => {
-						divNews.innerHTML += `
-							<div class="card">
-								<div class="box-img">
-									<div class="img"><img src="components/images/image-news/${card.image}.png" target="_blank" alt="">
-								</div>
-								<span class="date">${card.date}</span>
-							</div>
-								<div class="text">
-									<h3>${card.title}</h3>
-									<p>${card.description}</p>
-									<div class="more"><a href="${card.link}" target="_blank"><span>Ler mais</span> <i class="fa-solid fa-arrow-right"></i></a></div>
-								</div>
-							</div>
-						`;
-					});
-				});
-			});
+			class MobileNavbar {
+	constructor ( mobileMenu, navList, navLinks ) {
+		this.mobileMenu = document.querySelector( mobileMenu );
+		this.navList = document.querySelector( navList );
+		this.navLinks = document.querySelectorAll( navLinks );
+		this.activeClass = "active";
+		this.handleClick = this.handleClick.bind( this );
+	}
+
+	animateLinks () {
+		this.navLinks.forEach( ( link, index ) => {
+			link.style.animation
+				? ( link.style.animation = "" )
+				: ( link.style.animation = `navLinkFade 0.5s ease forwards ${ index / 7 + 0.3
+					}s`);
+		} );
+	}
+
+	handleClick () {
+		this.navList.classList.toggle( this.activeClass );
+		this.mobileMenu.classList.toggle( this.activeClass );
+		this.animateLinks();
+	}
+
+	addClickEvent () {
+		this.mobileMenu.addEventListener( "click", this.handleClick );
+	}
+
+	init () {
+		if ( this.mobileMenu ) {
+			this.addClickEvent();
+		}
+		return this;
+	}
+}
+
+const mobileNavbar = new MobileNavbar(
+	"#profile",
+	".nav-list",
+	".nav-list ul li",
+);
+mobileNavbar.init();
+
 		</script>
-    <script src="./javascripts/script.js" type="module"></script>
 
 	</body>
 </html>

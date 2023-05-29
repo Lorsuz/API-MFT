@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	font-family: Roboto;
+	color: white;
+}
+
+body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background: #045864;
+	overflow: hidden;
+}
+
+body>div.box-cut {
+	height: 100vh;
+	width: 100vw;
+	background: #01C4D6;
+	position: absolute;
+	clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 60% 100%);
+	transition: 500ms;
+	z-index: 1;
+}
+
+body>div.box-cut.toggle-up {
+	animation: rolar-up 1000ms linear forwards;
+}
+
+body>div.box-cut.toggle-in {
+	animation: rolar-in 1000ms linear;
+}
+
+body section {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+}
+
+body section.form>div {
+	width: 50%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: 1500ms;
+}
+
+body section.form>div h1 {
+	margin-bottom: 10px;
+	font-size: 2.5rem;
+	text-transform: uppercase;
+}
+
+body section.form>div form {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+body section.form>div form>div {
+	display: flex;
+	flex-direction: column;
+	margin: 20px 0;
+	position: relative;
+}
+
+body section.form>div form>div i {
+	position: absolute;
+	top: 7px;
+	left: -25px;
+	font-size: 1.3rem;
+}
+body section.form>div form>div label {
+	position: relative;
+	transition: 200ms;
+	transform: translateX(5px) translateY(-50px);
+	cursor: text;
+	color: #01C4D6;
+}
+
+body section.form>div form>div input {
+	height: 30px;
+	outline: none;
+	padding-left: 5px;
+	background: transparent;
+	border: none;
+	font-size: 1.2rem;
+	border-bottom: 2px solid #01C4D6; 
+}
+
+body section.form>div form>div input:placeholder-shown {
+	border-bottom: 2px solid;
+}
+
+body section.form>div form>div input:placeholder-shown~label {
+	transform: translateX(5px) translateY(-25px);
+	cursor: text;
+	color: white;
+}
+
+body section.form>div form>div input:focus {
+	border-bottom: 2px solid #01C4D6;
+}
+
+body section.form>div form>div input:focus~label {
+	transform: translateX(5px) translateY(-50px);
+	cursor: default;
+	color: #01C4D6;
+}
+
+body section.form>div form>div span {
+	color: rgb(255, 56, 56);
+	transform: translateX(5px) translateY(-10px);
+}
+
+body section.form>div form button {
+	width: 60%;
+	border-radius: 30px;
+	padding: 10px;
+	border: 2px solid #0097a4;
+	align-self: center;
+	cursor: pointer;
+	transition: 500ms;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+	font-size: 1rem;
+	font-weight: normal;
+}
+
+body section.form>div form button span {
+	background: linear-gradient(#045864, #01C4D6, #045864);
+	display: block;
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	transition: 500ms;
+}
+
+body section.form>div form button:hover {
+	letter-spacing: 1px;
+}
+
+body section.form>div form button:hover>span {
+	transform: translateY(-50px);
+}
+
+body section.form>div>div {
+	margin-top: 15px;
+}
+
+body section.form>div>div span {
+	cursor: default;
+}
+
+body section.form>div>div span.toggle {
+	color: #01C4D6;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+body section.MSG>div {
+	width: 50%;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 170px 0;
+	transition: 1500ms;
+}
+
+body section.MSG>div>div.content h1 {
+	font-size: 3.5rem;
+	margin-bottom: 20px;
+}
+
+body section.MSG>div>div.content p {
+	font-size: 1.5rem;
+	width: 350px;
+	line-height: 35px;
+	color: #ebebeb;
+}
+
+body section.MSG>div.up h1,
+body section.MSG>div.up p {
+	text-align: left;
+}
+
+body section.MSG>div.in h1,
+body section.MSG>div.in p {
+	text-align: end;
+}
+
+body .form .in {
+	transform: translateX(0);
+	z-index: 1;
+}
+
+body .form .up {
+	transform: translateX(1000px);
+	z-index: 0;
+}
+
+body .MSG .in {
+	transform: translateX(0);
+	z-index: 1;
+}
+
+body .MSG .up {
+	transform: translateX(-1000px);
+	z-index: 0;
+}
+
+body.active .form .in {
+	transform: translateX(-1000px);
+	z-index: 0;
+}
+
+body.active .form .up {
+	transform: translateX(0);
+	z-index: 1;
+}
+
+body.active .MSG .in {
+	transform: translateX(1000px);
+	z-index: 0;
+}
+
+body.active .MSG .up {
+	transform: translateX(0);
+	z-index: 1;
+}
+
+/* @keyframes rolar-up { from { clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 60% 100%); } to { clip-path: polygon(0% 0%, 60% 0%, 40% 100%, 0% 100%); } } @keyframes rolar-in { from { clip-path: polygon(0% 0%, 60% 0%, 40% 100%, 0% 100%); } to { clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 60% 100%); } } */
+@keyframes rolar-up {
+	0% {
+		clip-path: polygon(40% 0%, 40% 0%, 100% 0%, 100% 100%, 60% 100%);
+	}
+
+	25% {
+		clip-path: polygon(0% 0%, 0% 0%, 100% 0%, 100% 100%, 60% 100%);
+	}
+
+	50% {
+		clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 100%, 40% 100%);
+	}
+
+	75% {
+		clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 0%, 40% 100%);
+	}
+
+	100% {
+		clip-path: polygon(0% 100%, 0% 0%, 60% 0%, 60% 0%, 40% 100%);
+	}
+}
+
+@keyframes rolar-in {
+	0% {
+		clip-path: polygon(0% 100%, 0% 0%, 60% 0%, 60% 0%, 40% 100%);
+	}
+
+	25% {
+		clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 0%, 40% 100%);
+	}
+
+	50% {
+		clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 100%, 40% 100%);
+	}
+
+	75% {
+		clip-path: polygon(0% 0%, 0% 0%, 100% 0%, 100% 100%, 60% 100%);
+	}
+
+	100% {
+		clip-path: polygon(40% 0%, 40% 0%, 100% 0%, 100% 100%, 60% 100%);
+	}
+}
