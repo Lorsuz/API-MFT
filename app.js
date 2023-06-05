@@ -16,7 +16,7 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use(flash())
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
   res.locals.sucess_msg = req.flash("sucess_msg")
   res.locals.error_msg = req.flash("error_msg")
   next()
@@ -52,29 +52,45 @@ connection.connect((error) => {
 /* ==================================================================== */
 
 app.get('/', (req, res, next) => {
-  if(!req.session.loggedIn || req.session.loggedIn == undefined || req.session.loggedIn == null){
+  if (!req.session.loggedIn || req.session.loggedIn == undefined || req.session.loggedIn == null) {
     req.session.loggedIn = false
   }
   loggedIn = req.session.loggedIn
   msg = 'notícias encontradas'
+  
+  query = ''
+  search = req.query.search
+  reqArray = []
+  if (!search || search == undefined || search == null || search == '') {
+    query = 'SELECT * FROM cardnews'
+    search =''
+  }else{
+    tratSearch = `%${search}%`
+    reqArray = [tratSearch]
+    query = `SELECT * FROM cardnews WHERE title LIKE ?`
+  }
+  console.log(reqArray);
 
   connection.query(
-    'SELECT * FROM cardnews',
-    [],
+    query,
+    reqArray,
     (error, results) => {
       if (error) {
 
       }
-      if(results.length == 1){
+      if(results == undefined){
+        results = []
+        msg = 'result nao existe'
+      }else if (results.length == 1) {
         msg = 'notícia encontrada'
-      }
+      } 
 
       results.forEach(card => {
         card.date = format(card.date, 'dd/MM/yyyy')
       });
 
-      res.render('./index', {loggedIn, totalCards: results.length, plural: msg, cards: results});
-      
+      res.render('./index', { loggedIn, totalCards: results.length, plural: msg, cards: results, search: search });
+
     })
 
 });
@@ -91,11 +107,11 @@ app.get('/users', (req, res) => {
 });
 
 app.get('/user/register', (req, res) => {
-  res.render('./sign-acount')
+  res.render('./sign-acount', { errorAction: "" })
 });
 
 app.get('/user/login', (req, res) => {
-  res.render('./login-acount')
+  res.render('./login-acount', { errorAction: '' })
 });
 
 app.get('/user/logout', (req, res) => {
@@ -110,11 +126,118 @@ app.get('/user/logout', (req, res) => {
 
 app.get('/news/add', (req, res, next) => {
   res.render('./form-news')
+})
+app.get('/news/read/:id', (req, res, next) => {
+  id = req.params.id
+  connection.query(
+    "SELECT * FROM cardnews WHERE id = ?",
+    [id],
+    (error, results) => {
+      if (error) {
 
+      }
+      if(results == undefined){
+        results = []
+        msg = 'result nao existe'
+      }else if (results.length == 1) {
+        msg = 'notícia encontrada'
+      } 
+
+      results.forEach(card => {
+        card.date = format(card.date, 'dd/MM/yyyy')
+      });
+
+      res.render('./index', { loggedIn, totalCards: results.length, plural: msg, cards: results, search: search });
+
+    })
 })
 
+app.post('/user/register', (req, res) => {
+  const { nickname, email, password, birth, description } = req.body;
+  var errorAction = ''
+  // if (!nickname || !email || !password) {
+  //   return res.status(400).send('Nickname, email e password são obrigatórios.');
+  // }
+
+  connection.query(
+    'SELECT * FROM users WHERE email = ?',
+    [email],
+    (error, LetResults) => {
+
+      if (LetResults.length == 0) {
+
+        connection.query(
+          'INSERT INTO users (nickname, email, password, birth, description) VALUES (?, ?, ?, ?, ?)',
+          [nickname, email, password, birth, description],
+          (error, result) => {
+            if (error) {
+              errorAction = "ocorreu algum erro durante a execusão"
+            }
+            if (errorAction != '') {
+              res.render('./sign-acount', { errorAction});
+            }else{
+            req.session.loggedIn = true;
+            req.session.user = result[0];
+            res.redirect('/');
+          }
+          }
+        );
+      }else{
+        errorAction = "Esse email já está em uso"
+        res.render('./sign-acount', { errorAction});
+      }
+    }
+  );
+
+
+});
+
+app.post('/user/login', (req, res) => {
+  const { email, password } = req.body;
+  var errorAction = ''
+
+  connection.query(
+    'SELECT * FROM users WHERE email = ?',
+    [email],
+    (error, letResults) => {
+      if (error) {
+        errorAction = "ocorreu algum erro durante a execusão"
+      }
+      console.log(letResults)
+      if (letResults.length == 1) {
+
+        connection.query(
+          'SELECT * FROM users WHERE email = ? AND password = ?',
+          [email, password],
+          (error, results) => {
+            if (error) {
+              errorAction = "ocorreu algum erro durante a execusão"
+            }
+            if (results.length == 1) {
+              req.session.loggedIn = true;
+              req.session.user = results[0];
+              res.redirect('/')
+            }else {
+              errorAction = 'senha incorreta'
+              res.render('./login-acount', { errorAction });
+
+            }
+          }
+        );
+
+      }else {
+        errorAction = 'Não existe nenhum cadastro com esse email'
+      }
+      if (errorAction != '') {
+        res.render('./login-acount', { errorAction });
+      }
+     } )
+
+
+});
+
 app.post('/news/add', (req, res, next) => {
-  const {	title,	description,	date,	image,	link } = req.body;
+  const { title, description, date, image, link } = req.body;
   const id_user = req.session.user.id
   // if (!nickname || !email || !password) {
   //   return res.status(400).send('Nickname, email e password são obrigatórios.');
@@ -122,23 +245,23 @@ app.post('/news/add', (req, res, next) => {
 
   connection.query(
     'INSERT INTO cardnews (id_user,	title,	description,	date,	image,	link) VALUES (?, ?, ?, ?, ?, ?)',
-    [id_user,	title,	description,	date,	image,	link],
+    [id_user, title, description, date, image, link],
     (error, result) => {
       if (error) {
         console.error('Erro ao adicionar noticia:', error);
         return res.status(500).send('Erro ao adicionar Noticia.');
       }
-      
+
       connection.query(
         'SELECT * FROM cardnews WHERE title = ? OR description = ? OR link = ?',
         [title, description, link],
         (error, results) => {
           if (error) {
-    
+
           }
-    
+
           if (results.length == 0) {
-    
+
             res.redirect('/');
           } else {
             // res.render('./form-news', { error: 'Credenciais inválidas' });
@@ -148,72 +271,8 @@ app.post('/news/add', (req, res, next) => {
       );
 
     }
-    );
-})
-
-app.post('/user/register', (req, res) => {
-  const { nickname, email, password, birth, description } = req.body;
-
-  if (!nickname || !email || !password) {
-    return res.status(400).send('Nickname, email e password são obrigatórios.');
-  }
-
-  connection.query(
-    'INSERT INTO users (nickname, email, password, birth, description) VALUES (?, ?, ?, ?, ?)',
-    [nickname, email, password, birth, description],
-    (error, result) => {
-      if (error) {
-        console.error('Erro ao adicionar usuário:', error);
-        return res.status(500).send('Erro ao adicionar usuário.');
-      }
-
-      // res.status(201).send('Usuário cadastrado com sucesso!');
-      
-      connection.query(
-        'SELECT * FROM users WHERE email = ? AND password = ?',
-        [email, password],
-        (error, results) => {
-          if (error) {
-    
-          }
-    
-          if (results.length == 1) {
-            req.session.loggedIn = true;
-            req.session.user = results[0];
-    
-            res.redirect('/');
-          } else {
-            res.render('./login-acount', { error: 'Credenciais inválidas' });
-          }
-        }
-      );
-
-    }
-    );
-});
-
-app.post('/user/login', (req, res) => {
-  const { email, password } = req.body;
-  connection.query(
-    'SELECT * FROM users WHERE email = ? AND password = ?',
-    [email, password],
-    (error, results) => {
-      if (error) {
-
-      }
-
-      if (results.length == 1) {
-        req.session.loggedIn = true;
-        req.session.user = results[0];
-
-        res.redirect('/');
-      } else {
-
-        res.render('./login-acount', { error: 'Credenciais inválidas' });
-      }
-    }
   );
-});
+})
 
 /* ==================================================================== */
 

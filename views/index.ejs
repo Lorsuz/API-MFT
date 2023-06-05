@@ -142,9 +142,7 @@
 								<img src="images/image-news/n2.png" alt="" />
 							</div>
 							<div class="text">
-								<h3>
-									Diferença salarial entre homens e mulheres vai a 22%, diz IBGE
-								</h3>
+								<h3>Diferença salarial entre homens e mulheres vai a 22%, diz IBGE</h3>
 								<p>
 									Mulheres brasileiras recebem, em média, 78% do salário
 									masculino. A diferença de remuneração entre homens e mulheres,
@@ -224,8 +222,8 @@
 						Pressione em "Ler mais" para ser desviado para a Fonte original com
 						conteudo completo
 					</p>
-					<form class="search-box">
-						<input type="text" id="search-box" placeholder="Pesquisar" />
+					<form class="search-box" action="/" method="get">
+						<input type="text" id="search-box" name="search" value="<%= search%>" placeholder="Pesquisar" />
 						<button type="submit">
 							<i class="fa-solid fa-magnifying-glass"></i>
 						</button>
@@ -237,8 +235,12 @@
 					<% cards.forEach(function(card) { %>
 						<div class="card">
 						<div class="box-img">
-							<div class="img"><img src="<%= card.image %>" target="_blank" alt="">
+							<div class="img">
+								<img src="<%= card.image %>" target="_blank" alt="">
 							</div>
+							<% if(loggedIn) { %>
+								<a href="/news/read/<%= card.id %>"><i class="fa-solid fa-circle-info"></i></a>
+							<% } %>
 							<span class="date"><%= card.date %></span>
 						</div>
 						<div class="text">
