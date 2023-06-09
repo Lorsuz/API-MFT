@@ -57,14 +57,14 @@ app.get('/', (req, res, next) => {
   }
   loggedIn = req.session.loggedIn
   msg = 'notícias encontradas'
-  
+
   query = ''
   search = req.query.search
   reqArray = []
   if (!search || search == undefined || search == null || search == '') {
     query = 'SELECT * FROM cardnews'
-    search =''
-  }else{
+    search = ''
+  } else {
     tratSearch = `%${search}%`
     reqArray = [tratSearch]
     query = `SELECT * FROM cardnews WHERE title LIKE ?`
@@ -78,12 +78,12 @@ app.get('/', (req, res, next) => {
       if (error) {
 
       }
-      if(results == undefined){
+      if (results == undefined) {
         results = []
         msg = 'result nao existe'
-      }else if (results.length == 1) {
+      } else if (results.length == 1) {
         msg = 'notícia encontrada'
-      } 
+      }
 
       results.forEach(card => {
         card.date = format(card.date, 'dd/MM/yyyy')
@@ -134,14 +134,14 @@ app.get('/news/read/:id', (req, res, next) => {
     [id],
     (error, results) => {
       if (error) {
-
+        res.redrect('/')
       }
-      if(results == undefined){
+      if (results == undefined) {
         results = []
         msg = 'result nao existe'
-      }else if (results.length == 1) {
+      } else if (results.length == 1) {
         msg = 'notícia encontrada'
-      } 
+      }
 
       results.forEach(card => {
         card.date = format(card.date, 'dd/MM/yyyy')
@@ -174,17 +174,17 @@ app.post('/user/register', (req, res) => {
               errorAction = "ocorreu algum erro durante a execusão"
             }
             if (errorAction != '') {
-              res.render('./sign-acount', { errorAction});
-            }else{
-            req.session.loggedIn = true;
-            req.session.user = result[0];
-            res.redirect('/');
-          }
+              res.render('./sign-acount', { errorAction });
+            } else {
+              req.session.loggedIn = true;
+              req.session.user = result[0];
+              res.redirect('/');
+            }
           }
         );
-      }else{
+      } else {
         errorAction = "Esse email já está em uso"
-        res.render('./sign-acount', { errorAction});
+        res.render('./sign-acount', { errorAction });
       }
     }
   );
@@ -217,7 +217,7 @@ app.post('/user/login', (req, res) => {
               req.session.loggedIn = true;
               req.session.user = results[0];
               res.redirect('/')
-            }else {
+            } else {
               errorAction = 'senha incorreta'
               res.render('./login-acount', { errorAction });
 
@@ -225,13 +225,13 @@ app.post('/user/login', (req, res) => {
           }
         );
 
-      }else {
+      } else {
         errorAction = 'Não existe nenhum cadastro com esse email'
       }
       if (errorAction != '') {
         res.render('./login-acount', { errorAction });
       }
-     } )
+    })
 
 
 });
