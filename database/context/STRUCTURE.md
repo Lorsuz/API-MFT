@@ -9,70 +9,70 @@
 
 ### Comands for create all Database SQL Tables
 
-	```SQL
+```SQL
 
-		CREATE TABLE IF NOT EXISTS users (
-			id INT PRIMARY KEY AUTO_INCREMENT,
-			nickname VARCHAR(100) NOT NULL,
-			email VARCHAR(100) NOT NULL,
-			password VARCHAR(100) NOT NULL,
-			birth DATE NOT NULL,
-			description TEXT NOT NULL,
-			administrator BOOLEAN DEFAULT(0) NOT NULL
-		);
+	CREATE TABLE IF NOT EXISTS users (
+		id INT PRIMARY KEY AUTO_INCREMENT,
+		nickname VARCHAR(100) NOT NULL,
+		email VARCHAR(100) NOT NULL,
+		password VARCHAR(100) NOT NULL,
+		birth DATE NOT NULL,
+		description TEXT NOT NULL,
+		administrator BOOLEAN DEFAULT(0) NOT NULL
+	);
 
-		CREATE TABLE IF NOT EXISTS news (
-			id INT PRIMARY KEY AUTO_INCREMENT,
-			id_user INT NOT NULL,
-			title VARCHAR(200) NOT NULL,
-			description TEXT NOT NULL,
-			release DATE NOT NULL,
-			likes INT DEFAULT(0) NOT NULL,
-			image VARCHAR(100) NOT NULL,
-			link VARCHAR(100) NOT NULL,
-			verified BOOLEAN DEFAULT(0) NOT NULL,
-			FOREIGN KEY (id_user) REFERENCES users(id)
-		);
+	CREATE TABLE IF NOT EXISTS news (
+		id INT PRIMARY KEY AUTO_INCREMENT,
+		id_user INT NOT NULL,
+		title VARCHAR(200) NOT NULL,
+		description TEXT NOT NULL,
+		release DATE NOT NULL,
+		likes INT DEFAULT(0) NOT NULL,
+		image VARCHAR(100) NOT NULL,
+		link VARCHAR(100) NOT NULL,
+		verified BOOLEAN DEFAULT(0) NOT NULL,
+		FOREIGN KEY (id_user) REFERENCES users(id)
+	);
 
-		CREATE TABLE IF NOT EXISTS audits (
-			id INT PRIMARY KEY AUTO_INCREMENT,
-			id_news INT NOT NULL,
-			id_author INT NOT NULL,
-			id_checker INT NOT NULL,
-			timestamp TIMESTAMP NOT NULL,
-			FOREIGN KEY (id_news) REFERENCES news(id),
-			FOREIGN KEY (id_author) REFERENCES users(id),
-			FOREIGN KEY (id_checker) REFERENCES users(id)
-		);
+	CREATE TABLE IF NOT EXISTS audits (
+		id INT PRIMARY KEY AUTO_INCREMENT,
+		id_news INT NOT NULL,
+		id_author INT NOT NULL,
+		id_checker INT NOT NULL,
+		timestamp TIMESTAMP NOT NULL,
+		FOREIGN KEY (id_news) REFERENCES news(id),
+		FOREIGN KEY (id_author) REFERENCES users(id),
+		FOREIGN KEY (id_checker) REFERENCES users(id)
+	);
 
-		CREATE TABLE IF NOT EXISTS assessments (
-			id INT PRIMARY KEY AUTO_INCREMENT,
-			id_news INT NOT NULL,
-			id_user INT NOT NULL,
-			rating INT NOT NULL,
-			FOREIGN KEY (id_news) REFERENCES news(id),
-			FOREIGN KEY (id_user) REFERENCES users(id)
-		);
+	CREATE TABLE IF NOT EXISTS assessments (
+		id INT PRIMARY KEY AUTO_INCREMENT,
+		id_news INT NOT NULL,
+		id_user INT NOT NULL,
+		rating INT NOT NULL,
+		FOREIGN KEY (id_news) REFERENCES news(id),
+		FOREIGN KEY (id_user) REFERENCES users(id)
+	);
 
-		CREATE TABLE IF NOT EXISTS favorites (
-			id INT PRIMARY KEY AUTO_INCREMENT,
-			id_user INT NOT NULL,
-			id_news INT NOT NULL,
-			FOREIGN KEY (id_user) REFERENCES users(id),
-			FOREIGN KEY (id_news) REFERENCES news(id)
-		);
+	CREATE TABLE IF NOT EXISTS favorites (
+		id INT PRIMARY KEY AUTO_INCREMENT,
+		id_user INT NOT NULL,
+		id_news INT NOT NULL,
+		FOREIGN KEY (id_user) REFERENCES users(id),
+		FOREIGN KEY (id_news) REFERENCES news(id)
+	);
 
-		CREATE TABLE IF NOT EXISTS comments (
-			id INT PRIMARY KEY AUTO_INCREMENT,
-			id_news INT NOT NULL,
-			id_user INT NOT NULL,
-			content TEXT NOT NULL,
-			timestamp TIMESTAMP NOT NULL,
-			likes INT DEFAULT(0) NOT NULL,
-			FOREIGN KEY (id_news) REFERENCES news(id),
-			FOREIGN KEY (id_user) REFERENCES users(id)
-		);
-	```
+	CREATE TABLE IF NOT EXISTS comments (
+		id INT PRIMARY KEY AUTO_INCREMENT,
+		id_news INT NOT NULL,
+		id_user INT NOT NULL,
+		content TEXT NOT NULL,
+		timestamp TIMESTAMP NOT NULL,
+		likes INT DEFAULT(0) NOT NULL,
+		FOREIGN KEY (id_news) REFERENCES news(id),
+		FOREIGN KEY (id_user) REFERENCES users(id)
+	);
+```
 
 ### Paths
 
