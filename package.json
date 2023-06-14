@@ -2,8 +2,13 @@
   "name": "api---mft",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www.js",
+    "nodemon": "nodemon ./bin/www.js",
+    "db:load": "node database/load.js",
+    "db:drop": "del database\\\\database.sqlite",
+    "db:reload": "npm run db:drop && npm run db:load"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
@@ -14,11 +19,15 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "fs": "^0.0.1-security",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.3.1",
-    "sequelize": "^6.31.1"
+    "path": "^0.12.7",
+    "sequelize": "^6.31.1",
+    "sqlite-async": "^1.2.0",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

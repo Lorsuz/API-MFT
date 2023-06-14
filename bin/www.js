@@ -1,29 +1,13 @@
-#!/usr/bin/env node
+import app from '../app.js';
+import debug from 'debug';
+import http from 'http';
 
-/**
- * Module dependencies.
- */
-
-var app = require('../app');
-var debug = require('debug')('api---mft:server');
-var http = require('http');
-
-/**
- * Get port from environment and store in Express.
- */
+const serverDebug = debug('api---mft:server');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-
 var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
 
 server.listen(port,()=>{
   console.log(`Servidor hospedado na porta: ${port}`)
@@ -31,10 +15,6 @@ server.listen(port,()=>{
 });
 server.on('error', onError);
 server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
@@ -52,10 +32,6 @@ function normalizePort(val) {
   return false;
 }
 
-/**
- * Event listener for HTTP server "error" event.
- */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -65,7 +41,6 @@ function onError(error) {
     ? 'Pipe ' + port
     : 'Port ' + port;
 
-  // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges');
@@ -79,10 +54,6 @@ function onError(error) {
       throw error;
   }
 }
-
-/**
- * Event listener for HTTP server "listening" event.
- */
 
 function onListening() {
   var addr = server.address();

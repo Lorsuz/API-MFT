@@ -82,7 +82,7 @@
 							</li>
 						</ul>
 						<div class="log-out">
-							<a href="/user/logout">
+							<a href="/users/logout">
 								<i class="fa-solid fa-right-from-bracket"></i>
 								<span>Sair</span>
 							</a>
@@ -93,13 +93,13 @@
 					</div>
 				<% }else{ %>
 					<li class="button">
-						<a href="/user/register">
+						<a href="/users/register">
 							<i class="fa-solid fa-user"></i>
 							<span>Cadastrar</span>
 						</a>
 					</li>
 					<li class="button">
-						<a href="/user/login">
+						<a href="/users/login">
 							<i class="fa-solid fa-right-to-bracket"></i>
 							<span>Entrar</span>
 						</a>
@@ -241,7 +241,7 @@
 							<% if(loggedIn) { %>
 								<a href="/news/read/<%= card.id %>"><i class="fa-solid fa-circle-info"></i></a>
 							<% } %>
-							<span class="date"><%= card.date %></span>
+							<span class="date"><%= card.release %></span>
 						</div>
 						<div class="text">
 							<h3><%= card.title %></h3>

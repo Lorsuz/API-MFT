@@ -1,0 +1,71 @@
+@startuml Database
+
+	title Database
+	hide circle
+	scale 1.5
+
+	entity "users" as users {
+		*id : int <<PK>> <<AutoIncrement>>
+		nickname : varchar(100) <<Not null>>
+		email : varchar(100) <<Not null>>
+		password : varchar(100) <<Not null>>
+		birth : date <<Not null>>
+		description : text <<Not null>>
+		administrator : boolean <<Not null>>
+	}
+
+	entity "news" as news {
+		*id : int <<PK>> <<AutoIncrement>>
+		id_user : int <<FK>> <<Not null>>
+		title : varchar(200) <<Not null>>
+		description : text <<Not null>>
+		release : date <<Not null>>
+		likes : int <<Not null>> <<Default(0)>>
+		image : varchar(100) <<Not null>>
+		link : varchar(100) <<Not null>>
+		verified : boolean <<Not null>> <<Default(0)>>
+	}
+
+	entity "audits" as audits {
+		*id : int <<PK>> <<AutoIncrement>>
+		id_news : int <<FK>> <<Not null>>
+		id_author : int <<FK>> <<Not null>>
+		id_checker : int <<FK>> <<Not null>>
+		timestamp : timestamp <<Not null>>
+	}
+
+	entity "assessments" as assessments {
+		*id : int <<PK>> <<AutoIncrement>>
+		id_news : int <<FK>> <<Not null>>
+		id_user : int <<FK>> <<Not null>>
+		rating : int <<Not null>>
+	}
+
+	entity "favorites" as favorites {
+		*id : int <<PK>> <<AutoIncrement>>
+		id_user : int <<FK>> <<Not null>>
+		id_news : int <<FK>> <<Not null>>
+	}
+
+	entity "comments" as comments {
+		*id : int <<PK>> <<AutoIncrement>>
+		id_news : int <<FK>> <<Not null>>
+		id_user : int <<FK>> <<Not null>>
+		content : text <<Not null>>
+		timestamp : timestamp <<Not null>>
+		likes : int <<Not null>> <<Default(0)>>
+	}
+
+	users ||--o{ news : id_user
+	news ||--||  audits : id_news
+	users ||--o{ audits : id_author
+	users ||--o{ audits : id_checker
+	news ||--o{ assessments : id_news
+	users ||--o{ assessments : id_user
+	users ||--o{ favorites : id_user
+	news }o--|| favorites : id_news
+	news ||--o{ comments : id_news
+	users ||--o{ comments : id_user
+
+	@enduml
+

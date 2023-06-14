@@ -1,35 +1,129 @@
-var express = require('express');
-var router = express.Router();
-const fs = require('fs');
-const path = require('path');
-var emails = path.resolve('./json/emails.json')
+import commonImports from './exports/router.js';
 
-/* GET users listing. */
-router.get('/register', function(req, res, next) {
-  res.status(200).render('register')
-});
+var router = commonImports.router;
+var Users = commonImports.Users;
+var News = commonImports.News;
+var parseISO = commonImports.parseISO;
+var format = commonImports.format;
+var HTTPError = commonImports.HTTPError;
 
-router.post('/add', function(req, res) {
-  const email = req.body.email;
-	var objEmails
-  
-  fs.readFile(emails, 'utf-8', (err, data) => {
-    if (err) throw err;
-    objEmails = JSON.parse(data);
-  });
-  json.newProperty = "email";
-  objEmails.push(email);
-  fs.writeFile(emails, JSON.stringify(objEmails), 'utf-8', (err) => {
-    if (err) throw err;
-    console.log('The file has been saved!');
-});
-  res.redirect('/');
-});
-/*
-app.get('/list', function(req, res) {
-  const filePath = path.join(__dirname, 'emails.json');
-  const emails = JSON.parse(fs.readFileSync(filePath));
-  res.render('list', { emails });
-}); */
+router.get( '/users', ( req, res ) => {
+	connection.query( 'SELECT * FROM users', ( error, results ) => {
+		if ( error ) {
+			console.error( 'Erro ao executar consulta:', error );
+			return res.status( 500 ).send( 'Erro ao recuperar usuários' );
+		}
 
-module.exports = router;
+		res.json( results );
+	} );
+} );
+
+router.get( '/users/register', ( req, res ) => {
+	res.render( './sign-acount', { errorAction: "" } );
+} );
+
+router.get( '/users/login', ( req, res ) => {
+	res.render( './login-acount', { errorAction: '' } );
+} );
+
+router.get( '/users/logout', ( req, res ) => {
+	req.session.destroy( ( err ) => {
+		if ( err ) {
+			console.log( err );
+		} else {
+			res.redirect( '/' );
+		}
+	} );
+} );
+
+/* ==================================================================== */
+
+router.post( '/users/register', ( req, res ) => {
+	const { nickname, email, password, birth, description } = req.body;
+	var errorAction = '';
+	// if (!nickname || !email || !password) {
+	//   return res.status(400).send('Nickname, email e password são obrigatórios.');
+	// }
+
+	connection.query(
+		'SELECT * FROM users WHERE email = ?',
+		[ email ],
+		( error, LetResults ) => {
+
+			if ( LetResults.length == 0 ) {
+
+				connection.query(
+					'INSERT INTO users (nickname, email, password, birth, description) VALUES (?, ?, ?, ?, ?)',
+					[ nickname, email, password, birth, description ],
+					( error, result ) => {
+						if ( error ) {
+							errorAction = "ocorreu algum erro durante a execusão";
+						}
+						if ( errorAction != '' ) {
+							res.render( './sign-acount', { errorAction } );
+						} else {
+							req.session.loggedIn = true;
+							req.session.user = result[ 0 ];
+							res.redirect( '/' );
+						}
+					}
+				);
+			} else {
+				errorAction = "Esse email já está em uso";
+				res.render( './sign-acount', { errorAction } );
+			}
+		}
+	);
+} );
+
+router.post( '/users/register', async ( req, res ) => {
+	const { nickname, email, password, birth, description } = req.body;
+	var errorAction = '';
+
+	var results = await Users.readItemForColumn( "email", email );
+
+	if ( results && results != undefined ) {
+
+		if ( results.password != password ) {
+			errorAction = "senha incorreta";
+		}
+
+	} else {
+		errorAction = "Não existe nenhum cadastro com esse email";
+	}
+
+
+	if ( errorAction != '' ) {
+		res.render( './sign-acount', { errorAction } );
+	} else {
+		req.session.loggedIn = true;
+		req.session.user = results;
+		res.redirect( '/' );
+	}
+} );
+
+router.post( '/users/login', async ( req, res ) => {
+	const { email, password } = req.body;
+	var errorAction = '';
+	var results = await Users.readItemForColumn( "email", email );
+
+	if ( results && results != undefined ) {
+
+		if ( results.password != password ) {
+			errorAction = "senha incorreta";
+		}
+
+	} else {
+		errorAction = "Não existe nenhum cadastro com esse email";
+	}
+
+	if ( errorAction != '' ) {
+		res.render( './login-acount', { errorAction } );
+	} else {
+		req.session.loggedIn = true;
+		req.session.user = results;
+		res.redirect( '/' );
+	}
+} );
+
+export default router;

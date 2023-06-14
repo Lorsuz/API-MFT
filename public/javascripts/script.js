@@ -1,60 +1,95 @@
-function getProductView(card) {
-  return `<div class="card">
-  <div class="box-img">
-    <div class="img"><img src="${card.image}" target="_blank" alt="">
-  </div>
-  <span class="date">${card.date}</span>
-</div>
-  <div class="text">
-    <h3>${card.title}</h3>
-    <p>${card.description}</p>
-    <div class="more"><a href="${card.link}" target="_blank"><span>Ler mais</span> <i class="fa-solid fa-arrow-right"></i></a></div>
-  </div>
-</div>`;
+class Slide {
+	slide
+	prev
+	next
+	dot
+	slideCurrent = 0
+	totalSlides
+	interval
+
+	constructor(slide, prev, next, dot) {
+		this.slide = document.querySelectorAll(slide)
+		this.prev = document.querySelector(prev).addEventListener("click", () => {
+			this.calculateSlideCurrent(-1)
+		})
+		this.next = document.querySelector(next).addEventListener("click", () => {
+			this.calculateSlideCurrent(1)
+		})
+		this.dot = document.querySelectorAll(dot)
+		for (let index = 0; index < this.dot.length; index++) {
+			this.dot[index].addEventListener("click", () => {
+				this.removeAnimation()
+				this.animationEffect(this.slideCurrent, index)
+				this.changeSlideCurrent(index)
+			})
+		}
+		this.totalSlides = this.slide.length - 1
+		this.init()
+	}
+
+	init() {
+		this.interval = setInterval(() => {
+			this.calculateSlideCurrent(1)
+		}, 5000);
+	}
+
+	calculateSlideCurrent(value) {
+		this.removeAnimation()
+		var index = this.slideCurrent
+		index += value
+		if (index < 0) {
+			index = this.totalSlides
+		}
+		if (index > this.totalSlides) {
+			index = 0
+		}
+		this.animationEffect(this.slideCurrent, index, value)
+		this.changeSlideCurrent(index)
+	}
+
+	animationEffect(slideCurrent, index, value = 0) {
+		console.log()
+		if (value == 1) {
+			this.slide[slideCurrent].classList.add("toRightOld")
+			this.slide[index].classList.add("toRightNew")
+		} else if (value == -1) {
+			this.slide[this.slideCurrent].classList.add("toLeftOld")
+			this.slide[index].classList.add("toLeftNew")
+		} else if (slideCurrent < index) {
+			this.slide[slideCurrent].classList.add("toRightOld")
+			this.slide[index].classList.add("toRightNew")
+		} else if (slideCurrent > index) {
+			this.slide[slideCurrent].classList.add("toLeftOld")
+			this.slide[index].classList.add("toLeftNew")
+		}
+
+	}
+
+	changeSlideCurrent(index) {
+		this.slide[this.slideCurrent].classList.remove("active")
+		this.dot[this.slideCurrent].classList.remove("active")
+		this.slideCurrent = index
+		this.slide[this.slideCurrent].classList.add("active")
+		this.dot[this.slideCurrent].classList.add("active")
+
+		this.init()
+	}
+
+	removeAnimation() {
+		clearInterval(this.interval)
+		this.slide.forEach(element => {
+			element.classList.remove("toRightOld")
+			element.classList.remove("toRightNew")
+			element.classList.remove("toLeftOld")
+			element.classList.remove("toLeftNew")
+		});
+	}
 
 }
-
-const response = await fetch('./../jsons/data.json');
-const data = await response.json();
-
-let productsView = '';
-for (const card of data.news) {
-  productsView += getProductView(card);
-}
-
-productsView;
-
-document.querySelector('#cardNews').innerHTML = productsView;
-
-
-
-function searchProducts(query) {
- const filteredProducts = data.news.filter(card =>
-    card.title.toLowerCase().includes(query.toLowerCase())
-  );
-  return filteredProducts;
-}
-
-function displayProducts(products) {
-  const productsView = products.map(getProductView).join('');
-  if (products.length == 0) {
-    document.querySelector('#cardNews').innerHTML=`<p>Nenhuma Noticia encontrada!!</p>`
-  }else{
-    document.querySelector('#cardNews').innerHTML = productsView;
-  }
-}
-
-//  DISPLAY THE PRODUCTS
-displayProducts(data.news);
-
-// ESCUTAR FORM E PROCURAR
-document.querySelector('form').addEventListener('submit', event => {
-  event.preventDefault();
-  const query = document.querySelector('#search-box').value;
-  const filteredProducts = searchProducts(query);
-  
-  displayProducts(filteredProducts);
-
-
-});
+const sys = new Slide(
+	"main section.about .container .geral-data .data-self .xp .slides .slides-pag",
+	"main section.about .container .geral-data .data-self .xp .slides .prev",
+	"main section.about .container .geral-data .data-self .xp .slides .next",
+	"main section.about .container .geral-data .data-self .xp .slides .dots .dot"
+);
 
