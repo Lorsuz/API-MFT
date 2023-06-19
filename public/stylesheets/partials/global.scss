@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
+
+:root {
+	--color-theme-soft: #e70808;
+	--color-theme: #bb0d0d;
+	--text-main: #000000;
+	--text-sub: #3b3b3b;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	list-style: none;
+	outline: none;
+	cursor: default;
+	font-family: Roboto, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	border: none;
+}
+
+input,
+textarea {
+	cursor: text;
+}
+
+button,
+button *,
+a,
+a *,
+input[type="file"],
+input[type="date"],
+input[type=radio],
+textarea,
+label {
+	cursor: pointer;
+}
+
+body {
+	background: #e9e9e9;
+	overflow-x: hidden;
+
+	&::-webkit-scrollbar {
+		width: 5px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: #ffffff;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: #000000;
+	}
+}

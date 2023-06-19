@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>
+			<%= pageTitle%>
+		</title>
+
+		<link rel="stylesheet" href="./stylesheets/partials/header.css" />
+		<link rel="stylesheet" href="./stylesheets/<%= styleSheet%>.css" />
+		<link rel="stylesheet" href="./stylesheets/partials/footer.css" />
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
+		<script src="//localhost:35729/livereload.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<!-- colocar a logo com o link pra home -->
+			<a href="#"><i class="fa-solid fa-bars"></i></a>
+			<ul>
+				<li><a href="#">Inicio</a></li>
+				<li><a href="#">Desenvolvedores</a></li>
+				<li><a href="#">Suporte</a></li>
+				<li><a href="">Apoie-nos</a></li>
+			</ul>
+			<nav>
+				<% if(user !=0) { %>
+					<div class="profile">
+						<button id="profile">
+							<i class="fa-regular fa-user"></i></i>
+							<!-- <img src="linkpra imagem" alt=""> -->
+						</button>
+					</div>
+
+					<div class="nav-list">
+						<ul>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-user"></i>
+									<span>Perfil</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-pen-to-square"></i>
+									<span>Editar Perfil</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-image"></i>
+									<span>Galeria</span>
+								</a>
+							</li>
+							<li>
+								<a href="/news/add">
+									<i class="fa-solid fa-square-plus"></i>
+									<span>Adicionar Notícia</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-users"></i>
+									<span>Lista de usuarios</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-circle-info"></i>
+									<span>Suporte</span>
+								</a>
+							</li>
+							<li>
+								<a href="https://github.com/Lorsuz" target="_blank">
+									<i class="fa-sharp fa-solid fa-code"></i>
+									<span>Desenvolvedores</span>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fa-solid fa-circle-dollar-to-slot"></i>
+									<span>Apoie-nos</span>
+								</a>
+							</li>
+						</ul>
+						<div class="log-out">
+							<a href="/users/logout">
+								<i class="fa-solid fa-right-from-bracket"></i>
+								<span>Sair</span>
+							</a>
+						</div>
+						<div class="footer">
+							<p>Copyright &copy; - Todos os direitos reservados!</p>
+						</div>
+					</div>
+					<% }else{ %>
+						<ul class="buttons-sign-log">
+							<li>
+								<a href="/users/register">
+									<i class="fa-solid fa-user"></i>
+									<span>Cadastrar</span>
+								</a>
+							</li>
+							<li>
+								<a href="/users/login">
+									<i class="fa-solid fa-right-to-bracket"></i>
+									<span>Entrar</span>
+								</a>
+							</li>
+						</ul>
+						<% } %>
+			</nav>
+		</header>
+		<main>

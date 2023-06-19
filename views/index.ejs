@@ -1,114 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>ExistindoNews | HOME: MFT - Movimento_Feminista_Trabalhista</title>
-
-		<link rel="stylesheet" href="./stylesheets/style.css" />
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-		/>
-	</head>
-
-	<body>
-		<nav>
-			<a href="#"><i class="fa-solid fa-bars"></i></a>
-			<ul>
-				<li><a href="#">Inicio</a></li>
-				<li><a href="#">Desenvolvedores</a></li>
-				<li><a href="#">Suporte</a></li>
-				<li><a href="">Apoie-nos</a></li>
-			</ul>
-			<ul class="">
-				<% if(loggedIn) { %>
-					<li class="profile">
-						<button id="profile">
-							<i class="fa-regular fa-user"></i></i>
-						</button>
-					</li>
-
-					<div class="nav-list">
-						<ul>
-							<li>
-								<a href="">
-									<i class="fa-solid fa-user"></i>
-									<span>Perfil</span>
-								</a>
-							</li>
-							<li>
-								<a href="">
-									<i class="fa-solid fa-pen-to-square"></i>
-									<span>Editar Perfil</span>
-								</a>
-							</li>
-							<li>
-								<a href="">
-									<i class="fa-solid fa-image"></i>
-									<span>Galeria</span>
-								</a>
-							</li>
-							<li>
-								<a href="/news/add">
-									<i class="fa-solid fa-square-plus"></i>
-									<span>Adicionar Notícia</span>
-								</a>
-							</li>
-							<li>
-								<a href="">
-									<i class="fa-solid fa-users"></i>
-									<span>Lista de usuarios</span>
-								</a>
-							</li>
-							<li>
-								<a href="">
-									<i class="fa-solid fa-circle-info"></i>
-									<span>Suporte</span>
-								</a>
-							</li>
-							<li>
-								<a href="https://github.com/Lorsuz" target="_blank">
-									<i class="fa-sharp fa-solid fa-code"></i>
-									<span>Desenvolvedores</span>
-								</a>
-							</li>
-							<li>
-								<a href="">
-									<i class="fa-solid fa-circle-dollar-to-slot"></i>
-									<span>Apoie-nos</span>
-								</a>
-							</li>
-						</ul>
-						<div class="log-out">
-							<a href="/users/logout">
-								<i class="fa-solid fa-right-from-bracket"></i>
-								<span>Sair</span>
-							</a>
-						</div>
-						<div class="footer">
-							<p>Copyright &copy; - Todos os direitos reservados!</p>
-						</div>
-					</div>
-				<% }else{ %>
-					<li class="button">
-						<a href="/users/register">
-							<i class="fa-solid fa-user"></i>
-							<span>Cadastrar</span>
-						</a>
-					</li>
-					<li class="button">
-						<a href="/users/login">
-							<i class="fa-solid fa-right-to-bracket"></i>
-							<span>Entrar</span>
-						</a>
-					</li>
-				<% } %>
-
-			</ul>
-		</nav>
-		<header>
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | HOME: MFT - Movimento_Feminista_Trabalhista' ,
+	styleSheet: 'index' }) %>
+	<main>
+		<section class="cover">
 			<div class="background">
 				<div class="capa">
 					<div class="left">
@@ -129,11 +22,8 @@
 								</p>
 
 								<div class="more">
-									<a
-										href="https://g1.globo.com/mundo/noticia/2023/03/06/por-que-brasil-tem-caido-em-ranking-global-de-desigualdade-de-genero.ghtml"
-										target="_blank"
-										>Ler Mais</a
-									>
+									<a href="https://g1.globo.com/mundo/noticia/2023/03/06/por-que-brasil-tem-caido-em-ranking-global-de-desigualdade-de-genero.ghtml"
+										target="_blank">Ler Mais</a>
 								</div>
 							</div>
 						</div>
@@ -150,11 +40,8 @@
 									país e atingiu 22% no fim de 2022
 								</p>
 								<div class="more">
-									<a
-										href="https://www.cnnbrasil.com.br/economia/diferenca-salarial-entre-homens-e-mulheres-vai-a-22-diz-ibge/"
-										target="_blank"
-										>Ler Mais</a
-									>
+									<a href="https://www.cnnbrasil.com.br/economia/diferenca-salarial-entre-homens-e-mulheres-vai-a-22-diz-ibge/"
+										target="_blank">Ler Mais</a>
 								</div>
 							</div>
 						</div>
@@ -174,274 +61,132 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="xp">
-			<h3>Experiência</h3>
-			<div class="slides">
-				<div class="prev"><i class="fa-solid fa-chevron-left"></i></div>
-				<div class="next"><i class="fa-solid fa-chevron-right"></i></div>
-				<ul>
-					<li class="slides-pag active">
-						<h4>lorem</h4>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias velit voluptates aut,
-							consectetur ullam est expedita placeat sapiente quidem nihil, ratione tempora incidunt voluptatem,
-							nemo nulla doloremque possimus exercitationem nesciunt.</p>
-					</li>
-					<li class="slides-pag">
-						<h4>654654645</h4>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias velit voluptates aut,
-							consectetur ullam est expedita placeat sapiente quidem nihil, ratione tempora incidunt voluptatem,
-							nemo nulla doloremque possimus exercitationem nesciunt.</p>
-					</li>
-					<li class="slides-pag">
-						<h4>dfgdfdhfgh</h4>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias velit voluptates aut,
-							consectetur ullam est expedita placeat sapiente quidem nihil, ratione tempora incidunt voluptatem,
-							nemo nulla doloremque possimus exercitationem nesciunt.</p>
-					</li>
-					<li class="slides-pag">
-						<h4>lorfdgfdgdfghukiem</h4>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias velit voluptates aut,
-							consectetur ullam est expedita placeat sapiente quidem nihil, ratione tempora incidunt voluptatem,
-							nemo nulla doloremque possimus exercitationem nesciunt.</p>
-					</li>
-				</ul>
-				<ul class="dots">
-					<li class="dot active"></li>
-					<li class="dot"></li>
-					<li class="dot"></li>
-					<li class="dot"></li>
-				</ul>
+		</section>
+		<section class="news" id="news">
+			<div class="header-section">
+				<h1>InfoMais - Você sempre informado!</h1>
+				<p>
+					Pressione em "Ler mais" para ser desviado para a Fonte original com
+					conteudo completo
+				</p>
+				<form class="search-box" action="/" method="get">
+					<input type="text" id="search-box" name="search" value="<%= search%>" placeholder="Pesquisar" />
+					<button type="submit">
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</button>
+				</form>
+				<p id="response"> Total de <%= totalCards%>
+						<%= plural%>
+				</p>
 			</div>
-		</div> -->
-		</header>
-		<main>
-			<section class="news" id="news">
-				<div class="header-section">
-					<h1>InfoMais - Você sempre informado!</h1>
-					<p>
-						Pressione em "Ler mais" para ser desviado para a Fonte original com
-						conteudo completo
-					</p>
-					<form class="search-box" action="/" method="get">
-						<input type="text" id="search-box" name="search" value="<%= search%>" placeholder="Pesquisar" />
-						<button type="submit">
-							<i class="fa-solid fa-magnifying-glass"></i>
-						</button>
-					</form>
-					<p> Total de <%= totalCards%> <%= plural%> </p>
-				</div>
-
-				<div class="container" id="cardNews">
-					<% cards.forEach(function(card) { %>
-						<div class="card">
+			<div class="container" id="cardNews">
+				<% cards.forEach(function(card) { %>
+					<div class="card">
 						<div class="box-img">
 							<div class="img">
 								<img src="<%= card.image %>" target="_blank" alt="">
 							</div>
-							<% if(loggedIn) { %>
-								<a href="/news/read/<%= card.id %>"><i class="fa-solid fa-circle-info"></i></a>
-							<% } %>
-							<span class="date"><%= card.release %></span>
+							<div class="details">
+								<% if(user !=0) { %>
+									<button class="open-dialog" id_news="<%= card.id %>" id_user="<%= card.id %>">
+										<i class="fa-solid fa-circle-info"></i>
+										<div class="star">
+											<div class="star-outer">
+												<div class="star-inner"></div>
+											</div>
+										</div>
+									</button>
+									<% } %>
+										<span class="date">
+											<%= card.release %>
+										</span>
+							</div>
 						</div>
 						<div class="text">
-							<h3><%= card.title %></h3>
-							<p><%= card.description %></p>
-							<div class="more"><a href="<%= card.link %>" target="_blank"><span>Ler mais</span> <i class="fa-solid fa-arrow-right"></i></a></div>
+							<h3>
+								<%= card.title %>
+							</h3>
+							<p>
+								<%= card.description %>
+							</p>
+							<div class="more"><a href="<%= card.link %>" target="_blank"><span>Ler mais</span> <i
+										class="fa-solid fa-arrow-right"></i></a></div>
 						</div>
 					</div>
 					<% }); %>
-				</div>
-			</section>
-		</main>
-
-		<footer>
-			<h2>Obrigado por nos visitar</h2>
-			<p>
-				Esperamos que tenha aproveitado essa interface que foi totalmento
-				desenvolvida pensando no seu conforto querido usuario, por favor avalie
-				nossos serviços e mande feedbacks sobre como podemos melhorar!
-			</p>
-			<div class="footer-horizontal">
-				<div class="devs">
-					<h4>Créditos</h4>
-					<h5>Desenvolvedor e Designer</h5>
-					<span>- Ariel Souza</span>
-					<h5>Conteúdo e Documentação</h5>
-					<span>-Giovana Ferreira de Pontes Lima</span>
-					<span>- Noemí Gabrielle de Freitas Santos</span>
-					<span>- Vitória Pereira Barbosa</span>
-				</div>
-				<div class="contato">
-					<h4>Contato</h4>
-					<ul class="dados">
-						<li>Telefone: +55 (85) 9 2454-2354</li>
-						<li>Email: julho_amaral@gmail.com</li>
-						<li>
-							Endereço: Rua ali perto, 42 - Vasco <br />Rio de Janeiro - RJ
-						</li>
-					</ul>
-					<ul class="redes-sociais">
-						<li>
-							<a href="#"><i class="fa-brands fa-twitter"></i></a>
-						</li>
-						<li>
-							<a
-								target="_blank"
-								href="https://www.figma.com/file/NPgcyfkWhDNMuCZm3PC3jb/MFT?node-id=1-3&t=MlwwsC5kNtWpFt2u-0"
-								><i class="fa-brands fa-figma"></i
-							></a>
-						</li>
-						<li>
-							<a href="https://github.com/Lorsuz/MFT"
-								><i class="fa-brands fa-github"></i
-							></a>
-						</li>
-						<li>
-							<a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-						</li>
-					</ul>
-				</div>
-				<div class="info">
-					<h4>Informações</h4>
-					<ul>
-						<li><a href="#">Sobre</a></li>
-						<li>
-							<a href="#">Feedback</a>
-						</li>
-						<li>
-							<a href="#">Apoie-nos</a>
-						</li>
-						<li>
-							<a href="#">Desenvolvedores</a>
-						</li>
-						<li>
-							<a href="#">Portifólio</a>
-						</li>
-						<li>
-							<a href="#">Política de Privacidade</a>
-						</li>
-						<li>
-							<a href="#">Termo e Condições</a>
-						</li>
-					</ul>
-				</div>
 			</div>
-			<div class="copy">
-				<p>Copyright © - Todos os direitos reservados.</p>
-			</div>
-		</footer>
-		<!-- <script src="scripts/script.js"></script> -->
-		<script>
-			var menuLinks = document.querySelectorAll('.right a[href^="#"]');
+			<dialog id="info-card-news">
+				<button class="close-dialog"></button>
+				<div class="details-news">
+					<div class="info-news">
+						<div class="author">
+							<a href="" class="autor-img"><img src="" alt=""></a>
+							<div class="text"><a href="" class="author-name">@ariel</a><a href="" class="validator">icon por @adm</a></div>
+						</div>
+						<div class="button-edit"><a href="">Editar Nóticia</a></div>
+					</div>
+					<h2 classe="newsTitle">Detalhes do cartão</h2>
+					<p class="newsDescription"></p>
+					<form class="container">
+						<h3>Sua nota para esta Noticia!</h3>
+						<!-- postado por @alguem ou vc e verificada por @adm em 23/43/2332 -->
+						<div class="star-widget">
+							<input type="radio" name="rate" id="rate-5">
+							<label for="rate-5" class="fas fa-star"></label>
+							<input type="radio" name="rate" id="rate-4">
+							<label for="rate-4" class="fas fa-star"></label>
+							<input type="radio" name="rate" id="rate-3">
+							<label for="rate-3" class="fas fa-star"></label>
+							<input type="radio" name="rate" id="rate-2">
+							<label for="rate-2" class="fas fa-star"></label>
+							<input type="radio" name="rate" id="rate-1">
+							<label for="rate-1" class="fas fa-star"></label>
+						</div>
+					</form>
+					<!-- botao editar ou salvar e... -->
+					<div class="app">
+						<div class="rating">
+							<div class="rating__average">
+								<h3>4.5</h3>
+								<div class="star-outer">
+									<div class="star-inner"></div>
+								</div>
+								<p></p>
+							</div>
+							<div class="rating__progress"></div>
+						</div>
+					</div>
+				</div>
 
-			function getDistanceFromTheTop(element) {
-				const id = element.getAttribute("href");
-				return document.querySelector(id).offsetTop;
-			}
-
-			function scrollToSection(event) {
-				event.preventDefault();
-				const distanceFromTheTop = getDistanceFromTheTop(event.target) - 100;
-				smoothScrollTo(0, distanceFromTheTop);
-			}
-
-			menuLinks.forEach((link) => {
-				link.addEventListener("click", scrollToSection);
-			});
-
-			function smoothScrollTo(endX, endY, duration) {
-				const startX = window.scrollX || window.pageXOffset;
-				const startY = window.scrollY || window.pageYOffset;
-				const distanceX = endX - startX;
-				const distanceY = endY - startY;
-				const startTime = new Date().getTime();
-
-				duration = typeof duration !== "undefined" ? duration : 1000;
-
-				const easeInOutQuart = (time, from, distance, duration) => {
-					if ((time /= duration / 2) < 1)
-						return (distance / 2) * time * time * time * time + from;
-					return (
-						(-distance / 2) * ((time -= 2) * time * time * time - 2) + from
-					);
-				};
-
-				const timer = setInterval(() => {
-					const time = new Date().getTime() - startTime;
-					const newX = easeInOutQuart(time, startX, distanceX, duration);
-					const newY = easeInOutQuart(time, startY, distanceY, duration);
-					if (time >= duration) {
-						clearInterval(timer);
-					}
-					window.scroll(newX, newY);
-				}, 1000 / 60);
-			}
-		</script>
-		<script>
-			var ultimaPosicao = 0;
-			window.addEventListener("scroll", () => {
-				var nav = document.querySelector("nav");
-				var atualPosicao = window.scrollY;
-
-				if (atualPosicao > ultimaPosicao && atualPosicao > window.innerHeight) {
-					nav.classList.remove("sticky");
-					nav.style.top = `-${(window.innerHeight / 100) * 10}px`;
-				} else {
-					nav.classList.add("sticky");
-					nav.style.top = "0px";
-				}
-				if (atualPosicao < 80) {
-					nav.classList.remove("sticky");
-					nav.style.top = "0px";
-				}
-				ultimaPosicao = atualPosicao;
-			});
-		</script>
-		<script>
-			class MobileNavbar {
-	constructor ( mobileMenu, navList, navLinks ) {
-		this.mobileMenu = document.querySelector( mobileMenu );
-		this.navList = document.querySelector( navList );
-		this.navLinks = document.querySelectorAll( navLinks );
-		this.activeClass = "active";
-		this.handleClick = this.handleClick.bind( this );
-	}
-
-	animateLinks () {
-		this.navLinks.forEach( ( link, index ) => {
-			link.style.animation
-				? ( link.style.animation = "" )
-				: ( link.style.animation = `navLinkFade 0.5s ease forwards ${ index / 7 + 0.3
-					}s`);
-		} );
-	}
-
-	handleClick () {
-		this.navList.classList.toggle( this.activeClass );
-		this.mobileMenu.classList.toggle( this.activeClass );
-		this.animateLinks();
-	}
-
-	addClickEvent () {
-		this.mobileMenu.addEventListener( "click", this.handleClick );
-	}
-
-	init () {
-		if ( this.mobileMenu ) {
-			this.addClickEvent();
-		}
-		return this;
-	}
-}
-
-const mobileNavbar = new MobileNavbar(
-	"#profile",
-	".nav-list",
-	".nav-list ul li",
-);
-mobileNavbar.init();
-
-		</script>
-
-	</body>
-</html>
+				<div class="comments">
+					<h2>Comentarios</h2>
+					<hr>
+					<div class="chat">
+						<% for (let i = 0; i < 12; i++) { %>
+						<div class="comment">
+							<div class="img">
+								<img
+									src="https://i.pinimg.com/originals/45/f2/33/45f233d8cca8630bdf0f6b263605b5bd.jpg"
+									alt="">
+							</div>
+							<div class="text">
+								<div class="details">
+									<h6>name user</h6>
+									<span>19/92/3233</span>
+								</div>
+								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, magni!</p>
+							</div>
+						</div>
+						<% } %>
+					</div>
+					<div class="input">
+						<form action="" method="post">
+							<input type="text" placeholder="Digite seu comentario">
+							<button type="submit"><i class="fa-solid fa-comment"></i></button>
+						</form>
+					</div>
+				</div>
+			</dialog>
+		</section>
+	</main>
+	<%- include('partials/footer.ejs') %>

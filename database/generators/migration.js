@@ -43,7 +43,7 @@ async function up () {
 			);
 		`,
 		`
-			CREATE TABLE IF NOT EXISTS assessments (
+			CREATE TABLE IF NOT EXISTS ratings (
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				id_news INTEGER NOT NULL,
 				id_user INTEGER NOT NULL,

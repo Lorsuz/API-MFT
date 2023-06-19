@@ -6,6 +6,10 @@ import path from 'path';
 
 import Users from '../../models/Users.js';
 import News from '../../models/News.js';
+import Ratings from '../../models/Ratings.js';
+import Favorites from '../../models/Favorites.js';
+import Comments from '../../models/Comments.js';
+import Audits from '../../models/Audits.js';
 
 import { parseISO, format } from 'date-fns';
 
@@ -34,4 +38,4 @@ class HTTPError extends Error {
   }
 }
 
-export default {router, Users, News, parseISO, format, HTTPError};
+export default {router, Users, News, Ratings, Favorites, Comments, Audits, parseISO, format, HTTPError};

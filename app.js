@@ -3,19 +3,23 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-
-var app = express();
-
-/* ==================================================================== */
-
-import indexRouter from './routes/index.js';
-import usersRouter from './routes/users.js';
-// import newsRouter from './routes/news.js';
-
-/* ==================================================================== */
+import livereload from 'livereload';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+
+var app = express();
+
+import newsRouter from './routes/news.js';
+import indexRouter from './routes/index.js';
+import usersRouter from './routes/users.js';
+import auditsRouter from './routes/audits.js';
+import ratingsRouter from './routes/ratings.js';
+import commentsRouter from './routes/comments.js';
+import favoritesRouter from './routes/favorites.js';
+
+/* ==================================================================== */
+
 
 const __filename = fileURLToPath( import.meta.url );
 const __dirname = dirname( __filename );
@@ -29,9 +33,16 @@ app.use( express.urlencoded( { extended: false } ) );
 app.use( cookieParser() );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
+const liveReloadServer = livereload.createServer({port: 35729});
+liveReloadServer.watch( path.join( __dirname, 'public' ) );
+
 app.use( '/', indexRouter );
-app.use('/users', usersRouter);
-// app.use('/news', newsRouter);
+app.use( '/news', newsRouter );
+app.use( '/users', usersRouter );
+app.use( '/audits', auditsRouter );
+app.use( '/ratings', ratingsRouter );
+app.use( '/comments', commentsRouter );
+app.use( '/favorites', favoritesRouter );
 
 
 app.use( function ( req, res, next ) {
@@ -44,7 +55,8 @@ app.use( function ( err, req, res, next ) {
 	res.locals.error = req.app.get( 'env' ) === 'development' ? err : {};
 
 	res.status( err.status || 500 );
-	res.render( 'error' );
+	console.log( `Error: ${ err.message }\n\n ${ err }` );
+	res.send( `Error: ${ err.message }\n\n ${ err }` );
 } );
 
 export default app;

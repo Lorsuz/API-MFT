@@ -1,0 +1,194 @@
+@import 'global.css';
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+header {
+  width: 100%;
+  height: 10vh;
+  min-height: 50px;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-theme);
+  position: fixed;
+  z-index: 10;
+  transition: 500ms;
+  /* 	div#profile {
+  		display: flex;
+  		justify-content: center;
+  		margin-right: 6vw;
+  		z-index: 3;
+  		align-items: center;
+  		cursor: pointer;
+
+  		div {
+  			width: 50px;
+  			height: 50px;
+  			border-radius: 50%;
+  			margin-right: 10px;
+  			overflow: hidden;
+  			border: 2px solid rgb(255, 255, 255);
+  			background: rgb(255, 255, 255);
+  			cursor: pointer;
+  		}
+  	} */
+}
+header a {
+  color: #ffffff;
+}
+header > a {
+  display: none;
+}
+header > a i {
+  font-size: 2.2rem;
+  color: #ffffff;
+}
+header > ul {
+  display: flex;
+}
+header > ul li {
+  margin: 0 40px;
+}
+header nav .profile {
+  margin: 0 10px;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+header nav .profile button {
+  display: flex;
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+header nav .profile button i {
+  font-size: 1.5rem;
+  color: var(--color-theme);
+}
+header nav div.nav-list {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  z-index: 2;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30%;
+  transform: translateX(100%);
+  background: rgba(0, 0, 0, 0.749);
+  transition: 500ms;
+  backdrop-filter: blur(5px);
+}
+header nav div.nav-list.active {
+  transform: translateX(0);
+}
+header nav div.nav-list ul {
+  margin: 100px 0 0 0;
+}
+header nav div.nav-list ul li {
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+  opacity: 0;
+  transition: 500ms;
+}
+header nav div.nav-list ul li a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  color: rgb(124, 124, 124);
+  padding: 15px 40px;
+  transition: 500ms;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+header nav div.nav-list ul li a:hover {
+  color: #fff;
+  background: rgb(0, 0, 0);
+  letter-spacing: 3px;
+}
+header nav div.nav-list ul li a i {
+  cursor: pointer;
+}
+header nav div.nav-list ul li a span {
+  margin-left: 10px;
+  cursor: pointer;
+}
+header nav div.nav-list div.log-out {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 0 0;
+  cursor: pointer;
+}
+header nav div.nav-list div.log-out a {
+  color: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  background: #000;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  transition: 300ms;
+  cursor: pointer;
+}
+header nav div.nav-list div.log-out a i {
+  margin-right: 10px;
+  cursor: pointer;
+}
+header nav div.nav-list div.log-out a:hover {
+  background: rgb(153, 0, 0);
+}
+header nav div.nav-list div.footer p {
+  text-align: center;
+  color: #fff;
+  margin: 0 0 15px 0;
+}
+header nav > ul.buttons-sign-log {
+  display: flex;
+}
+header nav > ul.buttons-sign-log li {
+  height: 100%;
+}
+header nav > ul.buttons-sign-log li a {
+  display: flex;
+  width: 135px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 15px;
+  border-radius: 10px;
+  transition: 200ms ease-in-out;
+  color: #fff;
+  background: var(--color-theme);
+  border: 2px solid #fff;
+}
+header nav > ul.buttons-sign-log li a:hover {
+  background: #ffffff;
+  color: var(--color-theme);
+  border: 2px solid #ffffff;
+  letter-spacing: 1px;
+}
+header nav > ul.buttons-sign-log li a i {
+  margin-right: 5px;
+}
+
+/*# sourceMappingURL=header.css.map */

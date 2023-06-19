@@ -34,7 +34,7 @@
 		timestamp : timestamp <<Not null>>
 	}
 
-	entity "assessments" as assessments {
+	entity "ratings" as ratings {
 		*id : int <<PK>> <<AutoIncrement>>
 		id_news : int <<FK>> <<Not null>>
 		id_user : int <<FK>> <<Not null>>
@@ -60,8 +60,8 @@
 	news ||--||  audits : id_news
 	users ||--o{ audits : id_author
 	users ||--o{ audits : id_checker
-	news ||--o{ assessments : id_news
-	users ||--o{ assessments : id_user
+	news ||--o{ ratings : id_news
+	users ||--o{ ratings : id_user
 	users ||--o{ favorites : id_user
 	news }o--|| favorites : id_news
 	news ||--o{ comments : id_news

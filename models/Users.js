@@ -1,5 +1,6 @@
 import Database from '../database/connection.js';
 
+
 async function createItem(user) {
   const database = await Database.connect();
   const { nickname, email, password, birth, description, administrator } = user;
@@ -8,23 +9,31 @@ async function createItem(user) {
   return readItemForId(lastID);
 }
 
+async function readAll() {
+  const database = await Database.connect();
+  const query = `SELECT * FROM users`;
+  const result = await database.get(query);
+  return result;
+}
+
 async function readItemForId(id) {
   const database = await Database.connect();
   const query = `SELECT * FROM users WHERE id = ?`;
-  const user = await database.get(query, [id]);
-  return user;
+  const result = await database.get(query, [id]);
+  return result;
 }
 
 async function readItemForColumn(column,value) {
   const database = await Database.connect();
   const query = `SELECT * FROM users WHERE ${column} = ?`;
-  const user = await database.get(query, [value]);
-  return user;
+  const result = await database.get(query, [value]);
+  return result;
 }
 
 
 export default { 
   createItem,
+	readAll,
   readItemForId,
   readItemForColumn
  };

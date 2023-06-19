@@ -3,19 +3,21 @@ import commonImports from './exports/router.js';
 var router = commonImports.router;
 var Users = commonImports.Users
 var News = commonImports.News;
+var Audits = commonImports.Audits;
+var Comments = commonImports.Comments;
+var Favorites = commonImports.Favorites;
+var Ratings = commonImports.Ratings;
 var parseISO = commonImports.parseISO;
 var format = commonImports.format;
 var HTTPError = commonImports.HTTPError;
 
 router.get( '/', async ( req, res, next ) => {
 
-	if ( !req.session.loggedIn || req.session.loggedIn == undefined || req.session.loggedIn == null ) {
-		req.session.loggedIn = false;
-	} else {
-		req.session.loggedIn = true;
+	if ( !req.session.user || req.session.user == undefined || req.session.user == null ) {
+		req.session.user = 0;
 	}
 
-	var loggedIn = req.session.loggedIn;
+	var user = req.session.user;
 
 	var search = req.query.search;
 	var results = await News.readAll();
@@ -27,13 +29,15 @@ router.get( '/', async ( req, res, next ) => {
 	} else {
 		search = '';
 	}
-
+	var array = {}
 	if ( results ) {
 		results.forEach( card => {
-			console.log(card.release);
+			var arrayBefore = card.release
 			card.release = format( parseISO( card.release ), 'dd/MM/yyyy' );
-			console.log(card.release);
+			var arrayAfter = card.release
+			array[arrayBefore] = arrayAfter
 		} );
+		console.log(`News response:\n${array}`);
 		if ( results.length == 1 ) {
 			msg = 'notícia encontrada';
 		}
@@ -41,7 +45,7 @@ router.get( '/', async ( req, res, next ) => {
 		throw new HTTPError( 'Invalid data to create investment', 400 );
 	}
 
-	res.render( './index', { loggedIn: loggedIn, totalCards: results.length, plural: msg, cards: results, search: search } );
+	res.render( './index', { user: user, totalCards: results.length, plural: msg, cards: results, search: search } );
 } );
 
 export default router;
