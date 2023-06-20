@@ -17,8 +17,19 @@ router.get( '/users', async ( req, res ) => {
 	res.json( result );
 } );
 
-router.get( '/users/register', ( req, res ) => {
-	res.render( './sign-acount', { errorAction: "" } );
+router.get( '/users/register', async ( req, res ) => {
+	// await Users.deleteLess("id",1);
+
+	var backup = { 
+		nickname: 'Administrador',
+		email: 'administrador@gmail.com', 
+		password: '12345678', 
+		confirmPassword: '12345678',
+		birth: '2006-04-17', 
+		description: 'Sou eu que mando aqui'
+	};
+
+	res.render( './sign-acount', { errorAction: "", backup } );
 } );
 
 router.get( '/users/login', ( req, res ) => {
@@ -38,21 +49,48 @@ router.get( '/users/logout', ( req, res ) => {
 /* ==================================================================== */
 
 router.post( '/users/register', async ( req, res ) => {
-	const { nickname, email, password, birth, description, administrator } = req.body;
-	var errorAction = '';
-	var results = await Users.readItemForColumn( "email", email );
-	if ( results && results != undefined ) {
-		if ( results.password != password ) {
-			errorAction = "senha incorreta";
+	const { nickname, email, password, confirmPassword, birth, description, administrator } = req.body;
+	var promisse 
+	var errorActionActive = false
+	var errorAction = {nickname, email, confirmPassword};
+
+	for (let key in errorAction) {
+		if (errorAction.hasOwnProperty(key)) {
+			errorAction[key] = '';
 		}
-	} else {
-		errorAction = "Não existe nenhum cadastro com esse email";
 	}
-	if ( errorAction != '' ) {
-		res.render( './sign-acount', { errorAction } );
+
+	promisse = await Users.readItemForColumn( "email", email );
+	if ( promisse != undefined ) {
+		errorAction.email = "Esse E-mail já esta cadastrado...";
+	}
+
+	var promisse = await Users.readItemForColumn( "nickname", nickname );
+	if ( promisse != undefined ) {
+		errorAction.nickname = "Esse nickname já esta em uso...";
+	}
+	
+	if(password !=confirmPassword){
+		errorAction.confirmPassword = "Sua confirmação de senha está errada...";
+	}
+
+	for (let key in errorAction) {
+		if (errorAction.hasOwnProperty(key)) {
+			console.log(errorAction[key]);
+			if(errorAction[key] != ''){
+				errorActionActive = true
+			}
+		}
+	}
+
+	if ( errorActionActive ) {
+		var backup = { nickname, email, password, confirmPassword, birth, description };
+		res.render( './sign-acount', { errorAction, backup } );
 	} else {
+		var newUser = { nickname, email, password, birth, description, administrator };
+		var result = await Users.createItem( newUser );
 		req.session.loggedIn = true;
-		req.session.user = results;
+		req.session.user = result;
 		res.redirect( '/' );
 	}
 } );
