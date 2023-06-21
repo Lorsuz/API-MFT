@@ -8,6 +8,8 @@
 		<title>
 			<%= pageTitle%>
 		</title>
+		<link rel="shortcut icon" href="/images/Logo-existindo-news.png" type="image/x-icon">
+
 
 		<link rel="stylesheet" href="/stylesheets/partials/header.css" />
 		<link rel="stylesheet" href="/stylesheets/<%= styleSheet%>.css" />
@@ -20,14 +22,7 @@
 
 	<body>
 		<header>
-			<!-- colocar a logo com o link pra home -->
-			<a href="#"><i class="fa-solid fa-bars"></i></a>
-			<ul>
-				<li><a href="#">Inicio</a></li>
-				<li><a href="#">Desenvolvedores</a></li>
-				<li><a href="#">Suporte</a></li>
-				<li><a href="">Apoie-nos</a></li>
-			</ul>
+			<a href="/"><img src="/images/Logo-existindo-news.png" alt="Image Logo"><span>ExistindoNews</span></a>
 			<nav>
 				<% if(user !=0) { %>
 					<div class="profile">

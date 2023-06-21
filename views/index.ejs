@@ -1,5 +1,4 @@
-<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | HOME: MFT - Movimento_Feminista_Trabalhista' ,
-	styleSheet: 'index' }) %>
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | HOME' , styleSheet: 'index' }) %>
 	<main>
 		<section class="cover">
 			<div class="background">
@@ -121,7 +120,8 @@
 					<div class="info-news">
 						<div class="author">
 							<a href="" class="autor-img"><img src="" alt=""></a>
-							<div class="text"><a href="" class="author-name">@ariel</a><a href="" class="validator">icon por @adm</a></div>
+							<div class="text"><a href="" class="author-name">@ariel</a><a href="" class="validator">icon por @adm</a>
+							</div>
 						</div>
 						<div class="button-edit"><a href="">Editar Nóticia</a></div>
 					</div>
@@ -162,22 +162,20 @@
 					<h2>Comentarios</h2>
 					<hr>
 					<div class="chat">
-						<% for (let i = 0; i < 12; i++) { %>
-						<div class="comment">
-							<div class="img">
-								<img
-									src="https://i.pinimg.com/originals/45/f2/33/45f233d8cca8630bdf0f6b263605b5bd.jpg"
-									alt="">
-							</div>
-							<div class="text">
-								<div class="details">
-									<h6>name user</h6>
-									<span>19/92/3233</span>
+						<% for (let i=0; i < 12; i++) { %>
+							<div class="comment">
+								<div class="img">
+									<img src="https://i.pinimg.com/originals/45/f2/33/45f233d8cca8630bdf0f6b263605b5bd.jpg" alt="">
 								</div>
-								<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, magni!</p>
+								<div class="text">
+									<div class="details">
+										<h6>name user</h6>
+										<span>19/92/3233</span>
+									</div>
+									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, magni!</p>
+								</div>
 							</div>
-						</div>
-						<% } %>
+							<% } %>
 					</div>
 					<div class="input">
 						<form action="" method="post">
