@@ -1,7 +1,3 @@
-/* 
- - cd .\public\stylesheets\
- - sass -w sign.scss:sign.css 
-*/
 @import 'partials/global.css';
 
 :root {
@@ -18,7 +14,7 @@ main {
 	justify-content: center;
 	align-items: center;
 	background: var(--white300);
-	padding: 100px 0;
+	padding: 70px 0;
 	width: 100%;
 	transition: padding 300ms;
 
@@ -72,85 +68,14 @@ main {
 				&:focus {
 					border: 2px solid var(--color-theme);
 				}
-
-				&[type="date"] {
-					resize: none;
-				}
-			}
-			select{
-				width: 100%;
-				height: 50px;
-				border-radius: 5px;
-				display: block;
-				resize: vertical;
-				transition: 100ms ease-out;
-				font-size: 20px;
-				border: 2px solid #ccc;
-				padding-left: 15px;
-				margin: 10px 0 15px;
-				max-height: 250px;
-				cursor: pointer;
-				&:focus{
-					border: 2px solid var(--color-theme);
-
-				}
-
-				option{
-					i{
-						display: block;
-					}
-					&:hover{
-						background: var(--color-theme);
-					}
-				}
 			}
 
-			textarea {
-				width: 100%;
-				height: 50px;
-				min-height: 50px;
-				border-radius: 5px;
-				display: block;
-				resize: vertical;
-				transition: 100ms ease-outs;
-				font-size: 20px;
-				border: 2px solid #ccc;
-				padding-left: 15px;
-				margin: 10px 0 15px;
-				padding-top: 13px;
-				max-height: 250px;
-
-				&:focus {
-					transition: 100ms ease-outs;
-					border: 2px solid var(--color-theme);
-				}
-
-				&::-webkit-scrollbar {
-					width: 5px;
-				}
-
-				&::-webkit-scrollbar-track {
-					background: transparent;
-					cursor: default;
-				}
-
-				&::-webkit-scrollbar-thumb {
-					background-color: var(--color-theme);
-					border-radius: 50px;
-				}
-
-				&:focus::-webkit-scrollbar-thumb {
-					background-color: var(--color-theme);
-					border-radius: 50px;
-				}
-			}
-			span{
+			span {
 				color: var(--color-theme);
 				position: absolute;
 				font-size: 0.9rem;
 				transform: translateY(-70%);
 			}
-
 		}
 
 		button {
@@ -163,19 +88,20 @@ main {
 			text-transform: uppercase;
 			transition: 300ms;
 			letter-spacing: 1px;
-			
-			
+
+
 			&:hover {
 				background: var(--color_2);
 				letter-spacing: 2px;
 			}
 		}
 
-		> span {
+		>span {
 			text-align: center;
 			margin-top: auto;
 			font-size: 1.2rem;
 			display: block;
+
 			a {
 				color: var(--color-theme);
 			}

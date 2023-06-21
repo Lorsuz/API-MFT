@@ -64,66 +64,6 @@ main form > div input {
 main form > div input:focus {
   border: 2px solid var(--color-theme);
 }
-main form > div input[type=date] {
-  resize: none;
-}
-main form > div select {
-  width: 100%;
-  height: 50px;
-  border-radius: 5px;
-  display: block;
-  resize: vertical;
-  transition: 100ms ease-out;
-  font-size: 20px;
-  border: 2px solid #ccc;
-  padding-left: 15px;
-  margin: 10px 0 15px;
-  max-height: 250px;
-  cursor: pointer;
-}
-main form > div select:focus {
-  border: 2px solid var(--color-theme);
-}
-main form > div select option i {
-  display: block;
-}
-main form > div select option:hover {
-  background: var(--color-theme);
-}
-main form > div textarea {
-  width: 100%;
-  height: 50px;
-  min-height: 50px;
-  border-radius: 5px;
-  display: block;
-  resize: vertical;
-  transition: 100ms ease-outs;
-  font-size: 20px;
-  border: 2px solid #ccc;
-  padding-left: 15px;
-  margin: 10px 0 15px;
-  padding-top: 13px;
-  max-height: 250px;
-}
-main form > div textarea:focus {
-  transition: 100ms ease-outs;
-  border: 2px solid var(--color-theme);
-}
-main form > div textarea::-webkit-scrollbar {
-  width: 5px;
-}
-main form > div textarea::-webkit-scrollbar-track {
-  background: transparent;
-  cursor: default;
-}
-main form > div textarea::-webkit-scrollbar-thumb {
-  background-color: var(--color-theme);
-  border-radius: 50px;
-}
-main form > div textarea:focus::-webkit-scrollbar-thumb {
-  background-color: var(--color-theme);
-  border-radius: 50px;
-}
 main form > div span {
   color: var(--color-theme);
   position: absolute;
@@ -166,4 +106,4 @@ main form > span a {
   }
 }
 
-/*# sourceMappingURL=sign.css.map */
+/*# sourceMappingURL=login.css.map */
