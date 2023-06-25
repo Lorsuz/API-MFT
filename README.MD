@@ -4,6 +4,7 @@
 - ec6
 cd .\public\
 sass -w sass/:styleSheets/
+nodemailer
 
 
 estou em um projeto express, em uma pagina ejs tem uma lista de usuarios carregados de um banco sqlite, como faço com que sempre que eu apertar em um deles apareça um pop-up com as informaçoes de que eu apertei

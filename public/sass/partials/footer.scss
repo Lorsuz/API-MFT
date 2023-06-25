@@ -35,83 +35,95 @@ footer {
 	div.footer-horizontal {
 		height: auto;
 		display: flex;
-		align-items: center;
+		width: 100%;
 		justify-content: center;
 		flex-wrap: wrap;
 
 		h4 {
 			font-size: 1.6rem;
-			margin-bottom: 30px;
+			margin-bottom: 20px;
 		}
 
 		>div {
 			width: 33%;
 			min-width: 300px;
-			padding: 10px 30px 0 50px;
-			height: 350px;
-		}
+			padding: 10px 30px 30px 50px;
+			height: auto;
 
-		>div.devs {
-			h4 {
-				margin-bottom: 15px;
-			}
-
-			h5 {
-				font-size: 1.2rem;
-			}
-
-			span {
-				display: inline-block;
-				margin-bottom: 10px;
-				color: $color_6;
-			}
-		}
-
-		>div.contato {
-			border-right: 1px solid rgb(255, 255, 255);
-			border-left: 1px solid rgb(255, 255, 255);
-
-			ul.dados {
-				li {
-					margin-top: 10px;
+			&.devs {
+				h5 {
+					font-size: 1.2rem;
+					margin-bottom: 5px;
 				}
-			}
 
-			ul.redes-sociais {
-				display: flex;
-				justify-content: center;
+				ul {
+					margin-bottom: 15px;
 
-				li {
-					margin: 40px 20px;
+					li {
+						display: block;
+						margin-bottom: 10px;
+						color: $color_6;
 
-					a {
-						position: relative;
-						transition: 100ms;
-						top: 0;
-
-						i {
-							color: $color_7;
-							font-size: 2rem;
-						}
-
-						&:hover {
-							top: -5px;
+						&::before {
+							content: "- ";
 						}
 					}
 				}
 			}
-		}
 
-		>div.info {
-			ul {
-				li {
-					margin-top: 10px;
+			&.contato {
+				border-right: 1px solid rgb(255, 255, 255);
+				border-left: 1px solid rgb(255, 255, 255);
 
-					a {
-						color: $color_7;
+				ul.dados {
+					li {
+						margin-top: 10px;
 
-						&:hover {
-							text-decoration: underline;
+						span {
+							color: $color_6;
+						}
+					}
+				}
+
+				ul.redes-sociais {
+					display: flex;
+					justify-content: center;
+
+					li {
+						margin: 25px 20px 0 20px;
+
+						a {
+							position: relative;
+							transition: 100ms;
+							top: 0;
+							color: $color_6;
+
+							i {
+								font-size: 2rem;
+
+							}
+
+							&:hover {
+								color: $color_7;
+								top: -5px;
+							}
+						}
+					}
+				}
+			}
+
+			&.info {
+				ul {
+					li {
+						margin-top: 10px;
+
+						a {
+							color: $color_6;
+
+							&:hover {
+								color: $color_7;
+								text-decoration: underline;
+							}
 						}
 					}
 				}

@@ -1,27 +1,35 @@
 import commonImports from './exports/router.js';
 
 var router = commonImports.router;
-var Users = commonImports.Users;
-var News = commonImports.News;
-var Audits = commonImports.Audits;
-var Comments = commonImports.Comments;
-var Favorites = commonImports.Favorites;
-var Ratings = commonImports.Ratings;
+var Model = commonImports.Model;
 var parseISO = commonImports.parseISO;
 var format = commonImports.format;
 var HTTPError = commonImports.HTTPError;
 
 router.get( '/users', async ( req, res ) => {
-	var result = await Users.readAll();
-	console.log( result );
+	var result = await Model.readItems('users');
 	res.json( result );
 } );
 
+router.get( '/users/dashboard/:id', async ( req, res ) => {
+	var id = req.params.id;
+	var user = await Model.readItem('users', 'id', id );
+	if ( user == undefined ) {
+		res.redirect( '/' );
+	}
+	var news = await Model.readItems('news', 'id_user', user.id );
+	user.administrator = user.administrator ? 'Administrador' : 'Usuário';
+	user.birth = format( parseISO( user.birth ), 'dd/MM/yyyy' );
+
+	res.render( './dashboard', { user, news } );
+} );
+
 router.get( '/users/register', async ( req, res ) => {
-	// await Users.deleteLess("id",1);
+	// await Model.deleteAllLess('users','id',1);
 
 	var backup = {
 		nickname: 'Administrador',
+		name: 'Administrador supremo',
 		email: 'administrador@gmail.com',
 		password: '12345678',
 		confirmPassword: '12345678',
@@ -29,7 +37,7 @@ router.get( '/users/register', async ( req, res ) => {
 		description: 'Sou eu que mando aqui'
 	};
 
-	res.render( './sign-acount', { errorAction: "", backup } );
+	res.render( './sign-acount', { errorAction: '', backup } );
 } );
 
 router.get( '/users/login', ( req, res ) => {
@@ -43,7 +51,6 @@ router.get( '/users/login', ( req, res ) => {
 router.get( '/users/logout', ( req, res ) => {
 	req.session.destroy( ( err ) => {
 		if ( err ) {
-			console.log( err );
 		} else {
 			res.redirect( '/' );
 		}
@@ -53,46 +60,56 @@ router.get( '/users/logout', ( req, res ) => {
 /* ==================================================================== */
 
 router.post( '/users/register', async ( req, res ) => {
-	var { nickname, email, password, confirmPassword, birth, description, administrator } = req.body;
+	var { nickname, name, email, password, confirmPassword, birth, description, gender, administrator } = req.body;
 	var promise;
 	var errorActionActive = false;
 	var errorAction = { nickname, email, confirmPassword };
-	nickname = nickname.split(' ')
-	for (var i = 0; i < nickname.length; i++) {
-    var word = nickname[i];
-    nickname[i] = word.charAt(0).toUpperCase() + word.slice(1);
-  }
-	nickname = nickname.join(' ');
+	gender = gender == 1 ? 'Masculino' : 'Feminino';
+	function parseToCapitalize ( params ) {
+		params = params.split( ' ' );
+		for ( var i = 0; i < params.length; i++ ) {
+			var word = params[ i ];
+			word = word.trim();
+			params[ i ] = word.charAt( 0 ).toUpperCase() + word.slice( 1 );
+		}
+		return params.join( ' ' );
+	}
+	nickname = await parseToCapitalize( nickname );
+	name = await parseToCapitalize( name );
+
 	for ( let key in errorAction ) {
 		if ( errorAction.hasOwnProperty( key ) ) {
 			errorAction[ key ] = '';
 		}
 	}
-	promise = await Users.readItemForColumn( "email", email );
+	promise = await Model.readItem( 'users', 'email', email );
 	if ( promise != undefined ) {
-		errorAction.email = "Esse E-mail já esta cadastrado...";
+		errorAction.email = 'Esse E-mail já esta cadastrado...';
 	}
-	var promise = await Users.readItemForColumn( "nickname", nickname );
+	var promise = await Model.readItem( 'users', 'nickname', nickname );
 	if ( promise != undefined ) {
-		errorAction.nickname = "Esse nickname já esta em uso...";
+		errorAction.nickname = 'Esse nickname já esta em uso...';
+	}
+	if ( password.length < 8 ) {
+		errorAction.password = 'A senha deve conter pelo menos 8 digitos...';
 	}
 	if ( password != confirmPassword ) {
-		errorAction.confirmPassword = "Sua confirmação de senha está errada...";
+		errorAction.confirmPassword = 'Sua confirmação de senha está errada...';
 	}
 	for ( let key in errorAction ) {
 		if ( errorAction.hasOwnProperty( key ) ) {
-			console.log( errorAction[ key ] );
 			if ( errorAction[ key ] != '' ) {
+				errorAction[ key ] = `<i class='fa-solid fa-triangle-exclamation'></i> ${ errorAction[ key ] }`;
 				errorActionActive = true;
 			}
 		}
 	}
 	if ( errorActionActive ) {
-		var backup = { nickname, email, password, confirmPassword, birth, description };
+		var backup = { nickname, name, email, password, confirmPassword, birth, gender, description };
 		res.render( './sign-acount', { errorAction, backup } );
 	} else {
-		var newUser = { nickname, email, password, birth, description, administrator };
-		newUser = await Users.createItem( newUser );
+		var newUser = { nickname, name, email, password, birth, description, gender, administrator };
+		newUser = await Model.createItem( 'users', newUser );
 		req.session.user = newUser;
 		res.redirect( '/' );
 	}
@@ -102,28 +119,29 @@ router.post( '/users/login', async ( req, res ) => {
 	const { email, password } = req.body;
 	var errorActionActive = false;
 	var errorAction = { email, password };
-	var promise = await Users.readItemForColumn( "email", email );
+	var promise = await Model.readItem( 'users', 'email', email );
 	for ( let key in errorAction ) {
 		if ( errorAction.hasOwnProperty( key ) ) {
 			errorAction[ key ] = '';
 		}
 	}
 	if ( promise == undefined ) {
-		errorAction.email = "Não existe nenhum cadastro com esse email...";
+		errorAction.email = 'Não existe nenhum cadastro com esse email...';
 	}
 	if ( promise != undefined && promise.password != password ) {
-		errorAction.password = "A senha está incorreta...";
+		errorAction.password = 'A senha está incorreta...';
 	}
 	for ( let key in errorAction ) {
 		if ( errorAction.hasOwnProperty( key ) ) {
-			console.log( errorAction[ key ] );
 			if ( errorAction[ key ] != '' ) {
+				errorAction[ key ] = `<i class='fa-solid fa-triangle-exclamation'></i> ${ errorAction[ key ] }`;
+
 				errorActionActive = true;
 			}
 		}
 	}
 	if ( errorActionActive ) {
-		var backup = { email, password};
+		var backup = { email, password };
 		res.render( './login-acount', { errorAction, backup } );
 	} else {
 		req.session.user = promise;

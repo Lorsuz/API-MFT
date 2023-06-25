@@ -14,7 +14,7 @@ main section {
 }
 main section.cover {
   height: 100vh;
-  background: url(../images/fundo-mulheres.jpg) no-repeat center bottom;
+  background: #CFCBFD url(../images/fundo-mulheres.jpg) no-repeat center bottom;
   background-size: 100% 90%;
   background-attachment: fixed;
   display: flex;
@@ -154,7 +154,7 @@ main section.cover .capa .right .news a {
   color: #ffffff;
 }
 main section.news {
-  padding: 100px 0;
+  padding: 100px 0 0 0;
 }
 main section.news .header-section {
   width: 100%;
@@ -466,6 +466,7 @@ main section.news dialog#info-card-news > div.details-news .app .rating .rating_
 }
 main section.news dialog#info-card-news > div.details-news .app .rating .rating__progress .rating__progress-value .progress .bar {
   height: 100%;
+  width: 0%;
   background: gold;
   border-radius: 0.5rem;
   box-shadow: 0 0 5px 0 gold;

@@ -1,0 +1,99 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+}
+main section {
+  width: 80vw;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #ccc;
+  overflow: hidden;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+}
+main section .bg-profile {
+  overflow: hidden;
+  width: 100%;
+  height: 350px;
+}
+main section .bg-profile img {
+  width: 100%;
+}
+main section .profile {
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%) translateY(-70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main section .profile .img-profile {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border: 4px solid #ffffff;
+  background: #ffffff;
+  margin-bottom: 10px;
+  position: relative;
+}
+main section .profile .img-profile img {
+  width: 100%;
+  height: 100%;
+}
+main section .profile .img-profilehover > .bg-edit {
+  opacity: 1;
+}
+main section .profile .img-profile .bg-edit {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.47);
+  position: absolute;
+  top: 0;
+  transition: 300ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  backdrop-filter: blur(1px);
+}
+main section .profile .img-profile .bg-edit a {
+  cursor: pointer;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  padding: 10px 20px;
+  transform: translateY(10px);
+  font-size: 1.3rem;
+  transition: 300ms;
+  letter-spacing: 1px;
+}
+main section .profile .img-profile .bg-edit a a:hover {
+  letter-spacing: 2px;
+}
+main section h2 {
+  font-size: 2rem;
+  color: #3f3f3f;
+}
+main section .info {
+  width: 80%;
+  margin: 100px auto 0;
+}
+main section .info > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+main section .info > div > div span {
+  display: block;
+}
+main section .info > div > div span:nth-child(1) {
+  color: #9E3FFD;
+  font-size: 1.3rem;
+}
+main section .info > div > div span:nth-child(2) {
+  font-size: 1.5rem;
+}
+
+/*# sourceMappingURL=dashboard.css.map */

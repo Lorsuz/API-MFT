@@ -9,9 +9,11 @@ async function up () {
 			CREATE TABLE IF NOT EXISTS users (
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				nickname VARCHAR(100) NOT NULL,
+				name VARCHAR(100) NOT NULL,
 				email VARCHAR(100) NOT NULL,
 				password VARCHAR(100) NOT NULL,
 				birth DATE NOT NULL,
+				gender VARCHAR(10) NOT NULL,
 				description TEXT NOT NULL,
 				administrator BOOLEAN DEFAULT(0) NOT NULL
 			);		
@@ -68,7 +70,6 @@ async function up () {
 				id_user INTEGER NOT NULL,
 				content TEXT NOT NULL,
 				timestamp TIMESTAMP NOT NULL,
-				likes INTEGER DEFAULT(0) NOT NULL,
 				FOREIGN KEY (id_news) REFERENCES news(id),
 				FOREIGN KEY (id_user) REFERENCES users(id)
 			);
@@ -78,7 +79,6 @@ async function up () {
 
 	for (const element of query) {
 		promise = await execQuery(database, element );
-		console.log("Response: ",promise);
 	}
 
 	return promise;

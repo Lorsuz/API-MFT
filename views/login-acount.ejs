@@ -1,4 +1,4 @@
-<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | Register' , styleSheet: 'login' , user: 0 }) %>
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | LOGIN' , styleSheet: 'login' , user: 0 }) %>
 <main>
 	<form action="/users/login" method="post">
 		<h2>Bem vindo de volta!</h2>
@@ -7,13 +7,13 @@
 		<div>
 			<label for="email">E-mail:</label>
 			<input required name="email" type="email" id="email" value="<%= backup.email %>" />
-			<span><%= errorAction.email %></span>
+			<span><%- errorAction.email %></span>
 		</div>
 
 		<div>
 			<label for="password">Senha:</label>
 			<input required name="password" type="password" id="password" value="<%= backup.password%>" />
-			<span><%= errorAction.password%></span>
+			<span><%- errorAction.password%></span>
 		</div>
 
 		<button type="submit">Entrar</button>

@@ -1,27 +1,27 @@
 import commonImports from './exports/router.js';
 
 var router = commonImports.router;
-var Users = commonImports.Users
-var News = commonImports.News;
-var Audits = commonImports.Audits;
-var Comments = commonImports.Comments;
-var Favorites = commonImports.Favorites;
-var Ratings = commonImports.Ratings;
+var Model = commonImports.Model;
 var parseISO = commonImports.parseISO;
 var format = commonImports.format;
 var HTTPError = commonImports.HTTPError;
 
 router.get( '/news', async ( req, res, next ) => {
-	res.render( './form-news' );
+	var result = await Model.readItems( 'news' );
+	res.json( result );
 } );
 
 router.get( '/news/create', async ( req, res, next ) => {
-	res.render( './form-news' );
+	if (req.session.user == undefined ) {
+		req.session.user = 0;
+	}
+	var user = req.session.user;
+	res.render( './form-news', {user: user} );
 } );
 
 router.get( '/news/read/:id', async ( req, res, next ) => {
 	const id = req.params.id;
-	var result = await News.readItem( id );
+	var result = await Model.readItem('news','id', id );
 	res.json( result );
 } );
 

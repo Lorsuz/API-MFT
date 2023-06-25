@@ -1,7 +1,6 @@
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
-import Users from '../../models/Users.js';
-import News from '../../models/News.js';
+import Model from '../../models/Model.js';
 
 async function up () {
 	const file = resolve( 'database', 'generators', 'jsons', 'data.json' );
@@ -9,11 +8,11 @@ async function up () {
 	const data = JSON.parse( readFileSync( file ) );
 
 	for ( const user of data.users ) {
-		await Users.createItem( user );
+		await Model.createItem('users', user );
 	}
 
 	for (const cardNews of data.news) {
-	  await News.createItem(cardNews);
+	  await Model.createItem('news', cardNews);
 	}
 
 }

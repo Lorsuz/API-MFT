@@ -80,7 +80,7 @@
 			</div>
 			<div class="container" id="cardNews">
 				<% cards.forEach(function(card) { %>
-					<div class="card">
+					<div class="card" id="id_news_<%= card.id%>">
 						<div class="box-img">
 							<div class="img">
 								<img src="<%= card.image %>" target="_blank" alt="">
@@ -91,7 +91,7 @@
 										<i class="fa-solid fa-circle-info"></i>
 										<div class="star">
 											<div class="star-outer">
-												<div class="star-inner"></div>
+												<div class="star-inner" style="width: <%= card.rating %>;"></div>
 											</div>
 										</div>
 									</button>
@@ -115,6 +115,9 @@
 					<% }); %>
 			</div>
 			<dialog id="info-card-news">
+				<div class="loader">
+					<div class="custom-loader"></div>
+				</div>
 				<button class="close-dialog"></button>
 				<div class="details-news">
 					<div class="info-news">
@@ -153,7 +156,19 @@
 								</div>
 								<p></p>
 							</div>
-							<div class="rating__progress"></div>
+							<div class="rating__progress">
+								<% for(let index = 1; index <= 5; index++) { %>
+									<div class="rating__progress-value">
+										<p>
+											<%= index%><span class="star">&#9733;</span>
+										</p>
+										<div class="progress">
+											<div class="bar"></div>
+										</div>
+										<p class="count">ariel</p>
+									</div>
+									<% } %>
+							</div>
 						</div>
 					</div>
 				</div>

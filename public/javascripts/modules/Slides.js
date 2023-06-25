@@ -48,7 +48,6 @@
 	}
 
 	animationEffect(slideCurrent, index, value = 0) {
-		console.log()
 		if (value == 1) {
 			this.slide[slideCurrent].classList.add("toRightOld")
 			this.slide[index].classList.add("toRightNew")

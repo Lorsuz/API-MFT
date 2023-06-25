@@ -8,25 +8,30 @@
 		<div>
 			<label for="nickname">Apelido:</label>
 			<input required name="nickname" type="text" id="nickname" value="<%= backup.nickname %>" />
-			<span><%= errorAction.nickname %></span>
+			<span><%- errorAction.nickname %></span>
+		</div>
+		<div>
+			<label for="name">Nome Completo:</label>
+			<input required name="name" type="text" id="name" value="<%= backup.name %>" />
+			<span><%- errorAction.name %></span>
 		</div>
 
 		<div>
 			<label for="email">E-mail:</label>
 			<input required name="email" type="email" id="email" value="<%= backup.email %>" />
-			<span><%= errorAction.email %></span>
+			<span><%- errorAction.email %></span>
 		</div>
 
 		<div>
 			<label for="password">Senha:</label>
 			<input required name="password" type="password" id="password" value="<%= backup.password%>" />
-			<span></span>
+			<span><%- errorAction.password %></span>
 		</div>
 
 		<div>
 			<label for="confirmPassword">Confirme a senha:</label>
 			<input required name="confirmPassword" type="password" id="confirmPassword" value="<%= backup.confirmPassword %>" />
-			<span><%= errorAction.confirmPassword %></span>
+			<span><%- errorAction.confirmPassword %></span>
 		</div>
 
 		<div>
@@ -36,10 +41,19 @@
 		</div>
 
 		<div>
+			<label for="gender">Gênero:</label>
+			<select name="gender" id="gender">
+				<option value="1">Masculino</option>
+				<option value="0">Feminino</option>
+			</select>
+			<span></span>
+		</div>
+
+		<div>
 			<label for="administrator">Tipo de conta:</label>
 			<select name="administrator" id="administrator">
-				<option value="0"><div><i class="fa-solid fa-user"></i>Usuario</div></option>
-				<option value="1"><div><i class="fa-solid fa-user-gear"></i>Administrador</div></option>
+				<option value="0"><i class="fa-solid fa-user"></i>Usuario</option>
+				<option value="1"><i class="fa-solid fa-user-gear"></i>Administrador</option>
 			</select>
 			<span></span>
 		</div>

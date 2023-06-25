@@ -1,0 +1,41 @@
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | DASHBOARD' , styleSheet: 'dashboard' }) %>
+<main>
+<section class="profile">
+		<div class="bg-profile">
+			<img src="/images/uploads/backgrounds/quadrados-de-fundo-roxo.jpg" alt="">
+		</div>
+		<div class="profile">
+			<div class="img-profile">
+				<img src="/images/uploads/profiles/no-profile.png" alt="">
+				<div class="bg-edit">
+					<a href="user/update/<%= user.id%>">Editar</a>
+				</div>
+			</div>
+			<h2><%= user.nickname%></h2>
+		</div>
+		<div class="info">
+			<div class="basic">
+				<div><span>Nome completo:</span><span><%= user.name%></span></div>
+				<div><span>Data de Nascimento:</span><span><%= user.birth%></span></div>
+				<div><span>Sexo:</span><span><%= user.gender%></span></div>
+			</div>
+			<div class="contact">
+				<div><span>E-mail:</span><span><%= user.email%></span></div>
+				<div><span>Tipo de conta:</span><span><%= user.administrator%></span></div>
+			</div>
+			<div class="contact">
+				<div><span>Descrição:</span><span><%= user.description%></span></div>
+			</div>
+		</div>
+	</section>
+	<section class="contributions">
+		<h1>Contribuições</h1>
+		<div class="container">
+			<!-- .card>id+name+nota+editar(+apagar) -->
+			<% news.forEach(function(card) { %>
+				<div class="card"><span class="id"></span><%= card.id%></span> <a href="/news/update/<%= card.id%>">Editar</a></div>
+				<% }) %>
+		</div>
+	</section>
+</main>
+<%- include('partials/footer.ejs') %>

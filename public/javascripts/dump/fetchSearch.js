@@ -56,14 +56,11 @@ input.addEventListener( 'input', function () {
 router.get( '/news/search', async ( req, res, next ) => {
 	var search = req.query.search;
 	var results = {};
-
-	console.log( search );
 	if ( search != undefined && search != '' ) {
-		console.log( search );
-		results = await News.readSearch( 'title', search );
+		results = await Model.readSearch('news', 'title', search );
 	} else {
 		search = '';
-		results = await News.readAll();
+		results = await Model.readItems('news',);
 	}
 	res.json( results );
 } );

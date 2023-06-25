@@ -20,6 +20,7 @@ header {
   align-items: center;
   background: var(--color-theme);
   position: fixed;
+  top: 0;
   z-index: 10;
   transition: 500ms;
   /* 	div#profile {
@@ -65,13 +66,14 @@ header nav .profile {
   height: 45px;
   width: 45px;
   cursor: pointer;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 header nav .profile button {
+  overflow: hidden;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
   display: flex;
   z-index: 10;
   justify-content: center;
@@ -81,9 +83,8 @@ header nav .profile button {
   height: 100%;
   background: #ffffff;
 }
-header nav .profile button i {
-  font-size: 1.5rem;
-  color: var(--color-theme);
+header nav .profile button img {
+  width: 100%;
 }
 header nav div.nav-list {
   position: fixed;

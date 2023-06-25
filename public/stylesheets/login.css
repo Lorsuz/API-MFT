@@ -96,10 +96,10 @@ main form > span a {
 }
 
 @media (max-width: 700px) {
-  body {
-    padding: 50px 0;
+  main {
+    padding: 60px 0;
   }
-  form {
+  main form {
     background-color: transparent;
     box-shadow: none;
     padding: 0;

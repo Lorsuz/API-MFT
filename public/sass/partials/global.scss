@@ -17,6 +17,7 @@
 	cursor: default;
 	font-family: Roboto, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	border: none;
+	transition: 300ms ease-in-out;
 }
 
 input,
@@ -36,7 +37,7 @@ label {
 }
 
 body {
-	background: #e9e9e9;
+	// background: #e9e9e9;
 	overflow-x: hidden;
 
 	&::-webkit-scrollbar {
@@ -49,5 +50,43 @@ body {
 
 	&::-webkit-scrollbar-thumb {
 		background: #000000;
+	}
+
+	.loader {
+		position: fixed;
+		width: 100vw;
+		height: 100vh;
+		z-index: 100;
+		display: none;
+		justify-content: center;
+		align-items: center;
+		top: 0;
+		left: 0;
+		background: #ffffff5e;
+	
+		.custom-loader {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			padding: 1px;
+			background: conic-gradient(#0000 10%, var(--color-theme)) content-box;
+			-webkit-mask: repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 21deg 36deg),
+				radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 calc(100% - 8px));
+			-webkit-mask-composite: destination-in;
+			mask-composite: intersect;
+			animation: s4 1s infinite steps(10);
+		}
+	}
+	
+	@keyframes s4 {
+		to {
+			transform: rotate(1turn)
+		}
+	}
+
+	main{
+		min-height: 100vh;
+		height: auto;
+		padding-bottom: 70px;
 	}
 }

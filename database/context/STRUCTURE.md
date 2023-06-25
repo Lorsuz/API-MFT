@@ -1,11 +1,11 @@
 ### Geral Vision Tables Structure
 
 - users(id, nickname, email, password, birth, description, administrator);
-- news(id, id_user, title, description, timestamp, likes, image, link, verified);
+- news(id, id_user, title, description, release, likes, image, link, verified);
 - audits(id, id_news, id_author, id_checker, timestamp);
 - ratings(id, id_news, id_user, rating);
 - favorites(id, id_user, id_news);
-- comments(id, id_news, id_user, content, timestamp, likes);
+- comments(id, id_news, id_user, content, timestamp);
 
 ### Comands for create all Database SQL Tables
 
@@ -68,7 +68,6 @@
 		id_user INT NOT NULL,
 		content TEXT NOT NULL,
 		timestamp TIMESTAMP NOT NULL,
-		likes INT DEFAULT(0) NOT NULL,
 		FOREIGN KEY (id_news) REFERENCES news(id),
 		FOREIGN KEY (id_user) REFERENCES users(id)
 	);

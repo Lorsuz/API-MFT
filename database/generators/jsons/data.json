@@ -139,10 +139,12 @@
 	"users": [
 		{
 			"nickname": "Administrador",
+			"name": "Administrador Supremo",
 			"email": "administrador@gmail.com",
 			"password": "12345678",
 			"birth": "2006-04-17",
 			"description": "Sou eu que mando aqui",
+			"gender": "Masculino",
 			"administrator": true
 		}
 	],

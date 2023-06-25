@@ -16,6 +16,7 @@
   cursor: default;
   font-family: Roboto, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   border: none;
+  transition: 300ms ease-in-out;
 }
 
 input,
@@ -35,7 +36,6 @@ label {
 }
 
 body {
-  background: #e9e9e9;
   overflow-x: hidden;
 }
 body::-webkit-scrollbar {
@@ -46,6 +46,39 @@ body::-webkit-scrollbar-track {
 }
 body::-webkit-scrollbar-thumb {
   background: #000000;
+}
+body .loader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.368627451);
+}
+body .loader .custom-loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(rgba(0, 0, 0, 0) 10%, var(--color-theme)) content-box;
+  -webkit-mask: repeating-conic-gradient(rgba(0, 0, 0, 0) 0deg, #000 1deg 20deg, rgba(0, 0, 0, 0) 21deg 36deg), radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(100% - 9px), #000 calc(100% - 8px));
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: s4 1s infinite steps(10);
+}
+@keyframes s4 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+body main {
+  min-height: 100vh;
+  height: auto;
+  padding-bottom: 70px;
 }
 
 /*# sourceMappingURL=global.css.map */

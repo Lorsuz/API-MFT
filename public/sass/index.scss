@@ -22,7 +22,7 @@ main {
 
 		&.cover {
 			height: 100vh;
-			background: url(../images/fundo-mulheres.jpg) no-repeat center bottom;
+			background: #CFCBFD url(../images/fundo-mulheres.jpg) no-repeat center bottom;
 			background-size: 100% 90%;
 			background-attachment: fixed;
 			display: flex;
@@ -183,7 +183,7 @@ main {
 		}
 
 		&.news {
-			padding: 100px 0;
+			padding: 100px 0 0 0;
 
 			.header-section {
 				width: 100%;
@@ -545,6 +545,7 @@ main {
 
 											.bar {
 												height: 100%;
+												width: 0%;
 												background: gold;
 												border-radius: .5rem;
 												box-shadow: 0 0 5px 0 gold;

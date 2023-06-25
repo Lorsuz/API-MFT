@@ -18,9 +18,6 @@ import ratingsRouter from './routes/ratings.js';
 import commentsRouter from './routes/comments.js';
 import favoritesRouter from './routes/favorites.js';
 
-/* ==================================================================== */
-
-
 const __filename = fileURLToPath( import.meta.url );
 const __dirname = dirname( __filename );
 
@@ -34,7 +31,7 @@ app.use( cookieParser() );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
 const liveReloadServer = livereload.createServer({port: 35729});
-liveReloadServer.watch( path.join( __dirname, 'public' ) );
+liveReloadServer.watch( path.join( __dirname, 'public' ) ); 
 
 app.use( '/', indexRouter );
 app.use( '/news', newsRouter );
@@ -43,7 +40,6 @@ app.use( '/audits', auditsRouter );
 app.use( '/ratings', ratingsRouter );
 app.use( '/comments', commentsRouter );
 app.use( '/favorites', favoritesRouter );
-
 
 app.use( function ( req, res, next ) {
 	next( createError( 404 ) );
