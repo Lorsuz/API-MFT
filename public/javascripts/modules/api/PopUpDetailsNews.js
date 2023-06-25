@@ -21,50 +21,54 @@ function statusLoader ( status = 0 ) {
 	}
 }
 
+openDialog.forEach( element_1 => {
+	if ( !element_1.hasAttribute( 'click-event-added' ) ) {
+		element_1.addEventListener( 'click', handleClickEvent );
+		element_1.setAttribute( 'click-event-added', true );
+	}
+} );
 
-openDialog.forEach( element => {
-	element.addEventListener( 'click', () => {
-		const id_news = element.getAttribute( 'id_news' );
-		formRating.setAttribute( 'id_news', `id_${ id_news }` );
-		fetch( `/ratings/read/${ id_news }` )
+function handleClickEvent () {
+	const id_news = this.getAttribute( 'id_news' );
+	formRating.setAttribute( 'id_news', `id_${ id_news }` );
+	fetch( `/ratings/read/${ id_news }` )
+		.then( response => response.json() )
+		.then( data => {
+			dialog.showModal();
+			fetchRatings( id_news );
+			for ( let index = 0; index < inputRating.length; index++ ) {
+				if ( inputRating[ index ].getAttribute( 'id' ).slice( 5 ) == data.rating ) {
+					inputRating[ index ].checked = true;
+				}
+			}
+			inputRating.forEach( element_2 => {
+				element_2.removeEventListener( 'click', handleNestedClickEvent );
+				element_2.addEventListener( 'click', handleNestedClickEvent );
+			} );
+		} )
+		.catch( error => {
+			console.error( 'Erro ao obter detalhes da Noticia:', error );
+		} );
+}
+
+function handleNestedClickEvent () {
+	var rating = this.getAttribute( 'id' ).slice( 5 );
+	var id_news = formRating.getAttribute( 'id_news' ).slice( 3 );
+	statusLoader( 1 );
+	setTimeout( () => {
+		fetch( `/ratings/rate`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify( { id_news: id_news, rating: rating } ),
+		} )
 			.then( response => response.json() )
 			.then( data => {
-				dialog.showModal();
-				fetchRatings( id_news );
-				for ( let index = 0; index < inputRating.length; index++ ) {
-					if ( inputRating[ index ].getAttribute( 'id' ).slice( 5 ) == data.rating ) {
-						inputRating[ index ].checked = true;
-					}
-				}
-
-				inputRating.forEach( element => {
-					element.addEventListener( 'click', () => {
-						var rating = element.getAttribute( 'id' ).slice( 5 );
-						var id_news = formRating.getAttribute( 'id_news' ).slice( 3 );
-						statusLoader( 1 );
-						setTimeout( () => {
-							fetch( `/ratings/rate`, {
-								method: 'POST',
-								headers: { 'Content-Type': 'application/json' },
-								body: JSON.stringify( { id_news: id_news, rating: rating } )
-							} ).then( response => response.json() )
-								.then( data => {
-									statusLoader();
-									fetchRatings( data.id_news );
-								} )
-								.catch( error => console.log( error ) );
-						}, 500 );
-					} );
-				} );
-
-
+				statusLoader();
+				fetchRatings( data.id_news );
 			} )
-			.catch( error => {
-				console.error( 'Erro ao obter detalhes da Noticia:', error );
-			} );
-
-	} );
-} );
+			.catch( error => console.log( error ) );
+	}, 500 );
+}
 
 closeDialog.addEventListener( 'click', () => {
 	dialog.close();
@@ -72,10 +76,14 @@ closeDialog.addEventListener( 'click', () => {
 		const element = inputRating[ index ];
 		element.checked = false;
 	}
+	var bar = document.querySelectorAll( '.rating__progress-value .progress .bar' );
+	for ( let index = 0; index < bar.length; index++ ) {
+		bar[ index ].style.width = `0%`;
+	}
 } );
 
 function fetchRatings ( id_news ) {
-	fetch( `/ratings/${ id_news }` )
+	fetch( `/ratings/count/stars/${ id_news }` )
 		.then( response => response.json() )
 		.then( data => {
 			getRatings( data.ratings, id_news );
@@ -95,14 +103,9 @@ function getRatings ( ratings, id_news ) {
 	} );
 	var bar = document.querySelectorAll( '.rating__progress-value .progress .bar' );
 	var count = document.querySelectorAll( '.rating__progress-value p.count' );
-	console.log(bar);
-	console.log(count);
-	for (let index = 0; index < ratings.length; index++) {
-		console.log(index);
-		bar[index].style.width = `${ isNaN( ratings[index].count / total_rating ) ? 0 : ( ratings[index].count / total_rating ) * 100 }%`;
-		console.log(bar[index]);
-		count[index].textContent = ratings[index].count.toLocaleString()
-		console.log(count[index]);
+	for ( let index = 0; index < ratings.length; index++ ) {
+		bar[ index ].style.width = `${ isNaN( ratings[ index ].count / total_rating ) ? 0 : ( ratings[ index ].count / total_rating ) * 100 }%`;
+		count[ index ].textContent = ratings[ index ].count.toLocaleString();
 	}
 
 	let rating__average = ( ratting_based_on_star / total_rating ).toFixed( 1 );
@@ -114,7 +117,5 @@ function getRatings ( ratings, id_news ) {
 		element.style.width = `${ isNaN( rating__average / 5 ) ? 0 : ( rating__average / 5 ) * 100 }%`;
 	} );
 	var starCard = document.querySelector( `.card#id_news_${ id_news } .star-outer .star-inner` );
-	console.log( starCard );
 	starCard.style.width = `${ isNaN( rating__average / 5 ) ? 0 : ( rating__average / 5 ) * 100 }%`;
 }
-

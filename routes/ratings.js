@@ -11,7 +11,7 @@ router.get( `/ratings`, async ( req, res ) => {
 	res.json( result );
 } );
 
-router.get( `/ratings/:id_news`, async ( req, res ) => {
+router.get( `/ratings/count/stars/:id_news`, async ( req, res ) => {
 	var id_news = req.params.id_news;
 	var result = {};
 	result[ `ratings` ] = [];
@@ -56,6 +56,7 @@ router.post( `/ratings/rate`, async ( req, res ) => {
 		}
 	}
 	var ratingExist = await Model.readItem( `ratings`, `id_news`, rating.id_news, `id_user`, rating.id_user );
+	console.log(ratingExist);
 	if ( allRight ) {
 		if ( ratingExist == undefined ) {
 			var result = await Model.createItem( `ratings`, rating );
