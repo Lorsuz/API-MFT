@@ -11,7 +11,7 @@ router.get( '/', async ( req, res, next ) => {
 		// req.session.user = 0;
 		req.session.user = await Model.readItem( 'users', 'id', 1 );
 	}
-	await Model.deleteAll('ratings')
+	// await Model.deleteAll('ratings')
 	var user = req.session.user;
 	var search = req.query.search;
 	var results = await Model.readItems( 'news' );

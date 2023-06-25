@@ -17,9 +17,11 @@ router.get( `/ratings/count/stars/:id_news`, async ( req, res ) => {
 	result[ `ratings` ] = [];
 	for ( let index = 1; index <= 5; index++ ) {
 		var promisse = await Model.readItems( `ratings`, `id_news`, id_news, `rating`, index );
+		console.log(promisse);
 		var count = Object.keys( promisse ).length != undefined ? Object.keys( promisse ).length : 0;
 		result[ `ratings` ].push( { 'star': index, 'count': count } );
 	}
+	console.log(result);
 	res.json( result );
 } );
 
@@ -56,22 +58,15 @@ router.post( `/ratings/rate`, async ( req, res ) => {
 		}
 	}
 	var ratingExist = await Model.readItem( `ratings`, `id_news`, rating.id_news, `id_user`, rating.id_user );
-	console.log(ratingExist);
 	if ( allRight ) {
 		if ( ratingExist == undefined ) {
 			var result = await Model.createItem( `ratings`, rating );
-			console.log('Created');
-			console.log(result);
 			res.json( result );
 		} else {
 			if ( ratingExist.rating != rating.rating ) {
 				var result = await Model.updateItem( `ratings`, `rating`, `id`, ratingExist.id, rating.rating );
-				console.log(`Updated from ${ratingExist.rating} to ${rating.rating}`);
-				console.log(result);
 				res.json( result );
 			} else {
-				console.log('ratingExist');
-				console.log(ratingExist);
 				res.json( ratingExist );
 			}
 		}

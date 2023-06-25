@@ -90,7 +90,9 @@ header {
 			z-index: 2;
 			flex-direction: column;
 			justify-content: space-between;
-			width: 30%;
+			width: 30vw;
+			min-width: 350px;
+			max-width: 450px;
 			transform: translateX(100%);
 			background: rgba(0, 0, 0, 0.749);
 			transition: 500ms;
@@ -108,7 +110,6 @@ header {
 					align-items: center;
 					margin-left: 0;
 					opacity: 0;
-					transition: 500ms;
 
 					a {
 						display: inline-block;
@@ -116,14 +117,14 @@ header {
 						height: 100%;
 						color: $color_3;
 						padding: 15px 40px;
-						transition: 500ms;
+						transition: 200ms;
 						font-size: 1.1rem;
 						letter-spacing: 2px;
 						cursor: pointer;
 
 						&:hover {
 							color: $color_4;
-							background: rgb(0, 0, 0);
+							background: rgba(0, 0, 0, 0.678);
 							letter-spacing: 3px;
 						}
 

@@ -1,4 +1,36 @@
 {
+	"users": [
+		{
+			"nickname": "Administrador",
+			"name": "Administrador Supremo",
+			"email": "administrador@gmail.com",
+			"password": "12345678",
+			"birth": "2006-04-17",
+			"description": "Sou eu que mando aqui",
+			"gender": "Masculino",
+			"administrator": true
+		},
+		{
+			"nickname": "Administradora",
+			"name": "Administradora Suprema",
+			"email": "administradora@gmail.com",
+			"password": "12345678",
+			"birth": "2006-04-17",
+			"description": "Sou eu que mando aqui",
+			"gender": "Feminino",
+			"administrator": true
+		},
+		{
+			"nickname": "Usuario",
+			"name": "Usuario Comum",
+			"email": "Usuario@gmail.com",
+			"password": "12345678",
+			"birth": "2006-04-17",
+			"description": "Sou eu que não tenho valor aqui",
+			"gender": "Masculino",
+			"administrator": false
+		}
+	],
 	"news": [
 		{
 			"id_user": 1,
@@ -46,7 +78,7 @@
 			"verified": true
 		},
 		{
-			"id_user": 1,
+			"id_user": 2,
 			"title": " Mulheres negras perdem vagas de emprego durante a pandemia, aponta estudos.",
 			"release": "2021-08-15",
 			"image": "./images/image-news/n6.png",
@@ -55,7 +87,7 @@
 			"verified": true
 		},
 		{
-			"id_user": 1,
+			"id_user": 2,
 			"title": "63% das mulheres negras já sofreram preconceitos em seleções de emprego, mostra pesquisa.",
 			"release": "2022-06-03",
 			"image": "./images/image-news/n7.png",
@@ -64,7 +96,7 @@
 			"verified": true
 		},
 		{
-			"id_user": 1,
+			"id_user": 2,
 			"title": "Nefrologista carioca descobre a primeira médica negra do Brasil e fala de representatividade: 'O número ainda é baixo'.",
 			"release": "2020-11-19",
 			"image": "./images/image-news/n8.png",
@@ -73,7 +105,7 @@
 			"verified": true
 		},
 		{
-			"id_user": 1,
+			"id_user": 2,
 			"title": "Conheça Alva Rosa, a primeira mulher indigena a obter o título de doutorado pela a Ufam. ",
 			"release": "2023-03-08",
 			"image": "./images/image-news/n9.png",
@@ -82,7 +114,7 @@
 			"verified": true
 		},
 		{
-			"id_user": 1,
+			"id_user": 2,
 			"title": "Eleição 2022: Mulheres indígenas buscam mais representatividade na política.",
 			"release": "2022-08-16",
 			"image": "./images/image-news/n10.png",
@@ -91,64 +123,186 @@
 			"verified": true
 		},
 		{
-			"id_user": 1,
+			"id_user": 3,
 			"title": "Com deficiência e empoderadas: Mulheres refugiadas e migrantes recebem capacitação para o mercado de trabalho no Brasil.",
 			"release": "2020-12-03",
 			"image": "./images/image-news/n11.png",
 			"description": "Aborda o tema da capacitação profissional de mulheres refugiadas e migrantes no Brasil, com o objetivo de empoderá-las e promover sua independência financeira. Além disso, destaca a importância de incluir mulheres com deficiência nesse processo de capacitação e inserção no mercado de trabalho",
 			"link": "https://www.acnur.org/portugues/2020/12/03/com-deficiencia-e-empoderadas-mulheres-refugiadas-e-migrantes-recebem-capacitacao-para-o-mercado-de-trabalho-no-brasil/",
-			"verified": true
+			"verified": false
 		},
 		{
-			"id_user": 1,
+			"id_user": 3,
 			"title": "Maioria de mulheres refugiadas está fora do mercado de trabalho em SP.",
 			"release": "2018-06-19",
 			"image": "./images/image-news/n12.png",
 			"description": "O site agenciabrasil.ebc.com destaca que a maioria das mulheres refugiadas em São Paulo está fora do mercado de trabalho. Segundo dados de um relatório da Acnur e do Cáritas, apenas 14% das mulheres refugiadas em idade ativa estão empregadas. O artigo discute os desafios enfrentados por essas mulheres para conseguir trabalho, como a falta de qualificação profissional, a discriminação e a dificuldade em validar diplomas estrangeiros. Além disso, o texto ressalta a importância da capacitação profissional e da inclusão dessas mulheres no mercado de trabalho para promover sua autonomia e independência financeira.",
 			"link": "https://agenciabrasil.ebc.com.br/internacional/noticia/2018-06/maioria-de-mulheres-refugiadas-esta-fora-do-mercado-de-trabalho-em-sp",
-			"verified": true
+			"verified": false
 		},
 		{
-			"id_user": 1,
+			"id_user": 3,
 			"title": "Mulher com deficiência é mais vulnerável ao desemprego, baixa remuneração e violência",
 			"release": "2020-07-14",
 			"image": "./images/image-news/n13.png",
 			"description": "O site institutoclaro.org.br aborda a vulnerabilidade das mulheres com deficiência no mercado de trabalho. O artigo destaca que essas mulheres enfrentam uma série de obstáculos, como a falta de acessibilidade, a discriminação e a falta de oportunidades de capacitação. Além disso, o texto aponta que as mulheres com deficiência têm mais dificuldade em encontrar empregos com remuneração adequada e sofrem mais violência no ambiente de trabalho. O artigo destaca a importância de políticas públicas e ações para promover a inclusão dessas mulheres no mercado de trabalho e garantir seus direitos",
 			"link": "https://www.institutoclaro.org.br/cidadania/nossas-novidades/reportagens/mulher-com-deficiencia-e-mais-vulneravel-ao-desemprego-baixa-remuneracao-e-violencia/",
-			"verified": true
+			"verified": false
 		},
 		{
-			"id_user": 1,
+			"id_user": 3,
 			"title": "A difícil inserção de pessoas com deficiência no mercado de trabalho.",
 			"release": "2020-09-23",
 			"image": "./images/image-news/n14.png",
 			"description": "O site unicamp.br trata da dificuldade de inserção de pessoas com deficiência no mercado de trabalho. O artigo destaca que essas pessoas enfrentam uma série de obstáculos, como a falta de acessibilidade nas empresas e a discriminação no processo seletivo. Além disso, o texto aborda a importância da capacitação profissional e do desenvolvimento de habilidades para aumentar as chances de sucesso na busca por emprego. O artigo também ressalta a importância de políticas públicas e iniciativas privadas para promover a inclusão de pessoas com deficiência no mercado de trabalho.",
 			"link": "https://www.unicamp.br/unicamp/index.php/ju/noticias/2020/09/23/dificil-insercao-de-pessoas-com-deficiencia-no-mercado-de-trabalho",
-			"verified": true
+			"verified": false
 		},
 		{
-			"id_user": 1,
+			"id_user": 3,
 			"title": "Mulheres com deficiência contam: “fui contratada, mas a empresa me desprezou…”",
 			"release": "2018-08-21",
 			"image": "./images/image-news/n15.png",
 			"description": "O site uol.com.br traz depoimentos de mulheres com deficiência que foram contratadas, mas sofreram discriminação e exclusão no ambiente de trabalho. O artigo destaca que essas mulheres enfrentam uma série de desafios, como a falta de acessibilidade e a discriminação no processo de seleção e promoção.",
 			"link": "https://www.uol.com.br/universa/noticias/redacao/2018/08/21/mulheres-com-deficiencia-contam-que-sao-desconsideradas-pelos-empregadores.htm?cmpid=copiaecola",
-			"verified": true
+			"verified": false
 		}
 	],
-	"users": [
-		{
-			"nickname": "Administrador",
-			"name": "Administrador Supremo",
-			"email": "administrador@gmail.com",
-			"password": "12345678",
-			"birth": "2006-04-17",
-			"description": "Sou eu que mando aqui",
-			"gender": "Masculino",
-			"administrator": true
-		}
+	"audits": [
 	],
 	"ratings": [
-		{}
+		{
+			"id_news":"1",
+			"id_user":"1",
+			"rating": 3
+		},
+		{
+			"id_news":"2",
+			"id_user":"1",
+			"rating": 4
+		},
+		{
+			"id_news":"3",
+			"id_user":"1",
+			"rating": 2
+		},
+		{
+			"id_news":"1",
+			"id_user":"2",
+			"rating": 2
+		},
+		{
+			"id_news":"2",
+			"id_user":"2",
+			"rating": 5
+		},
+		{
+			"id_news":"3",
+			"id_user":"2",
+			"rating": 2
+		},
+		{
+			"id_news":"1",
+			"id_user":"3",
+			"rating": 2
+		},
+		{
+			"id_news":"2",
+			"id_user":"3",
+			"rating": 4
+		},
+		{
+			"id_news":"3",
+			"id_user":"3",
+			"rating": 5
+		}
+	],
+	"comments": [
+		{
+			"id_news": 1,
+			"id_user": 1,
+			"content": "Muito boa a noticia",
+			"timestamp": "2023-06-30 14:30:00"
+		},
+		{
+			"id_news": 1,
+			"id_user": 1,
+			"content": "Vou mandar outra mensagem so pra testar o vetor",
+			"timestamp": "2023-06-30 14:30:10"
+		},
+		{
+			"id_news": 1,
+			"id_user": 2,
+			"content": "Eu tamb vo entrar na onda kkkkkkkk",
+			"timestamp": "2023-06-30 14:30:20"
+		},
+		{
+			"id_news": 1,
+			"id_user": 1,
+			"content": "Mais uma so pra garantir",
+			"timestamp": "2023-06-30 14:30:30"
+		},
+		{
+			"id_news": 1,
+			"id_user": 3,
+			"content": "Karaca finalmente funcionou",
+			"timestamp": "2023-06-30 14:30:40"
+		},
+		{
+			"id_news": 1,
+			"id_user": 2,
+			"content": "Acho melhor inveter a direção",
+			"timestamp": "2023-06-30 14:30:50"
+		},
+		{
+			"id_news": 1,
+			"id_user": 3,
+			"content": "Tamb acho",
+			"timestamp": "2023-06-30 14:31:00"
+		},
+		{
+			"id_news": 1,
+			"id_user": 1,
+			"content": "Então venham ajeitar seus bando de folgado",
+			"timestamp": "2023-06-30 14:31:10"
+		},
+		{
+			"id_news": 1,
+			"id_user": 2,
+			"content": "Tu ta parecendo um idiota falando sozinho",
+			"timestamp": "2023-06-30 14:31:20"
+		},
+		{
+			"id_news": 1,
+			"id_user": 1,
+			"content": "Claro faz 2 dois que nao prego o olho",
+			"timestamp": "2023-06-30 14:31:30"
+		},
+		{
+			"id_news": 1,
+			"id_user": 3,
+			"content": "Ja que a gente é versao de vc msm nos vai dormir ali por tu tchau",
+			"timestamp": "2023-06-30 14:31:40"
+		},
+		{
+			"id_news": 1,
+			"id_user": 1,
+			"content": "Ja vao tarde",
+			"timestamp": "2023-06-30 14:31:50"
+		},
+		{
+			"id_news": 1,
+			"id_user": 3,
+			"content": "Sera que alguem percebeu que a diferença entre nossas mensagens é de exatamente 10 segundos em todas? kkkkkkk",
+			"timestamp": "2023-06-30 14:31:50"
+		},
+		{
+			"id_news": 1,
+			"id_user": 1,
+			"content": "Cala a boca",
+			"timestamp": "2023-06-30 14:31:50"
+		}
+	],
+	"favorites": [
 	]
 }

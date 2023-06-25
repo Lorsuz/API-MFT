@@ -42,18 +42,20 @@
 									<span>Perfil</span>
 								</a>
 							</li>
+							<%if(user.administrator){%>
 							<li>
-								<a href="">
+								<a href="/requests">
 									<i class="fa-solid fa-pen-to-square"></i>
-									<span>Editar Perfil</span>
+									<span>Solicitações</span>
 								</a>
 							</li>
 							<li>
-								<a href="">
-									<i class="fa-solid fa-image"></i>
-									<span>Galeria</span>
+								<a href="/audits">
+									<i class="fa-solid fa-pen-to-square"></i>
+									<span>Registros de Auditoria</span>
 								</a>
 							</li>
+							<%}%>
 							<li>
 								<a href="/news/create">
 									<i class="fa-solid fa-square-plus"></i>
@@ -61,13 +63,13 @@
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="/users">
 									<i class="fa-solid fa-users"></i>
 									<span>Lista de usuarios</span>
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="support">
 									<i class="fa-solid fa-circle-info"></i>
 									<span>Suporte</span>
 								</a>
@@ -79,7 +81,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a href="/donate">
 									<i class="fa-solid fa-circle-dollar-to-slot"></i>
 									<span>Apoie-nos</span>
 								</a>

@@ -7,12 +7,20 @@ async function up () {
 
 	const data = JSON.parse( readFileSync( file ) );
 
-	for ( const user of data.users ) {
-		await Model.createItem('users', user );
-	}
-
-	for (const cardNews of data.news) {
-	  await Model.createItem('news', cardNews);
+	var index = 0
+	var tables = ['users', 'news', 'audits','ratings', 'comments', 'favorites']
+	
+	for (const key in data) {
+		if (Object.hasOwnProperty.call(data, key)) {
+			const array = data[key];
+			for (const element of array) {
+				if(array.length != 0){
+					console.log(element);
+					await Model.createItem(tables[index], element);
+				}
+			}
+		}
+		index++
 	}
 
 }

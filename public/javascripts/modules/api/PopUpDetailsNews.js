@@ -7,13 +7,21 @@ var closeDialog = document.querySelector( "button.close-dialog" );
 var formRating = document.querySelector( `${ pathDialog } form.container` );
 var inputRating = document.querySelectorAll( `${ pathDialog } form.container input[type="radio"]` );
 
-function statusLoader ( status = 0 ) {
+var chat = document.querySelector( `${ pathDialog } > .comments` );
+
+// fetch( '' )
+// 	.then( response => response.json() )
+// 	.then( data => {
+
+// 	} );
+
+function statusLoader ( status = 0, minTime = 0 ) {
 	if ( status == 0 ) {
 		setTimeout( () => {
 			document.querySelectorAll( '.loader' ).forEach( element => {
 				element.style.display = 'none';
 			} );
-		}, 500 );
+		}, minTime );
 	} else if ( status == 1 ) {
 		document.querySelectorAll( '.loader' ).forEach( element => {
 			element.style.display = 'flex';
@@ -31,9 +39,11 @@ openDialog.forEach( element_1 => {
 function handleClickEvent () {
 	const id_news = this.getAttribute( 'id_news' );
 	formRating.setAttribute( 'id_news', `id_${ id_news }` );
+	statusLoader( 1 );
 	fetch( `/ratings/read/${ id_news }` )
 		.then( response => response.json() )
 		.then( data => {
+			statusLoader();
 			dialog.showModal();
 			fetchRatings( id_news );
 			for ( let index = 0; index < inputRating.length; index++ ) {
@@ -55,19 +65,16 @@ function handleNestedClickEvent () {
 	var rating = this.getAttribute( 'id' ).slice( 5 );
 	var id_news = formRating.getAttribute( 'id_news' ).slice( 3 );
 	statusLoader( 1 );
-	setTimeout( () => {
-		fetch( `/ratings/rate`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify( { id_news: id_news, rating: rating } ),
-		} )
-			.then( response => response.json() )
-			.then( data => {
-				statusLoader();
-				fetchRatings( data.id_news );
-			} )
-			.catch( error => console.log( error ) );
-	}, 500 );
+	fetch( `/ratings/rate`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify( { id_news: id_news, rating: rating } ),
+	} )
+		.then( response => response.json() )
+		.then( data => {
+			statusLoader( 0, 500 );
+			fetchRatings( data.id_news );
+		} );
 }
 
 closeDialog.addEventListener( 'click', () => {
@@ -80,6 +87,9 @@ closeDialog.addEventListener( 'click', () => {
 	for ( let index = 0; index < bar.length; index++ ) {
 		bar[ index ].style.width = `0%`;
 	}
+	document.querySelectorAll( '.app .star-outer .star-inner' ).forEach( ( element ) => {
+		element.style.width = `0%`;
+	} );
 } );
 
 function fetchRatings ( id_news ) {

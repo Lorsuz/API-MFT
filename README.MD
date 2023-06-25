@@ -7,6 +7,21 @@ sass -w sass/:styleSheets/
 nodemailer
 
 
+home
+perfil(contribuiçoes e favoritos)
+criar perfil
+editar perfil
+registro das noticias verificadas
+editar noticia
+noticias n verificadas
+desenvolvedores creditos e direitos(apoie-nos em algum lugar)
+apoie-nos(chave aleatoria, email, telefone, qrcode ao lado)
+suporte
+
+documentaçao
+
+
+
 estou em um projeto express, em uma pagina ejs tem uma lista de usuarios carregados de um banco sqlite, como faço com que sempre que eu apertar em um deles apareça um pop-up com as informaçoes de que eu apertei
 
 
