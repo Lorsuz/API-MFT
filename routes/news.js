@@ -1,6 +1,7 @@
 import commonImports from './exports/router.js';
 
 var router = commonImports.router;
+var upload = commonImports.upload;
 var Model = commonImports.Model;
 var parseISO = commonImports.parseISO;
 var format = commonImports.format;
@@ -31,9 +32,6 @@ router.get( '/news/read/:id', async ( req, res, next ) => {
 router.post( '/news/create', async ( req, res, next ) => {
 	const { title, description, date, image, link } = req.body;
 	const id_user = req.session.user.id;
-	// if (!nickname || !email || !password) {
-	//   return res.status(400).send('Nickname, email e password são obrigatórios.');
-	// }
 
 	connection.query(
 		'INSERT INTO cardnews (id_user,	title,	description,	date,	image,	link) VALUES (?, ?, ?, ?, ?, ?)',

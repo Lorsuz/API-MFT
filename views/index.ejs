@@ -7,7 +7,7 @@
 						<h2>Ultimas notícias</h2>
 						<div class="card">
 							<div class="img">
-								<img src="images/image-news/n1.png" alt="" />
+								<img src="images/uploads/news/n1.png" alt="" />
 							</div>
 							<div class="text">
 								<h3>
@@ -28,7 +28,7 @@
 						</div>
 						<div class="card">
 							<div class="img">
-								<img src="images/image-news/n2.png" alt="" />
+								<img src="images/uploads/news/n2.png" alt="" />
 							</div>
 							<div class="text">
 								<h3>Diferença salarial entre homens e mulheres vai a 22%, diz IBGE</h3>
@@ -87,7 +87,7 @@
 							</div>
 							<div class="details">
 								<% if(user !=0) { %>
-									<button class="open-dialog" id_news="<%= card.id %>" id_user="<%= card.id %>">
+									<button class="open-dialog" id_news="<%= card.id %>" id_user="<%= card.id_user %>">
 										<i class="fa-solid fa-circle-info"></i>
 										<div class="star">
 											<div class="star-outer">
@@ -157,7 +157,7 @@
 								<p></p>
 							</div>
 							<div class="rating__progress">
-								<% for(let index = 1; index <= 5; index++) { %>
+								<% for(let index=1; index <=5; index++) { %>
 									<div class="rating__progress-value">
 										<p>
 											<%= index%><span class="star">&#9733;</span>
@@ -177,24 +177,15 @@
 					<h2>Comentarios</h2>
 					<hr>
 					<div class="chat">
-							<div class="comment">
-								<div class="img">
-									<img src="https://i.pinimg.com/originals/45/f2/33/45f233d8cca8630bdf0f6b263605b5bd.jpg" alt="">
-								</div>
-								<div class="text">
-									<div class="details">
-										<h6>name user</h6>
-										<span>19/92/3233</span>
-									</div>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, magni!</p>
-								</div>
-							</div>
+						<div class="loader-chat">
+							<div class="custom-loader"></div>
+						</div>
 					</div>
 					<div class="input">
-						<form action="" method="post">
-							<input type="text" placeholder="Digite seu comentario">
-							<button type="submit"><i class="fa-solid fa-comment"></i></button>
-						</form>
+						<div id="form_comment">
+							<input type="text" name="content" placeholder="Digite seu comentario">
+							<button><i class="fa-solid fa-comment"></i></button>
+						</div>
 					</div>
 				</div>
 			</dialog>

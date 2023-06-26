@@ -38,7 +38,6 @@ class SGBD {
 		}
 		var query = `INSERT INTO ${ table } (${ dataTable.camps }) VALUES (${ dataTable.reservad.slice( 2 ) })`;
 		const result = await database.run( query, dataTable.values );
-		// console.log(result);
 		return this.readItem( table, "id", result.lastID );
 	}
 

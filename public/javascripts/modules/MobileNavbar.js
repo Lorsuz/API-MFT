@@ -38,5 +38,6 @@ const mobileNavbar = new MobileNavbar(
 	"#profile",
 	".nav-list",
 	".nav-list ul li",
+	""
 );
 mobileNavbar.init();

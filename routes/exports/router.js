@@ -4,11 +4,24 @@ import session from 'express-session';
 import flash from 'connect-flash';
 import path from 'path';
 
+import multer from 'multer';
+
 import { parseISO, format } from 'date-fns';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 import Model from '../../models/Model.js';
 
 var router = express.Router();
+const __filename = fileURLToPath( import.meta.url );
+const __dirname = dirname( __filename );
+const pathUploadBackground = multer({
+  dest: path.join(__dirname, 'public', 'images', 'uploads', 'backgrounds')
+});
+
+const pathUploadProfile = multer({
+  dest: path.join(__dirname, 'public', 'images', 'uploads', 'profiles')
+});
 
 router.use( bodyParser.json() );
 router.use( bodyParser.urlencoded( { extended: false } ) );
@@ -33,4 +46,4 @@ class HTTPError extends Error {
 	}
 }
 
-export default { router, Model, parseISO, format, HTTPError };
+export default { router, Model, pathUploadBackground, pathUploadProfile, parseISO, format, HTTPError };

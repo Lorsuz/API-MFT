@@ -2,29 +2,29 @@
 <main>
 <section class="profile">
 		<div class="bg-profile">
-			<img src="/images/uploads/backgrounds/quadrados-de-fundo-roxo.jpg" alt="">
+			<img src="/images/uploads/backgrounds/<%= userProfile.background%>" alt="">
 		</div>
 		<div class="profile">
 			<div class="img-profile">
-				<img src="/images/uploads/profiles/no-profile.png" alt="">
-				<div class="bg-edit">
-					<a href="user/update/<%= user.id%>">Editar</a>
-				</div>
+				<img src="/images/uploads/profiles/<%= userProfile.profile%>" alt="">
+				<a href="user/update/<%= user.id%>" class="bg-edit">
+					<button >Editar</button>
+				</a>
 			</div>
-			<h2><%= user.nickname%></h2>
+			<h2><%= userProfile.nickname%></h2>
 		</div>
 		<div class="info">
 			<div class="basic">
-				<div><span>Nome completo:</span><span><%= user.name%></span></div>
-				<div><span>Data de Nascimento:</span><span><%= user.birth%></span></div>
-				<div><span>Sexo:</span><span><%= user.gender%></span></div>
+				<div><span>Nome completo:</span><span><%= userProfile.name%></span></div>
+				<div><span>Data de Nascimento:</span><span><%= userProfile.birth%></span></div>
+				<div><span>Sexo:</span><span><%= userProfile.gender%></span></div>
 			</div>
 			<div class="contact">
-				<div><span>E-mail:</span><span><%= user.email%></span></div>
-				<div><span>Tipo de conta:</span><span><%= user.administrator%></span></div>
+				<div><span>E-mail:</span><span><%= userProfile.email%></span></div>
+				<div><span>Tipo de conta:</span><span><%= user.administrator ? 'Administrador' : 'Usuário'%></span></div>
 			</div>
 			<div class="contact">
-				<div><span>Descrição:</span><span><%= user.description%></span></div>
+				<div><span>Descrição:</span><span><%= userProfile.description%></span></div>
 			</div>
 		</div>
 	</section>

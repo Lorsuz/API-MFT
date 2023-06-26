@@ -51,8 +51,8 @@ app.use( function ( err, req, res, next ) {
 	res.locals.error = req.app.get( 'env' ) === 'development' ? err : {};
 
 	res.status( err.status || 500 );
-	console.log( `Error: ${ err.message }\n\n ${ err }` );
-	res.send( `Error: ${ err.message }\n\n ${ err }` );
+	console.log( `Error: ${ err.message }\n ${ err }` );
+	res.send( `Error: ${ err.message }\n ${ err }` );
 } );
 
 export default app;

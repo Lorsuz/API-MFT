@@ -27,12 +27,17 @@
 		<header>
 			<a href="/"><img src="/images/Logo-existindo-news.png" alt="Image Logo"><span>ExistindoNews</span></a>
 			<nav>
-				<% if(user != 0) { %>
-					<div class="profile">
-						<button id="profile">
-							<img src="/images/uploads/profiles/no-profile.png" alt="">
-						</button>
-					</div>
+				<% if(user !=0) { %>
+					<button id="profile">
+						<span>
+							<%= user.nickname%>
+						</span>
+						<div class="relative">
+							<div class="profile">
+								<img src="/images/uploads/profiles/<%= user.profile%>" alt="">
+							</div>
+						</div>
+					</button>
 
 					<div class="nav-list">
 						<ul>
@@ -43,49 +48,49 @@
 								</a>
 							</li>
 							<%if(user.administrator){%>
-							<li>
-								<a href="/requests">
-									<i class="fa-solid fa-pen-to-square"></i>
-									<span>Solicitações</span>
-								</a>
-							</li>
-							<li>
-								<a href="/audits">
-									<i class="fa-solid fa-pen-to-square"></i>
-									<span>Registros de Auditoria</span>
-								</a>
-							</li>
-							<%}%>
-							<li>
-								<a href="/news/create">
-									<i class="fa-solid fa-square-plus"></i>
-									<span>Adicionar Notícia</span>
-								</a>
-							</li>
-							<li>
-								<a href="/users">
-									<i class="fa-solid fa-users"></i>
-									<span>Lista de usuarios</span>
-								</a>
-							</li>
-							<li>
-								<a href="support">
-									<i class="fa-solid fa-circle-info"></i>
-									<span>Suporte</span>
-								</a>
-							</li>
-							<li>
-								<a href="https://github.com/Lorsuz" target="_blank">
-									<i class="fa-sharp fa-solid fa-code"></i>
-									<span>Desenvolvedores</span>
-								</a>
-							</li>
-							<li>
-								<a href="/donate">
-									<i class="fa-solid fa-circle-dollar-to-slot"></i>
-									<span>Apoie-nos</span>
-								</a>
-							</li>
+								<li>
+									<a href="/requests">
+										<i class="fa-solid fa-pen-to-square"></i>
+										<span>Solicitações</span>
+									</a>
+								</li>
+								<li>
+									<a href="/audits">
+										<i class="fa-solid fa-pen-to-square"></i>
+										<span>Registros de Auditoria</span>
+									</a>
+								</li>
+								<%}%>
+									<li>
+										<a href="/news/create">
+											<i class="fa-solid fa-square-plus"></i>
+											<span>Adicionar Notícia</span>
+										</a>
+									</li>
+									<li>
+										<a href="/users">
+											<i class="fa-solid fa-users"></i>
+											<span>Lista de usuarios</span>
+										</a>
+									</li>
+									<li>
+										<a href="support">
+											<i class="fa-solid fa-circle-info"></i>
+											<span>Suporte</span>
+										</a>
+									</li>
+									<li>
+										<a href="https://github.com/Lorsuz" target="_blank">
+											<i class="fa-sharp fa-solid fa-code"></i>
+											<span>Desenvolvedores</span>
+										</a>
+									</li>
+									<li>
+										<a href="/donate">
+											<i class="fa-solid fa-circle-dollar-to-slot"></i>
+											<span>Apoie-nos</span>
+										</a>
+									</li>
 						</ul>
 						<div class="log-out">
 							<a href="/users/logout">
@@ -115,4 +120,3 @@
 						<% } %>
 			</nav>
 		</header>
-		<main>

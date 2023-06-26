@@ -1,31 +1,43 @@
+import { nextDay } from 'date-fns';
 import commonImports from './exports/router.js';
 
 var router = commonImports.router;
+var pathUploadBackground = commonImports.pathUploadBackground;
+var pathUploadProfile = commonImports.pathUploadProfile;
+
 var Model = commonImports.Model;
 var parseISO = commonImports.parseISO;
 var format = commonImports.format;
 var HTTPError = commonImports.HTTPError;
 
 router.get( '/users', async ( req, res ) => {
-	var result = await Model.readItems('users');
+	var result = await Model.readItems( 'users' );
+	res.json( result );
+} );
+
+router.get( '/users/read/:id', async ( req, res ) => {
+	var id = req.params.id;
+	var result = await Model.readItem( 'users', 'id', id );
 	res.json( result );
 } );
 
 router.get( '/users/dashboard/:id', async ( req, res ) => {
 	var id = req.params.id;
-	var user = await Model.readItem('users', 'id', id );
-	if ( user == undefined ) {
-		res.redirect( '/' );
+	var userProfile = await Model.readItem( 'users', 'id', id );
+	if ( req.session.user == undefined ) {
+		req.session.user = 0
 	}
-	var news = await Model.readItems('news', 'id_user', user.id );
-	user.administrator = user.administrator ? 'Administrador' : 'Usuário';
-	user.birth = format( parseISO( user.birth ), 'dd/MM/yyyy' );
-
-	res.render( './dashboard', { user, news } );
+	var user = req.session.user;
+	if ( userProfile == undefined ) {
+		res.redirect( '/' );
+	} else {
+		var news = await Model.readItems( 'news', 'id_user', userProfile.id );
+		userProfile.birth = format( parseISO( userProfile.birth ), 'dd/MM/yyyy' );
+		res.render( './dashboard', { user, userProfile, news } );
+	}
 } );
 
 router.get( '/users/register', async ( req, res ) => {
-	// await Model.deleteAllLess('users','id',1);
 
 	var backup = {
 		nickname: 'Administrador',
@@ -148,5 +160,47 @@ router.post( '/users/login', async ( req, res ) => {
 		res.redirect( '/' );
 	}
 } );
+
+router.post( '/users/update/background/:id', pathUploadBackground.single( 'image' ), ( req, res ) => {
+	if ( !req.file ) {
+		res.status( 400 ).send( 'Nenhuma imagem foi enviada.' );
+		return;
+	}
+
+	const fileExtension = req.file.originalname.split( '.' ).pop();
+
+	const fileName = Date.now() + '.' + fileExtension;
+
+	const newFilePath = 'caminho/para/o/diretorio/' + fileName;
+	fs.rename( req.file.path, newFilePath, ( err ) => {
+		if ( err ) {
+			console.error( 'Erro ao renomear o arquivo:', err );
+			res.status( 500 ).send( 'Erro ao fazer o upload da imagem.' );
+		} else {
+			res.send( 'Imagem enviada com sucesso!' );
+		}
+	} );
+} );
+router.post( '/users/update/profile/:id', pathUploadProfile.single( 'image' ), ( req, res ) => {
+	if ( !req.file ) {
+		res.status( 400 ).send( 'Nenhuma imagem foi enviada.' );
+		return;
+	}
+
+	const fileExtension = req.file.originalname.split( '.' ).pop();
+
+	const fileName = Date.now() + '.' + fileExtension;
+
+	const newFilePath = 'caminho/para/o/diretorio/' + fileName;
+	fs.rename( req.file.path, newFilePath, ( err ) => {
+		if ( err ) {
+			console.error( 'Erro ao renomear o arquivo:', err );
+			res.status( 500 ).send( 'Erro ao fazer o upload da imagem.' );
+		} else {
+			res.send( 'Imagem enviada com sucesso!' );
+		}
+	} );
+} );
+
 
 export default router;

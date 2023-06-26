@@ -61,29 +61,46 @@ header > a span {
   color: var(--color-theme);
   font-family: Courgette;
 }
-header nav .profile {
+header nav button {
   margin: 0 10px;
   height: 45px;
-  width: 45px;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-header nav .profile button {
   overflow: hidden;
-  border: 3px solid #ffffff;
-  border-radius: 50%;
-  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 100px;
+  background: #e6cece;
+  font-weight: bold;
+  position: relative;
   z-index: 10;
+  transition: 300ms;
+}
+header nav button span {
+  position: absolute;
+  width: auto;
+  left: 0px;
+  color: var(--color-theme);
+  font-size: 1.2rem;
+  padding: 0 10px 0 15px;
+}
+header nav button .profile {
+  overflow: hidden;
+  position: absolute;
+  border: 3px solid #ffffff;
+  width: 45px;
+  border-radius: 50%;
+  right: 0;
+  display: flex;
+  z-index: 11;
   justify-content: center;
   align-items: center;
   background: transparent;
-  width: 100%;
   height: 100%;
   background: #ffffff;
+  position: relative;
 }
-header nav .profile button img {
+header nav button .profile img {
   width: 100%;
 }
 header nav div.nav-list {
@@ -142,6 +159,10 @@ header nav div.nav-list div.log-out {
   display: flex;
   justify-content: center;
   margin: 40px 0 0 0;
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
   cursor: pointer;
 }
 header nav div.nav-list div.log-out a {
