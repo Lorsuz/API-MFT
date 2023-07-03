@@ -2,7 +2,7 @@
 footer {
   background: #000;
   height: auto;
-  color: #ffffff;
+  color: var(--color-white);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

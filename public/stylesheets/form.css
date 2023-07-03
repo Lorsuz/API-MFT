@@ -1,8 +1,7 @@
 @import 'partials/global.css';
 :root {
   --color_2: #960000;
-  --white: #ffffff;
-  --white300: #f7fafc;
+  --white: var(--color-white);
   --dark: #1a202c;
   --input: #e8e8e8;
 }
@@ -12,7 +11,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--white300);
+  background: var(--color-white-sub);
   padding: 150px 0;
   width: 100%;
   transition: padding 300ms;
@@ -25,7 +24,7 @@ main form {
   height: auto;
   padding: 40px 30px;
   display: flex;
-  background: var(--white);
+  background: var(--color-white);
   flex-direction: column;
   transition: 300ms;
 }
@@ -42,11 +41,16 @@ main form h1 {
 main form > div {
   margin-bottom: 15px;
 }
+main form > div > input, main form > div select, main form > div textarea {
+  padding: 0 15px;
+}
 main form > div label {
   margin: 0;
   display: block;
   font-size: 20px;
   color: var(--dark);
+  font-weight: bold;
+  margin-bottom: 3px;
   cursor: pointer;
 }
 main form > div input {
@@ -55,14 +59,72 @@ main form > div input {
   border-radius: 5px;
   display: block;
   resize: vertical;
-  transition: 100ms ease-out;
+  transition: 300ms ease-out;
   font-size: 20px;
   border: 2px solid #ccc;
-  padding-left: 15px;
-  margin: 10px 0 15px;
+  margin-bottom: 15px;
 }
 main form > div input:focus {
   border: 2px solid var(--color-theme);
+}
+main form > div input[type=date] {
+  resize: none;
+}
+main form > div select {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  resize: vertical;
+  transition: 300ms ease-out;
+  font-size: 20px;
+  border: 2px solid #ccc;
+  margin-bottom: 15px;
+  max-height: 250px;
+  cursor: pointer;
+  appearance: none;
+}
+main form > div select:focus {
+  border: 2px solid var(--color-theme);
+}
+main form > div select option {
+  color: var(--color-theme);
+}
+main form > div select option:hover {
+  color: #fff;
+}
+main form > div textarea {
+  width: 100%;
+  height: 150px;
+  min-height: 50px;
+  border-radius: 5px;
+  display: block;
+  resize: vertical;
+  transition: 300ms ease-outs;
+  font-size: 20px;
+  border: 2px solid #ccc;
+  padding-left: 15px;
+  margin-bottom: 15px;
+  padding-top: 8px;
+  max-height: 250px;
+}
+main form > div textarea:focus {
+  transition: 100ms ease-outs;
+  border: 2px solid var(--color-theme);
+}
+main form > div textarea::-webkit-scrollbar {
+  width: 5px;
+}
+main form > div textarea::-webkit-scrollbar-track {
+  background: transparent;
+  cursor: default;
+}
+main form > div textarea::-webkit-scrollbar-thumb {
+  background-color: var(--color-theme);
+  border-radius: 50px;
+}
+main form > div textarea:focus::-webkit-scrollbar-thumb {
+  background-color: var(--color-theme);
+  border-radius: 50px;
 }
 main form > div span {
   color: var(--color-theme);
@@ -106,4 +168,4 @@ main form > span a {
   }
 }
 
-/*# sourceMappingURL=login.css.map */
+/*# sourceMappingURL=form.css.map */

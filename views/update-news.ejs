@@ -1,0 +1,36 @@
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | Update Noticia' , styleSheet: 'form' }) %>
+
+<main>
+	<form action="/news/update/<%=news.id%>" method="post">
+		<h1>Formurio de noticias</h1>
+		<div>
+			<label for="title">Titulo:</label>
+			<input required name="title" type="text" id="title"
+				value="<%=news.title%>" />
+			<span></span>
+		</div>
+		<div>
+			<label for="description">Descrição:</label>
+			<textarea required name="description"
+				id="description"><%=news.description%></textarea>
+			<span></span>
+		</div>
+		<div>
+			<label for="release">Data de publicação:</label>
+			<input required name="release" type="data" id="release" value="<%=news.release%>" />
+			<span></span>
+		</div>
+		<div>
+			<label for="image">Link da imagem:</label>
+			<input required name="image" type="text" id="image" value="<%=news.image%>" />
+			<span></span>
+		</div>
+		<div>
+			<label for="link">Link de desvio:</label>
+			<textarea name="link" id="link"><%=news.link%></textarea>
+			<span></span>
+		</div>
+		<button type="submit">Atualizar</button>
+		<a href="/users/dashboard">Cancelar</a>
+</main>
+<%- include('partials/footer.ejs') %>

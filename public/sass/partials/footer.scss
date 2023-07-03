@@ -1,17 +1,16 @@
-$color_1: #ffffff;
 $color_3: #1a1919;
 $color_4: #f5f105;
 $color_5: #e70808;
 $color_6: #c1c1c1;
 $color_7: rgb(255, 255, 255);
-$background-color_1: #00000059;
+$background-color_1: var(--color-black)59;
 
 @import 'global.css';
 
 footer {
 	background: #000;
 	height: auto;
-	color: $color_1;
+	color: var(--color-white);
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;

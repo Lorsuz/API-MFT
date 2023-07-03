@@ -8,7 +8,6 @@ async function up () {
 		`	
 			CREATE TABLE IF NOT EXISTS users (
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
-				background VARCHAR(50) DEFAULT('default-background.jpg'),
 				profile VARCHAR(50) DEFAULT('default-profile.jpg'),
 				nickname VARCHAR(100) NOT NULL,
 				name VARCHAR(100) NOT NULL,
@@ -17,7 +16,8 @@ async function up () {
 				birth DATE NOT NULL,
 				gender VARCHAR(10) NOT NULL,
 				description TEXT NOT NULL,
-				administrator BOOLEAN DEFAULT(0) NOT NULL
+				administrator BOOLEAN DEFAULT(0) NOT NULL,
+				status BOOLEAN DEFAULT(0) NOT NULL
 			);		
 		`,
 		`

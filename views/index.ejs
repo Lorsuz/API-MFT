@@ -66,7 +66,7 @@
 				<h1>InfoMais - Você sempre informado!</h1>
 				<p>
 					Pressione em "Ler mais" para ser desviado para a Fonte original com
-					conteudo completo
+					conteúdo completo
 				</p>
 				<form class="search-box" action="/" method="get">
 					<input type="text" id="search-box" name="search" value="<%= search%>" placeholder="Pesquisar" />
@@ -82,11 +82,12 @@
 				<% cards.forEach(function(card) { %>
 					<div class="card" id="id_news_<%= card.id%>">
 						<div class="box-img">
+						
 							<div class="img">
 								<img src="<%= card.image %>" target="_blank" alt="">
 							</div>
 							<div class="details">
-								<% if(user !=0) { %>
+								<% if(user != undefined) { %>
 									<button class="open-dialog" id_news="<%= card.id %>" id_user="<%= card.id_user %>">
 										<i class="fa-solid fa-circle-info"></i>
 										<div class="star">
@@ -95,7 +96,7 @@
 											</div>
 										</div>
 									</button>
-									<% } %>
+									<% } %> 
 										<span class="date">
 											<%= card.release %>
 										</span>
@@ -114,81 +115,8 @@
 					</div>
 					<% }); %>
 			</div>
-			<dialog id="info-card-news">
-				<div class="loader">
-					<div class="custom-loader"></div>
-				</div>
-				<button class="close-dialog"></button>
-				<div class="details-news">
-					<div class="info-news">
-						<div class="author">
-							<a href="" class="autor-img"><img src="" alt=""></a>
-							<div class="text"><a href="" class="author-name">@ariel</a><a href="" class="validator">icon por @adm</a>
-							</div>
-						</div>
-						<div class="button-edit"><a href="">Editar Nóticia</a></div>
-					</div>
-					<h2 classe="newsTitle">Detalhes do cartão</h2>
-					<p class="newsDescription"></p>
-					<form class="container">
-						<h3>Sua nota para esta Noticia!</h3>
-						<!-- postado por @alguem ou vc e verificada por @adm em 23/43/2332 -->
-						<div class="star-widget">
-							<input type="radio" name="rate" id="rate-5">
-							<label for="rate-5" class="fas fa-star"></label>
-							<input type="radio" name="rate" id="rate-4">
-							<label for="rate-4" class="fas fa-star"></label>
-							<input type="radio" name="rate" id="rate-3">
-							<label for="rate-3" class="fas fa-star"></label>
-							<input type="radio" name="rate" id="rate-2">
-							<label for="rate-2" class="fas fa-star"></label>
-							<input type="radio" name="rate" id="rate-1">
-							<label for="rate-1" class="fas fa-star"></label>
-						</div>
-					</form>
-					<!-- botao editar ou salvar e... -->
-					<div class="app">
-						<div class="rating">
-							<div class="rating__average">
-								<h3>4.5</h3>
-								<div class="star-outer">
-									<div class="star-inner"></div>
-								</div>
-								<p></p>
-							</div>
-							<div class="rating__progress">
-								<% for(let index=1; index <=5; index++) { %>
-									<div class="rating__progress-value">
-										<p>
-											<%= index%><span class="star">&#9733;</span>
-										</p>
-										<div class="progress">
-											<div class="bar"></div>
-										</div>
-										<p class="count">ariel</p>
-									</div>
-									<% } %>
-							</div>
-						</div>
-					</div>
-				</div>
+			<%- include('partials/dialog-news.ejs') %>
 
-				<div class="comments">
-					<h2>Comentarios</h2>
-					<hr>
-					<div class="chat">
-						<div class="loader-chat">
-							<div class="custom-loader"></div>
-						</div>
-					</div>
-					<div class="input">
-						<div id="form_comment">
-							<input type="text" name="content" placeholder="Digite seu comentario">
-							<button><i class="fa-solid fa-comment"></i></button>
-						</div>
-					</div>
-				</div>
-			</dialog>
 		</section>
 	</main>
 	<%- include('partials/footer.ejs') %>

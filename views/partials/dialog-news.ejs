@@ -1,0 +1,65 @@
+<dialog id="info-card-news">
+	<div class="loader">
+		<div class="custom-loader"></div>
+	</div>
+	<button class="close-dialog"></button>
+	<div class="details-news">
+		<h2 classe="newsTitle">Detalhes do cartão</h2>
+		<p class="newsDescription"></p>
+		<form class="container">
+			<h3>Sua nota para esta Noticia!</h3>
+			<div class="star-widget">
+				<input type="radio" name="rate" id="rate-5">
+				<label for="rate-5" class="fas fa-star"></label>
+				<input type="radio" name="rate" id="rate-4">
+				<label for="rate-4" class="fas fa-star"></label>
+				<input type="radio" name="rate" id="rate-3">
+				<label for="rate-3" class="fas fa-star"></label>
+				<input type="radio" name="rate" id="rate-2">
+				<label for="rate-2" class="fas fa-star"></label>
+				<input type="radio" name="rate" id="rate-1">
+				<label for="rate-1" class="fas fa-star"></label>
+			</div>
+		</form>
+		<div class="app">
+			<div class="rating">
+				<div class="rating__average">
+					<h3></h3>
+					<div class="star-outer">
+						<div class="star-inner"></div>
+					</div>
+					<p></p>
+				</div>
+				<div class="rating__progress">
+					<% for(let index=5; index >= 1; index--) { %>
+						<div class="rating__progress-value">
+							<p>
+								<%= index%><span class="star">&#9733;</span>
+							</p>
+							<div class="progress">
+								<div class="bar"></div>
+							</div>
+							<p class="count"></p>
+						</div>
+						<% } %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="comments">
+		<h2>Comentarios</h2>
+		<hr>
+		<div class="chat">
+			<div class="loader-chat">
+				<div class="custom-loader"></div>
+			</div>
+		</div>
+		<div class="input">
+			<div id="form_comment">
+				<input type="text" name="content" placeholder="Digite seu comentario">
+				<button><i class="fa-solid fa-comment"></i></button>
+			</div>
+		</div>
+	</div>
+</dialog>

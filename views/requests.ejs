@@ -1,0 +1,64 @@
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | List Users' , styleSheet: 'list' }) %>
+	<main>
+		<section class="new-admins">
+			<h1>Pedidos de Conta administradora</h1>
+			<ul>
+				<% if(users.length == 0){%>
+					<li><p class="no">Não há pedidos de administradores!</p></li>
+				<% }%>
+				<% users.forEach(function(element) { %>
+					<li>
+						<span class="id">
+							<%=element.id%>
+						</span>
+						<div class="profile">
+							<div class="img"><img src="/images/uploads/profiles/<%= element.profile%>" alt=""></div>
+							<a class="nickname" href="/users/dashboard/<%=element.nickname%>">
+								<%=element.nickname%>
+							</a>
+						</div>
+						<div class="birth"><span><%=element.birth%></span></div>
+						<div class="type"><span><%-element.administrator?'Administrador': 'Usuário'%></span></div>
+						<div class=" actions">
+							<%if(user !=undefined ){%>
+								<%if(user.administrator ){%>
+									<a class="edit" href="/users/accept/<%=element.id%>"><i class="fa-solid fa-trash"></i>Banir</a>
+									<a class="delete" href="/users/delete/<%=element.id%>"><i class="fa-solid fa-trash"></i>Banir</a>
+									<%}%>
+										<%}%>
+						</div>
+					</li>
+					<%})%>
+			</ul>
+		</section>
+		<section class="new-news">
+			<h1>Novas Noticias</h1>
+			<ul>
+				<% if(news.length == 0){%>
+					<li><p class="no">Não há pedidos de administradores!</p></li>
+				<% }%>
+				<% news.forEach(function(element, index) { %>
+					<li>
+						<span class="id">
+								<%=element.id%>
+							</span>
+						<a class="content" href="<%=element.link%>"><%=element.title%> target="_blank" </a>
+						<div class="id">
+							<p>
+								<%=element.release%>
+							</p>
+						</div>
+						<div class=" actions">
+							<%if(user != undefined ){%>
+								<%if(user.administrator ){%>
+									<a class="edit" href="/news/accept/<%=element.id%>">Aceitar</a>
+								<a class="delete" href="/news/delete/<%=element.id%>">Banir</a>
+								<%}%>
+								<%}%>
+						</div>
+					</li>
+					<%})%>
+			</ul>
+		</section>
+	</main>
+	<%- include('partials/footer.ejs') %>

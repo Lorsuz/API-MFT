@@ -23,154 +23,139 @@ function statusLoader ( status = 0, minTime = 0 ) {
 	}
 }
 
-function statusLoaderChat ( status = 0, minTime = 0 ) {
-	if ( status == 0 ) {
+function statusLoaderChat ( status = false ) {
+	if ( status ) {
+		document.querySelector( '.loader-chat' ).style.display = 'flex';
+	} else {
 		setTimeout( () => {
-			document.querySelectorAll( '.loader-chat' ).forEach( element => {
-				element.style.display = 'none';
-			} );
-		}, minTime );
-	} else if ( status == 1 ) {
-		document.querySelectorAll( '.loader-chat' ).forEach( element => {
-			element.style.display = 'flex';
-		} );
+			document.querySelector( '.loader-chat' ).style.display = 'none';
+		}, 200 );
 	}
 }
 
-openDialog.forEach( element_1 => {
-	if ( !element_1.hasAttribute( 'click-event-added' ) ) {
-		element_1.addEventListener( 'click', handleClickEvent );
-		element_1.setAttribute( 'click-event-added', true );
+openDialog.forEach( element => {
+	chat.innerHTML = '';
+	if ( !element.hasAttribute( 'click-event-added' ) ) {
+		element.addEventListener( 'click', handleClickEvent );
+		element.setAttribute( 'click-event-added', true );
 	}
 } );
 
-function handleClickEvent() {
-	const id_news = this.getAttribute('id_news');
-	dialog.setAttribute('id_news', `id_${id_news}`);
-	statusLoader(1);
-	fetchNewsDetails(id_news);
-	fetchComments(id_news);
-	statusLoaderChat(1);
+async function handleClickEvent () {
+	const id_news = this.getAttribute( 'id_news' );
+	dialog.setAttribute( 'id_news', `id_${ id_news }` );
+	statusLoader( 1 );
+	await fetchNewsDetails( id_news );
+	await fetchComments( id_news );
 }
 
-function fetchNewsDetails(id_news) {
-	fetch(`/ratings/read/${id_news}`)
-		.then(response => response.json())
-		.then(data => {
-			statusLoader();
-			dialog.showModal();
-			fetchRatings(id_news);
-			setSelectedRating(data.rating);
-			addRatingEventListeners();
-		})
-		.catch(error => {
-			console.error('Erro ao obter detalhes da Noticia:', error);
-		});
+async function fetchNewsDetails ( id_news ) {
+	try {
+		const response = await fetch( `/ratings/read/${ id_news }` );
+		const data = await response.json();
+		statusLoader();
+		dialog.showModal();
+		await fetchRatings( id_news );
+		setSelectedRating( data.rating );
+		addRatingEventListeners();
+	} catch ( error ) {
+		console.error( 'Erro ao obter detalhes da Noticia:', error );
+	}
 }
 
-function setSelectedRating(rating) {
-	for (let index = 0; index < inputRating.length; index++) {
-		if (inputRating[index].getAttribute('id').slice(5) == rating) {
-			inputRating[index].checked = true;
+function setSelectedRating ( rating ) {
+	for ( let index = 0; index < inputRating.length; index++ ) {
+		if ( inputRating[ index ].getAttribute( 'id' ).slice( 5 ) == rating ) {
+			inputRating[ index ].checked = true;
 		}
 	}
 }
 
-function addRatingEventListeners() {
-	inputRating.forEach(element => {
-		element.removeEventListener('click', handleNestedClickEvent);
-		element.addEventListener('click', handleNestedClickEvent);
-	});
+function addRatingEventListeners () {
+	inputRating.forEach( element => {
+		element.removeEventListener( 'click', handleNestedClickEvent );
+		element.addEventListener( 'click', handleNestedClickEvent );
+	} );
 }
 
-function fetchComments(id_news) {
-	fetch(`/comments/read/${id_news}`)
-		.then(response => response.json())
-		.then(data => {
-			if (data.length != 0) {
-				const fetchPromises = data.map(element =>
-					fetch(`/users/read/${element.id_user}`).then(response => response.json())
-				);
-
-				Promise.all(fetchPromises)
-					.then(users => {
-						renderComments(data, users);
-						statusLoaderChat(0, 500);
-					})
-					.catch(error => {
-						console.error('Erro ao obter dados dos usuários:', error);
-					});
-			} else {
-				statusLoaderChat(0, 200);
-				chat.innerHTML = '<p class="nothing">Não há comentários para esta notícia.</p>';
-			}
-		});
+async function fetchComments ( id_news ) {
+	try {
+		const response = await fetch( `/comments/read/${ id_news }` );
+		const data = await response.json();
+		if ( data.length != 0 ) {
+			const fetchPromises = await data.map( element => fetch( `/users/read/${ element.id_user }` )
+				.then( response => response.json() )
+			);
+			const users = await Promise.all( fetchPromises );
+			renderComments( data, users );
+		} else {
+			chat.innerHTML = '<p class="nothing">Não há comentários para esta notícia.</p>';
+		}
+	} catch ( error ) {
+		console.error( 'Erro ao obter comentarios dos usuários:', error.message );
+	}
 }
 
-function renderComments(comments, users) {
-	comments.forEach((element, index) => {
-		const user = users[index];
-
+async function renderComments ( comments, users ) {
+	await comments.forEach( ( element, index ) => {
+		const user = users[ index ];
 		chat.innerHTML += `
       <div class="comment">
         <div class="img">
-          <img src="https://i.pinimg.com/originals/45/f2/33/45f233d8cca8630bdf0f6b263605b5bd.jpg" alt="">
+          <img src="/images/uploads/profiles/${ user.profile }" alt="">
         </div>
         <div class="text">
           <div class="details">
-            <h6>${user.nickname}</h6>
-            <span>${element.timestamp}</span>
+            <a href="/users/dashboard/${ user.nickname }">@${ user.nickname }</a>
+            <span>${ element.timestamp }</span>
           </div>
-          <p>${element.content}</p>
+          <p>${ element.content }</p>
         </div>
       </div>
     `;
 		chat.scrollTop = chat.scrollHeight;
-	});
+	} );
 }
 
 // Event listener
-document.querySelector('div#form_comment button').addEventListener('click', () => {
-	var id_news = dialog.getAttribute('id_news')
-	var inputComment = document.querySelector('div#form_comment input');
-	const elementoExist = chat.querySelector('p.nothing');
-	if (elementoExist) {
+document.querySelector( 'div#form_comment button' ).addEventListener( 'click', () => {
+	var id_news = dialog.getAttribute( 'id_news' );
+	var inputComment = document.querySelector( 'div#form_comment input' );
+	const elementoExist = chat.querySelector( 'p.nothing' );
+	if ( elementoExist ) {
 		chat.innerHTML = '';
 	}
-	if (inputComment.value != '') {
-		statusLoaderChat(1);
-		fetch('/comments/create', {
+	if ( inputComment.value != '' ) {
+		fetch( '/comments/create', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ id_news: id_news, content: inputComment.value })
-		})
-			.then(response => response.json())
-			.then(data => {
-				fetch(`/users/read/${data.id_user}`)
-					.then(response => response.json())
-					.then(user => {
+			body: JSON.stringify( { id_news: id_news.slice( 3 ), content: inputComment.value } )
+		} )
+			.then( response => response.json() )
+			.then( data => {
+				fetch( `/users/read/${ data.id_user }` )
+					.then( response => response.json() )
+					.then( user => {
 						chat.innerHTML += `
             <div class="comment">
               <div class="img">
-                <img src="https://i.pinimg.com/originals/45/f2/33/45f233d8cca8630bdf0f6b263605b5bd.jpg" alt="">
-              </div>
-              <div class="text">
+                <img src="/images/uploads/profiles/${ user.profile }" alt="">
+								</div>
+								<div class="text">
                 <div class="details">
-                  <h6>${user.nickname}</h6>
-                  <span>${data.timestamp}</span>
+								<a href="/users/dashboard/${ user.nickname }">@${ user.nickname }</a>
+								<span>${ data.timestamp }</span>
                 </div>
-                <p>${data.content}</p>
-              </div>
-            </div>
-          `;
+                <p>${ data.content }</p>
+								</div>
+								</div>
+								`;
 						chat.scrollTop = chat.scrollHeight;
 						inputComment.value = '';
-						statusLoaderChat(0);
-					});
-			});
+					} );
+			} );
 	}
-});
-
+} );
 
 function handleNestedClickEvent () {
 	var rating = this.getAttribute( 'id' ).slice( 5 );
@@ -195,6 +180,7 @@ closeDialog.addEventListener( 'click', () => {
 		element.checked = false;
 	}
 	var bar = document.querySelectorAll( '.rating__progress-value .progress .bar' );
+	bar = Array.from( bar );
 	for ( let index = 0; index < bar.length; index++ ) {
 		bar[ index ].style.width = `0%`;
 	}
@@ -204,15 +190,14 @@ closeDialog.addEventListener( 'click', () => {
 	chat.innerHTML = '';
 } );
 
-function fetchRatings ( id_news ) {
-	fetch( `/ratings/count/stars/${ id_news }` )
-		.then( response => response.json() )
-		.then( data => {
-			getRatings( data.ratings, id_news );
-		} )
-		.catch( error => {
-			console.error( 'Erro ao obter detalhes da Noticia:', error );
-		} );
+async function fetchRatings ( id_news ) {
+	try {
+		const response = await fetch( `/ratings/count/stars/${ id_news }` );
+		const data = await response.json();
+		getRatings( data.ratings, id_news );
+	} catch ( error ) {
+		console.error( 'Erro ao obter detalhes da Noticia:', error );
+	}
 }
 
 function getRatings ( ratings, id_news ) {
@@ -225,11 +210,16 @@ function getRatings ( ratings, id_news ) {
 	} );
 	var bar = document.querySelectorAll( '.rating__progress-value .progress .bar' );
 	var count = document.querySelectorAll( '.rating__progress-value p.count' );
+
+	bar = Array.from( bar );
+	count = Array.from( count );
+	bar.reverse();
+	count.reverse();
+
 	for ( let index = 0; index < ratings.length; index++ ) {
 		bar[ index ].style.width = `${ isNaN( ratings[ index ].count / total_rating ) ? 0 : ( ratings[ index ].count / total_rating ) * 100 }%`;
 		count[ index ].textContent = ratings[ index ].count.toLocaleString();
 	}
-
 	let rating__average = ( ratting_based_on_star / total_rating ).toFixed( 1 );
 	rating__average = isNaN( rating__average ) ? 0 : rating__average;
 

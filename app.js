@@ -1,9 +1,9 @@
 import createError from 'http-errors';
 import express from 'express';
 import path from 'path';
-import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import livereload from 'livereload';
+
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -18,6 +18,8 @@ import ratingsRouter from './routes/ratings.js';
 import commentsRouter from './routes/comments.js';
 import favoritesRouter from './routes/favorites.js';
 
+import verifyUnconfirmedAccounts from './modules/checkAccounts.js';
+
 const __filename = fileURLToPath( import.meta.url );
 const __dirname = dirname( __filename );
 
@@ -27,7 +29,6 @@ app.set( 'view engine', 'ejs' );
 app.use( logger( 'dev' ) );
 app.use( express.json() );
 app.use( express.urlencoded( { extended: false } ) );
-app.use( cookieParser() );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
 const liveReloadServer = livereload.createServer({port: 35729});
@@ -40,6 +41,8 @@ app.use( '/audits', auditsRouter );
 app.use( '/ratings', ratingsRouter );
 app.use( '/comments', commentsRouter );
 app.use( '/favorites', favoritesRouter );
+
+setInterval(verifyUnconfirmedAccounts, 60 * 60 * 1000)
 
 app.use( function ( req, res, next ) {
 	next( createError( 404 ) );

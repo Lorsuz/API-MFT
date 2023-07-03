@@ -1,9 +1,9 @@
-$color_1: #ffffff;
+$color_1: var(--color-white);
 $color_3: rgb(124, 124, 124);
 $color_4: #fff;
 
 @import 'global.css';
-@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Courgette&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @keyframes navLinkFade {
 	from {
@@ -32,7 +32,7 @@ header {
 	transition: 500ms;
 
 	>a {
-		background: #ffffff;
+		background: var(--color-white);
 		padding: 5px 20px;
 		width: auto;
 		border-radius: 10px;
@@ -81,7 +81,7 @@ header {
 			.profile {
 				overflow: hidden;
 				position: absolute;
-				border: 3px solid #ffffff;
+				border: 3px solid var(--color-white);
 				width: 45px;
 				border-radius: 50%;
 				right: 0;
@@ -91,7 +91,7 @@ header {
 				align-items: center;
 				background: transparent;
 				height: 100%;
-				background: #ffffff;
+				background: var(--color-white);
 				position: relative;
 
 				img {
@@ -111,7 +111,7 @@ header {
 			flex-direction: column;
 			justify-content: space-between;
 			width: 30vw;
-			min-width: 350px;
+			min-width: 400px;
 			max-width: 450px;
 			transform: translateX(100%);
 			background: rgba(0, 0, 0, 0.749);
@@ -123,7 +123,7 @@ header {
 			}
 
 			ul {
-				margin: 100px 0 0 0;
+				margin: 80px 0 0 0;
 
 				li {
 					display: flex;
@@ -221,9 +221,9 @@ header {
 					border: 2px solid #fff;
 
 					&:hover {
-						background: #ffffff;
+						background: var(--color-white);
 						color: var(--color-theme);
-						border: 2px solid #ffffff;
+						border: 2px solid var(--color-white);
 						letter-spacing: 1px;
 					}
 
@@ -254,4 +254,27 @@ header {
 			cursor: pointer;
 		}
 	} */
+}
+
+@media (max-width: 700px) {
+	header{
+		padding: 0 20px;
+		>a{
+			border-radius: 50%;
+			width: 50px;
+			height: 50px;
+			display: flex;justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			position: relative;
+			
+			img{
+				position: absolute;
+				width: 100%;
+				top: 0;
+				left: 0;
+			}
+			a{}
+		}
+	}
 }

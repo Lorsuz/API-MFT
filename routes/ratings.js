@@ -24,9 +24,8 @@ router.get( `/ratings/count/stars/:id_news`, async ( req, res ) => {
 } );
 
 router.get( `/ratings/read/:id_news`, async ( req, res ) => {
-	if ( req.session.user == undefined ) {
-		// req.session.user = 0;
-		req.session.user = await Model.readItem( `users`, `id`, 1 );
+	if(req.session.user==undefined){
+		return res.redirect('/')
 	}
 	var id_news = req.params.id_news;
 	var id_user = req.session.user.id;
@@ -38,10 +37,10 @@ router.get( `/ratings/read/:id_news`, async ( req, res ) => {
 } );
 
 router.post( `/ratings/rate`, async ( req, res ) => {
-
-	if ( req.session.user != undefined ) {
-		res.redirect( '/users/login' );
-	} else {
+	
+	if(req.session.user==undefined){
+		return res.redirect('/')
+	}
 		var allRight = true;
 		var rating = {
 			id_news: parseInt( req.body.id_news ),
@@ -69,7 +68,6 @@ router.post( `/ratings/rate`, async ( req, res ) => {
 				}
 			}
 		}
-	}
 } );
 
 export default router;

@@ -11,10 +11,7 @@ router.post( '/comments', async ( req, res ) => {
 	res.json(result)
 } );
 
-
-
 router.post( '/comments/create/', async ( req, res ) => {
-	console.log('content: '+ req.body.content);
 	var row = {
 		id_news: req.body.id_news,
 		id_user: req.session.user.id,
@@ -23,9 +20,12 @@ router.post( '/comments/create/', async ( req, res ) => {
 	}
 	if(row.id_user != undefined){
 		var result = await Model.createItem('comments', row)
+		if ( result != undefined ) {
+				result.timestamp = format(parseISO(result.timestamp), 'dd/MM/yyyy HH:mm:ss')
+		}
 		res.json(result)
 	}else{
-		res.redirect('/users/login')
+		return res.redirect('/users/login')
 	}
 })
 
@@ -35,8 +35,6 @@ router.get( '/comments/read/:id_news', async ( req, res ) => {
 	if ( result != undefined ) {
 		result.forEach(element => {
 			element.timestamp = format(parseISO(element.timestamp), 'dd/MM/yyyy HH:mm:ss')
-
-			
 		});
 		res.json( result );
 	}

@@ -15,7 +15,7 @@
 		<link rel="stylesheet" href="/stylesheets/<%= styleSheet%>.css" />
 		<link rel="stylesheet" href="/stylesheets/partials/footer.css" />
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 		<script src="//localhost:35729/livereload.js"></script>
 	</head>
@@ -27,7 +27,7 @@
 		<header>
 			<a href="/"><img src="/images/Logo-existindo-news.png" alt="Image Logo"><span>ExistindoNews</span></a>
 			<nav>
-				<% if(user !=0) { %>
+				<% if(user != undefined) { %>
 					<button id="profile">
 						<span>
 							<%= user.nickname%>
@@ -42,7 +42,7 @@
 					<div class="nav-list">
 						<ul>
 							<li>
-								<a href="/users/dashboard/<%= user.id %>">
+								<a href="/users/dashboard/<%= user.nickname %>">
 									<i class="fa-solid fa-user"></i>
 									<span>Perfil</span>
 								</a>
@@ -74,13 +74,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="support">
-											<i class="fa-solid fa-circle-info"></i>
-											<span>Suporte</span>
-										</a>
-									</li>
-									<li>
-										<a href="https://github.com/Lorsuz" target="_blank">
+										<a href="/developers" target="_blank">
 											<i class="fa-sharp fa-solid fa-code"></i>
 											<span>Desenvolvedores</span>
 										</a>

@@ -1,4 +1,4 @@
-<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | Register' , styleSheet: 'sign' , user: 0 }) %>
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | Register' , styleSheet: 'form'}) %>
 
 <main>
 	<form action="/users/register" method="post">
@@ -60,7 +60,7 @@
 
 		<div>
 			<label for="description">Descrição:</label>
-			<textarea required name="description" id="description"><%= backup.description %></textarea>
+			<textarea name="description" id="description"><%= backup.description %></textarea>
 			<span></span>
 		</div>
 

@@ -1,0 +1,61 @@
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | Update Account' , styleSheet: 'form' }) %>
+
+	<main>
+		<form enctype="multipart/form-data" action="/users/update/" method="post">
+			<h2>Formulário do Perfil</h2>
+			<h1>Atualizar dados da conta</h1>
+
+			<a class="delete" href="/users/delete/<%= backup.id%>">Deletar</a>
+
+			<div>
+				<label for="nickname">Apelido:</label>
+				<input required name="nickname" type="text" id="nickname" value="<%= backup.nickname %>" />
+				<span><%- errorAction.nickname %></span>
+			</div>
+
+			<div>
+				<label for="name">Nome Completo:</label>
+				<input required name="name" type="text" id="name" value="<%= backup.name %>" />
+				<span><%- errorAction.name %></span>
+			</div>
+
+			<div>
+				<label for="password">Senha:</label>
+				<input required name="password" type="password" id="password" value="<%= backup.password%>" />
+				<span><%- errorAction.password %></span>
+			</div>
+
+			<div>
+				<label for="confirmPassword">Confirme a senha:</label>
+				<input required name="confirmPassword" type="password" id="confirmPassword"
+				value="<%= backup.password%>" />
+				<span><%- errorAction.confirmPassword %></span>
+			</div>
+
+			<div>
+				<label for="birth">Data de nascimento:</label>
+				<input required name="birth" type="date" id="birth" value="<%= backup.birth %>" />
+				<span></span>
+			</div>
+
+			<div>
+				<label for="gender">Gênero:</label>
+				<select name="gender" id="gender">
+					<option value="1">Masculino</option>
+					<option value="0">Feminino</option>
+				</select>
+				<span></span>
+			</div>
+
+			<div>
+				<label for="description">Descrição:</label>
+				<textarea name="description" placeholder="Conta sem descrição..." id="description"><%= backup.description %></textarea>
+				<span></span>
+			</div>
+
+			<button type="submit">Atualizar</button>
+			<a href="/users/dashboard">Cancelar</a>
+		</form>
+	</main>
+
+	<%- include('partials/footer.ejs') %>

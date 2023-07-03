@@ -24,7 +24,7 @@ main section.cover {
 main section.cover .background {
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0), #000000);
+  background: linear-gradient(rgba(0, 0, 0, 0), var(--color-black));
 }
 main section.cover .capa {
   display: flex;
@@ -40,10 +40,10 @@ main section.cover .capa .left {
 main section.cover .capa .left h2 {
   font-size: 1.8rem;
   text-align: center;
-  color: #ffffff;
+  color: var(--color-white);
 }
 main section.cover .capa .left > div {
-  background: #ffffff;
+  background: var(--color-white);
   margin: 20px auto;
   border-radius: 10px;
   padding: 20px;
@@ -51,7 +51,7 @@ main section.cover .capa .left > div {
   align-items: center;
   max-width: 750px;
   width: 90%;
-  height: 180px;
+  height: 190px;
   position: relative;
 }
 main section.cover .capa .left > div .img {
@@ -102,7 +102,7 @@ main section.cover .capa .left > div .text .more a {
   background: var(--color-theme);
   padding: 8px 30px;
   border-radius: 50px;
-  color: #ffffff;
+  color: var(--color-white);
   bottom: 15px;
   transition: 300ms;
 }
@@ -113,7 +113,7 @@ main section.cover .capa .right {
   height: 500px;
   display: flex;
   flex-direction: column;
-  color: #ffffff;
+  color: var(--color-white);
   width: 40%;
   min-width: 400px;
   padding: 50px 0 0 20px;
@@ -140,6 +140,7 @@ main section.cover .capa .right h2 {
 }
 main section.cover .capa .right p {
   margin-bottom: 50px;
+  font-size: 1.1rem;
   width: 95%;
 }
 main section.cover .capa .right .news {
@@ -151,7 +152,10 @@ main section.cover .capa .right .news a {
   border-radius: 50px;
   display: block;
   font-size: 1.2rem;
-  color: #ffffff;
+  color: var(--color-white);
+}
+main section.cover .capa .right .news a:hover {
+  background: #a70606;
 }
 main section.news {
   padding: 100px 0 0 0;
@@ -202,7 +206,10 @@ main section.news .header-section .search-box button {
   cursor: pointer;
 }
 main section.news .header-section .search-box button i {
-  color: #ffffff;
+  color: var(--color-white);
+  font-size: 1.2rem;
+}
+main section.news .header-section > p {
   font-size: 1.2rem;
 }
 main section.news .container {
@@ -211,10 +218,11 @@ main section.news .container {
   justify-content: center;
 }
 main section.news .container .card {
-  background: #ffffff;
+  background: var(--color-white);
   width: 30%;
-  max-width: 360px;
-  min-width: 300px;
+  max-width: 400px;
+  min-width: 350px;
+  height: auto;
   margin: 15px;
   box-shadow: 0px 0px 15px 0px #c1c1c1;
   border-radius: 3px;
@@ -223,13 +231,33 @@ main section.news .container .card {
 main section.news .container .card .box-img {
   position: relative;
 }
+main section.news .container .card .box-img .favorite {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 5;
+  border-radius: 50%;
+  background: var(--color-white);
+}
+main section.news .container .card .box-img .favorite i {
+  cursor: pointer;
+  z-index: 4;
+  font-size: 1.3rem;
+  color: var(--color-theme);
+}
 main section.news .container .card .box-img .img {
   overflow: hidden;
-  height: 200px;
+  height: 230px;
 }
 main section.news .container .card .box-img .img img {
   width: 100%;
-  height: 100%;
+  height: 110%;
 }
 main section.news .container .card .box-img .details {
   position: absolute;
@@ -289,7 +317,7 @@ main section.news .container .card .box-img .details button::after {
   display: none;
 }
 main section.news .container .card .box-img .details span {
-  background: #ffffff;
+  background: var(--color-white);
   color: #e70808;
   display: flex;
   justify-content: center;
@@ -298,12 +326,13 @@ main section.news .container .card .box-img .details span {
   font-size: 1.1rem;
   height: 100%;
   width: 115px;
+  height: 35px;
   margin-right: 0;
 }
 main section.news .container .card .text {
   padding: 20px 30px;
   position: relative;
-  height: 220px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -322,20 +351,18 @@ main section.news .container .card .text p {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   text-align: justify;
 }
 main section.news .container .card .text .more {
-  position: absolute;
-  bottom: 25px;
   align-content: center;
-  margin: 0 auto;
+  margin: 0 auto 15px;
 }
 main section.news .container .card .text .more a {
   background: var(--color-theme);
   padding: 10px 25px;
   border-radius: 50px;
-  color: #ffffff;
+  color: var(--color-white);
   transition: 300ms;
   font-size: 1.1rem;
 }
@@ -353,7 +380,7 @@ main section.news dialog#info-card-news {
   padding: 25px;
 }
 main section.news dialog#info-card-news::backdrop {
-  background-color: rgba(0, 0, 0, 0.3490196078);
+  background-color: rgba(0, 0, 0, 0.5254901961);
 }
 main section.news dialog#info-card-news button.close-dialog {
   position: absolute;
@@ -388,17 +415,21 @@ main section.news dialog#info-card-news button.close-dialog::after {
 main section.news dialog#info-card-news > div.details-news {
   width: 60%;
   padding-right: 20px;
+  background: #ffffff;
+}
+main section.news dialog#info-card-news > div.details-news h2 {
+  text-align: center;
 }
 main section.news dialog#info-card-news > div.details-news .app {
   background: #181736;
   display: grid;
   place-items: center;
-  color: #ffffff;
+  color: var(--color-white);
   width: 100%;
   min-width: 370px;
   padding: 25px;
   border-radius: 10px;
-  box-shadow: 0px 0px 15px 0 rgba(0, 0, 0, 0.6156862745);
+  box-shadow: 0px 0px 15px 0 var(--color-black) 9d;
   border: 3px solid #252549;
 }
 main section.news dialog#info-card-news > div.details-news .app .rating {
@@ -565,7 +596,7 @@ main section.news dialog#info-card-news > div.comments .chat .loader-chat {
   justify-content: center;
   align-items: center;
   position: sticky;
-  background: #ffffff;
+  background: var(--color-white);
 }
 main section.news dialog#info-card-news > div.comments .chat .loader-chat .custom-loader {
   width: 50px;
@@ -579,7 +610,7 @@ main section.news dialog#info-card-news > div.comments .chat::-webkit-scrollbar 
   width: 5px;
 }
 main section.news dialog#info-card-news > div.comments .chat::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: var(--color-white);
 }
 main section.news dialog#info-card-news > div.comments .chat::-webkit-scrollbar-thumb {
   background: var(--color-theme);
@@ -601,10 +632,12 @@ main section.news dialog#info-card-news > div.comments .chat .comment {
 }
 main section.news dialog#info-card-news > div.comments .chat .comment .img {
   overflow: hidden;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
+  background: var(--color-theme);
   margin-right: 10px;
+  border: 3px solid var(--color-theme);
 }
 main section.news dialog#info-card-news > div.comments .chat .comment .img img {
   width: 100%;
@@ -616,9 +649,10 @@ main section.news dialog#info-card-news > div.comments .chat .comment .text .det
   display: flex;
   justify-content: space-between;
 }
-main section.news dialog#info-card-news > div.comments .chat .comment .text .details h6 {
+main section.news dialog#info-card-news > div.comments .chat .comment .text .details a {
   font-size: 1rem;
   text-transform: capitalize;
+  color: #3f3f3f;
 }
 main section.news dialog#info-card-news > div.comments .chat .comment .text .details span {
   width: auto;
@@ -688,8 +722,48 @@ main section.news dialog#info-card-news > div.comments .input > div button i {
   body section.cover .capa .left > div .text {
     width: 100%;
   }
+  body section.cover .capa .left > div .text .more {
+    justify-content: center;
+  }
+  body section.cover .capa .left > div .text .more a {
+    padding: 10px 50px;
+    font-size: 1.1rem;
+  }
   body section.cover .capa .right {
     width: 90%;
+  }
+  body section.cover .capa .right span {
+    text-align: center;
+    width: 95%;
+  }
+  body section.cover .capa .right h2 {
+    text-align: center;
+    width: 95%;
+  }
+  body section.cover .capa .right p {
+    text-align: justify;
+  }
+  body section.cover .capa .right .news {
+    justify-content: center;
+    width: 95%;
+  }
+  body section.cover .capa .right .news a {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 40px;
+    font-size: 1.2rem;
+  }
+  body section.news {
+    width: 100vw;
+  }
+  body section.news .container {
+    width: 100vw;
+  }
+  body section.news .container .card {
+    width: 95vw;
+    max-width: 400px;
   }
 }
 @keyframes s3 {

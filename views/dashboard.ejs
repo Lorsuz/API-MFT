@@ -1,41 +1,103 @@
 <%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | DASHBOARD' , styleSheet: 'dashboard' }) %>
-<main>
-<section class="profile">
-		<div class="bg-profile">
-			<img src="/images/uploads/backgrounds/<%= userProfile.background%>" alt="">
-		</div>
-		<div class="profile">
-			<div class="img-profile">
-				<img src="/images/uploads/profiles/<%= userProfile.profile%>" alt="">
-				<a href="user/update/<%= user.id%>" class="bg-edit">
-					<button >Editar</button>
-				</a>
+	<main>
+		<section class="profile">
+			<div class="bg-profile">
+				<img src="/images/uploads/backgrounds/<%= userProfile.background%>" alt="">
 			</div>
-			<h2><%= userProfile.nickname%></h2>
-		</div>
-		<div class="info">
-			<div class="basic">
-				<div><span>Nome completo:</span><span><%= userProfile.name%></span></div>
-				<div><span>Data de Nascimento:</span><span><%= userProfile.birth%></span></div>
-				<div><span>Sexo:</span><span><%= userProfile.gender%></span></div>
+			<div class="profile">
+				<% if(user !=undefined){%>
+					<% if(user.id==userProfile.id){%>
+						<div class="img-profile user-logged">
+							<img src="/images/uploads/profiles/<%= userProfile.profile%>" alt="">
+							<a href="/users/update/" class="bg-edit">
+								<button><i class="fa-solid fa-camera"></i></button>
+							</a>
+						</div>
+						<% }else{%>
+							<div class="img-profile">
+								<img src="/images/uploads/profiles/<%= userProfile.profile%>" alt="">
+							</div>
+							<% }%>
+								<% }else{%>
+									<div class="img-profile">
+										<img src="/images/uploads/profiles/<%= userProfile.profile%>" alt="">
+									</div>
+									<% }%>
+										<h2>
+											<%= userProfile.nickname%>
+										</h2>
 			</div>
-			<div class="contact">
-				<div><span>E-mail:</span><span><%= userProfile.email%></span></div>
-				<div><span>Tipo de conta:</span><span><%= user.administrator ? 'Administrador' : 'Usuário'%></span></div>
+			<div class="info">
+				<!-- <div class="basic"> -->
+				<div><span>Nome completo:</span><span>
+						<%= userProfile.name%>
+					</span></div>
+				<div><span>Data de Nascimento:</span><span>
+						<%= userProfile.birth%>
+					</span></div>
+				<div><span>Sexo:</span><span>
+						<%= userProfile.gender%>
+					</span></div>
+				<!-- </div> -->
+				<!-- <div class="contact"> -->
+				<div><span>E-mail:</span><span>
+						<%= userProfile.email%>
+					</span></div>
+				<div><span>Tipo de conta:</span><span>
+						<%= userProfile.administrator ? 'Administrador' : 'Usuário' %>
+					</span></div>
+				<!-- </div> -->
+				<!-- <div class="contact"> -->
+				<div><span>Descrição:</span><span>
+						<%= userProfile.description%>
+					</span></div>
+				<!-- </div> -->
 			</div>
-			<div class="contact">
-				<div><span>Descrição:</span><span><%= userProfile.description%></span></div>
-			</div>
-		</div>
-	</section>
-	<section class="contributions">
-		<h1>Contribuições</h1>
-		<div class="container">
-			<!-- .card>id+name+nota+editar(+apagar) -->
-			<% news.forEach(function(card) { %>
-				<div class="card"><span class="id"></span><%= card.id%></span> <a href="/news/update/<%= card.id%>">Editar</a></div>
-				<% }) %>
-		</div>
-	</section>
-</main>
-<%- include('partials/footer.ejs') %>
+		</section>
+		<section class="contributions">
+			<h1>Contribuições</h1>
+			<div class="container">
+				<% if(news.length == 0){%>
+					<div class="card"><p class="no">Não há Noticias para este usuário</p></div>
+				<% }%>
+				<% news.forEach(function(card) { %>
+					<div class="card">
+						<span class="id">
+							<%= card.id%>
+						</span>
+						<div class="rating">
+							<div class="average">
+								<%= card.average%>
+							</div>
+							<div class="star">
+								<div class="star-outer">
+									<div class="star-inner" style="width: <%= card.rating%>;"></div>
+								</div>
+							</div>
+						</div>
+						<span class="release">
+							<%= card.release%>
+						</span>
+						<span class="verified">
+							<% if(card.verified){%>
+								<i class="fa-solid fa-check"></i>
+								<span>Verificada</span>
+								<%}else{ %>
+									<i class="fa-solid fa-xmark"></i>
+									<span>Pendente</span>
+							<%} %>
+						</span>
+						<% if(user!=undefined && user.id==userProfile.id){%>
+							<% if(user.id==userProfile.id){%>
+								<div class="actions">
+									<a class="edit" href="/news/update/<%= card.id%>">Editar</a>
+									<a class="delete" href="/news/delete/<%= card.id%>">Excluir</a>
+								</div>
+								<% } %>
+									<% } %>
+					</div>
+					<% }) %>
+			</>
+		</section>
+	</main>
+	<%- include('partials/footer.ejs') %>

@@ -1,10 +1,10 @@
-$color_1: #ffffff;
+$color_1: var(--color-white);
 $color_3: #1a1919;
 $color_4: #f5f105;
 $color_5: #e70808;
 $color_6: #c1c1c1;
 $color_7: rgb(255, 255, 255);
-$background-color_1: #00000059;
+$background-color_1: var(--color-black)59;
 
 @import 'partials/global.css';
 
@@ -32,7 +32,7 @@ main {
 			.background {
 				width: 100%;
 				height: 100%;
-				background: linear-gradient(rgba(0, 0, 0, 0), #000000);
+				background: linear-gradient(rgba(0, 0, 0, 0), var(--color-black));
 			}
 
 			.capa {
@@ -53,7 +53,7 @@ main {
 					}
 
 					>div {
-						background: #ffffff;
+						background: var(--color-white);
 						margin: 20px auto;
 						border-radius: 10px;
 						padding: 20px;
@@ -61,7 +61,7 @@ main {
 						align-items: center;
 						max-width: 750px;
 						width: 90%;
-						height: 180px;
+						height: 190px;
 						position: relative;
 
 						.img {
@@ -163,6 +163,7 @@ main {
 
 					p {
 						margin-bottom: 50px;
+						font-size: 1.1rem;
 						width: 95%;
 					}
 
@@ -176,6 +177,10 @@ main {
 							display: block;
 							font-size: 1.2rem;
 							color: $color_1;
+
+							&:hover {
+								background: #a70606;
+							}
 						}
 					}
 				}
@@ -240,6 +245,10 @@ main {
 						}
 					}
 				}
+
+				>p {
+					font-size: 1.2rem;
+				}
 			}
 
 			.container {
@@ -248,10 +257,11 @@ main {
 				justify-content: center;
 
 				.card {
-					background: #ffffff;
+					background: var(--color-white);
 					width: 30%;
-					max-width: 360px;
-					min-width: 300px;
+					max-width: 400px;
+					min-width: 350px;
+					height: auto;
 					margin: 15px;
 					box-shadow: 0px 0px 15px 0px #c1c1c1;
 					border-radius: 3px;
@@ -259,14 +269,33 @@ main {
 
 					.box-img {
 						position: relative;
+						.favorite{
+							position: absolute;
+							right: 15px;
+							top: 10px;
+							width: 40px;
+							height: 40px;
+							display: flex;
+							justify-content: center;align-items: center;
+							cursor: pointer;
+							z-index: 5;
+							border-radius: 50%;
+							background: var(--color-white);
+							i{
+								cursor: pointer;
+							z-index: 4;
+								font-size: 1.3rem;
+								color: var(--color-theme);
+							}
+						}
 
 						.img {
 							overflow: hidden;
-							height: 200px;
+							height: 230px;
 
 							img {
 								width: 100%;
-								height: 100%;
+								height: 110%;
 							}
 						}
 
@@ -338,7 +367,7 @@ main {
 							}
 
 							span {
-								background: #ffffff;
+								background: var(--color-white);
 								color: $color_5;
 								display: flex;
 								justify-content: center;
@@ -347,6 +376,7 @@ main {
 								font-size: 1.1rem;
 								height: 100%;
 								width: 115px;
+								height: 35px;
 								margin-right: 0;
 							}
 						}
@@ -355,7 +385,7 @@ main {
 					.text {
 						padding: 20px 30px;
 						position: relative;
-						height: 220px;
+						height: auto;
 						display: flex;
 						flex-direction: column;
 						align-items: center;
@@ -375,15 +405,13 @@ main {
 							-webkit-line-clamp: 4;
 							-webkit-box-orient: vertical;
 							overflow: hidden;
-							margin-bottom: 10px;
+							margin-bottom: 30px;
 							text-align: justify;
 						}
 
 						.more {
-							position: absolute;
-							bottom: 25px;
 							align-content: center;
-							margin: 0 auto;
+							margin: 0 auto 15px;
 
 							a {
 								background: var(--color-theme);
@@ -413,7 +441,7 @@ main {
 				padding: 25px;
 
 				&::backdrop {
-					background-color: $background-color_1;
+					background-color: #00000086;
 				}
 
 				button.close-dialog {
@@ -454,17 +482,21 @@ main {
 					&.details-news {
 						width: 60%;
 						padding-right: 20px;
+						background: #ffffff;
 
+						h2{
+							text-align: center;
+						}
 						.app {
 							background: #181736;
 							display: grid;
 							place-items: center;
-							color: #ffffff;
+							color: var(--color-white);
 							width: 100%;
 							min-width: 370px;
 							padding: 25px;
 							border-radius: 10px;
-							box-shadow: 0px 0px 15px 0 #0000009d;
+							box-shadow: 0px 0px 15px 0 var(--color-black)9d;
 							border: 3px solid #252549;
 
 							.rating {
@@ -639,6 +671,7 @@ main {
 
 					&.comments {
 						width: 40%;
+
 						h2 {
 							color: var(--color-theme);
 							text-align: center;
@@ -655,7 +688,7 @@ main {
 						.chat {
 							width: 100%;
 							height: 80%;
-							// box-shadow: inset 0 0 10px 0 #00000091;
+							// box-shadow: inset 0 0 10px 0 var(--color-black)91;
 							overflow-y: scroll;
 							position: relative;
 							padding: 0 15px;
@@ -670,8 +703,8 @@ main {
 								justify-content: center;
 								align-items: center;
 								position: sticky;
-								background: #ffffff;
-	
+								background: var(--color-white);
+
 								.custom-loader {
 									width: 50px;
 									height: 50px;
@@ -689,14 +722,15 @@ main {
 							}
 
 							&::-webkit-scrollbar-track {
-								background: #ffffff;
+								background: var(--color-white);
 							}
 
 							&::-webkit-scrollbar-thumb {
 								background: var(--color-theme);
 								border-radius: 50px;
 							}
-							> p{
+
+							>p {
 								text-align: center;
 								font-size: 1.2rem;
 								position: absolute;
@@ -713,10 +747,12 @@ main {
 
 								.img {
 									overflow: hidden;
-									width: 50px;
-									height: 50px;
+									width: 35px;
+									height: 35px;
 									border-radius: 50%;
+									background: var(--color-theme);
 									margin-right: 10px;
+									border: 3px solid var(--color-theme);
 
 									img {
 										width: 100%;
@@ -730,9 +766,10 @@ main {
 										display: flex;
 										justify-content: space-between;
 
-										h6 {
+										a {
 											font-size: 1rem;
 											text-transform: capitalize;
+											color: #3f3f3f;
 										}
 
 										span {
@@ -841,16 +878,67 @@ main {
 
 						.text {
 							width: 100%;
+							.more{
+								justify-content: center;
+								a{
+									padding: 10px 50px;
+									font-size: 1.1rem;
+								}
+							}
 						}
 					}
 				}
 
 				.right {
 					width: 90%;
+
+					span {
+						text-align: center;
+						width: 95%;
+
+					}
+
+					h2 {
+						text-align: center;
+						width: 95%;
+
+					}
+
+					p {
+						text-align: justify;
+					}
+
+					.news {
+						justify-content: center;
+						width: 95%;
+
+
+						a {
+							width: 60%;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							padding: 10px 40px;
+							font-size: 1.2rem;
+
+						}
+					}
 				}
 			}
 		}
-	}
+		section.news{
+			width: 100vw;
+			.container{
+				width: 100vw;
+				.card{
+					width: 95vw;
+					max-width: 400px;
+				}
+			}
+		}
+	}}
+@media (max-width: 560px) {
+
 }
 
 @keyframes s3 {

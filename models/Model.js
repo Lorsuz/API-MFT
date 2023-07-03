@@ -8,7 +8,7 @@ class SGBD {
 		dataTable.values = [];
 		switch ( table ) {
 			case 'users':
-				dataTable.camps = 'nickname, name, email, password, birth, description, gender, administrator';
+				dataTable.camps = 'nickname, name, email, password, birth, description, gender, administrator, status';
 				break;
 			case 'news':
 				dataTable.camps = 'id_user, title, release, image, description, link, verified';
@@ -83,23 +83,39 @@ class SGBD {
 	/* # UPDATE */
 	async updateItem ( table, column, row, id, newValue ) {
 		const database = await Database.connect();
-		const query = `UPDATE ${ table } SET ${ column } = ${newValue} WHERE ${ row } = ? `;
-		await database.run( query, [ id ] );
+		const query = `UPDATE ${ table } SET ${ column } = ? WHERE ${ row } = ? `;
+		await database.run( query, [newValue, id ] );
 		return this.readItem( table, row, id );
 	}
-
+ 
 	/* # DELETE */
-	async deleteItem ( table, column, value ) {
+	async deleteItem ( table, ...conditions ) {
 		const database = await Database.connect();
-		const query = `DELETE FROM ${ table } WHERE ${ column } = ?`;
-		const result = await database.run( query, [ value ] );
+		let query = `DELETE FROM ${table} WHERE `;
+		const placeholders = [];
+		for (let i = 0; i < conditions.length; i += 2) {
+			const column = conditions[i];
+			const value = conditions[i + 1];
+			query += `${column} = ? AND `;
+			placeholders.push(value);
+		} 
+		query = query.slice(0, -5);
+		const result = await database.run(query, placeholders);
 		return this.readItem( table, "id", result.lastID );
 	}
 
 	async deleteItems ( table, column, value ) {
 		const database = await Database.connect();
-		const query = `DELETE * FROM ${ table } WHERE ${ column } = ?`;
-		const result = await database.all( query, [ value ] );
+		let query = `DELETE * FROM ${table} WHERE `;
+		const placeholders = [];
+		for (let i = 0; i < conditions.length; i += 2) {
+			const column = conditions[i];
+			const value = conditions[i + 1];
+			query += `${column} = ? AND `;
+			placeholders.push(value);
+		} 
+		query = query.slice(0, -5);
+		const result = await database.run(query, placeholders);
 		return this.readItem( table, "id", result.lastID );
 	}
 

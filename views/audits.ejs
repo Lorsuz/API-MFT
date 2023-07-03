@@ -1,0 +1,15 @@
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | List Users' , styleSheet: 'users' }) %>
+	<main>
+		<section>
+			<h1>Histórico de verificações</h1>
+			<ul>
+				<% audits.forEach(function(element, index) { %>
+					<li>
+						<div class="id"><% element.id></div>
+						<div class="date"><% element.id></div>
+					</li>
+					<%})%>
+			</ul>
+		</section>
+	</main>
+	<%- include('partials/footer.ejs') %>

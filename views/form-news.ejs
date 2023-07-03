@@ -1,36 +1,34 @@
-<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | Criar Noticia' , styleSheet: 'form-news' }) %>
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | Criar Noticia' , styleSheet: 'form' }) %>
 
-<main>
-	<form action="/news/add" method="post">
-		<h1>Formurio de noticias</h1>
-		<div>
-			<label for="title">Titulo:</label>
-			<input required name="title" type="text" id="title"
-				value="Por que o Brasil tem caído em ranking global de desigualdade de gênero" />
-			<span></span>
-		</div>
-		<div>
-			<label for="description">Descrição:</label>
-			<textarea required name="description"
-				id="description">'Progresso no mundo é lento, mas Brasil avança ainda mais devagar no combate à desigualdade de gênero', resume economista.</textarea>
-			<span></span>
-		</div>
-		<div>
-			<label for="date">Data de publicação:</label>
-			<input required name="date" type="date" id="date" value="2023-03-06" />
-			<span></span>
-		</div>
-		<div>
-			<label for="image">Link da imagem:</label>
-			<input required name="image" type="text" id="image" value="./images/image-news/n1.png" />
-			<span></span>
-		</div>
-		<div>
-			<label for="link">Link de desvio:</label>
-			<textarea name="link" id="link">https://g1.globo.com/mundo/noticia/2023/03/06/por-que-brasil-tem-caido-em-ranking-global-de-desigualdade-de-genero.ghtml</textarea>
-			<span></span>
-		</div>
-		<button type="submit">Criar</button>
-</main>
+	<main>
+		<form action="/news/create/" method="post">
+			<h1>Formulário de noticias</h1>
+			<div>
+				<label for="title">Titulo:</label>
+				<input required name="title" type="text" id="title" value="" />
+				<span></span>
+			</div>
+			<div>
+				<label for="description">Descrição:</label>
+				<textarea required name="description" id="description" placeholder="Subtitulo da noticia"></textarea>
+				<span></span>
+			</div>
+			<div>
+				<label for="release">Data de publicação:</label>
+				<input required name="release" type="date" id="release" value="" />
+				<span></span>
+			</div>
+			<div>
+				<label for="image">Link da imagem:</label>
+				<textarea required name="image" id="image" placeholder="Aqui vai o endereço da imagem..." /></textarea>
+				<span></span>
+			</div>
+			<div>
+				<label for="link">Link de desvio:</label>
+				<textarea required name="link" id="link" placeholder="Aqui vai o endereço de URL da notícia..."></textarea>
+				<span></span>
+			</div>
+			<button type="submit">Criar</button>
+	</main>
 
-<%- include('partials/footer.ejs') %>
+	<%- include('partials/footer.ejs') %>
