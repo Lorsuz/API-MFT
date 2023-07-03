@@ -81,6 +81,8 @@ router.get( '/news/accept/:id', async ( req, res, next ) => {
 	}
 	await Model.updateItem( 'news', 'verified', 'id', id, 1 );
 	
+	await Model.createItem(`audits`, )
+	
 
 	return res.redirect( `/request` );
 })
