@@ -18,7 +18,7 @@ import ratingsRouter from './routes/ratings.js';
 import commentsRouter from './routes/comments.js';
 import favoritesRouter from './routes/favorites.js';
 
-import verifyUnconfirmedAccounts from './modules/checkAccounts.js';
+// import verifyUnconfirmedAccounts from './modules/checkAccounts.js';
 
 const __filename = fileURLToPath( import.meta.url );
 const __dirname = dirname( __filename );
@@ -42,20 +42,29 @@ app.use( '/ratings', ratingsRouter );
 app.use( '/comments', commentsRouter );
 app.use( '/favorites', favoritesRouter );
 
-setInterval(verifyUnconfirmedAccounts, 60 * 60 * 1000)
+// setInterval(verifyUnconfirmedAccounts, 60 * 60 * 1000)
 
 app.use( function ( req, res, next ) {
 	next( createError( 404 ) );
 } );
 
-app.use( function ( err, req, res, next ) {
+// app.use( function ( err, req, res, next ) {
 
-	res.locals.message = err.message;
-	res.locals.error = req.app.get( 'env' ) === 'development' ? err : {};
+// 	res.locals.message = err.message;
+// 	res.locals.error = req.app.get( 'env' ) === 'development' ? err : {};
 
-	res.status( err.status || 500 );
-	console.log( `Error: ${ err.message }\n ${ err }` );
-	res.send( `Error: ${ err.message }\n ${ err }` );
+// 	res.status( err.status || 500 );
+// 	console.log( `Error: ${ err.message }\n ${ err }` );
+// 	res.send( `Error: ${ err.message }\n ${ err }` );
+// } );
+
+app.use( ( error, req, res, next ) => {
+	res.locals.message = error.message;
+	res.locals.error = req.app.get( 'env' ) === 'development' ? error : {};
+	error.status = error.status || 500;
+	res.status( error.status ); 
+	console.error( `Error: ${ error }` );
+	res.render( 'error-page', { error: error, UserLoggedIn: req.session.UserLoggedIn,user: req.session.UserLoggedIn, account: req.session.data, } );
 } );
 
 export default app;

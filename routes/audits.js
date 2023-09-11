@@ -6,7 +6,7 @@ var parseISO = commonImports.parseISO;
 var format = commonImports.format;
 var HTTPError = commonImports.HTTPError;
 
-router.get( '/audits', ( req, res ) => {
+router.get( '/audits', async ( req, res ) => {
 	var user = req.session.user
 	if(user ==undefined){
 		return res.redirect('/')
@@ -14,6 +14,8 @@ router.get( '/audits', ( req, res ) => {
 	if(!user.administrator){
 		return res.redirect('/')
 	}
+	var audits = await Model.readItems('audits')
+	
 	res.render('./audits',{user, audits})
 } );
 

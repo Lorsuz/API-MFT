@@ -1,4 +1,4 @@
-<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | List Users' , styleSheet: 'list' }) %>
+<%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | request' , styleSheet: 'list' }) %>
 	<main>
 		<section class="new-admins">
 			<h1>Pedidos de Conta administradora</h1>
@@ -54,7 +54,7 @@
 									<a class="edit" href="/news/accept/<%=element.id%>">Aceitar</a>
 								<a class="delete" href="/news/delete/<%=element.id%>">Banir</a>
 								<%}%>
-								<%}%>
+							<%}%>
 						</div>
 					</li>
 					<%})%>

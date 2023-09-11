@@ -14,7 +14,7 @@ server.listen(port,()=>{
   console.log(`Servidor disponível no endereço http://localhost:3000/`)
 });
 server.on('error', onError);
-server.on('listening', onListening);
+server.on('listening', onListening); 
 
 function normalizePort(val) {
   var port = parseInt(val, 10);

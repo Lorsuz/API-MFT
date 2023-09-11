@@ -1,6 +1,7 @@
 import { nextDay } from 'date-fns';
 import commonImports from './exports/router.js';
 import { PrismaClient } from "@prisma/client";
+import bcrypt from 'bcrypt';
 
 var prisma = new PrismaClient();
 
@@ -89,24 +90,24 @@ router.get( '/users/register', async ( req, res ) => {
 	}
 
 	var backup = {
-		nickname: 'Administrador',
-		name: 'Administrador supremo',
-		email: 'administrador@gmail.com',
-		password: '12345678',
-		confirmPassword: '12345678',
+		nickname: 'Administradore',
+		name: 'Administradore supreme',
+		email: 'administradore@gmail.com',
+		password: '#A1r2i3e4l5',
+		confirmPassword: '#A1r2i3e4l5',
 		birth: '2006-04-17',
 		description: 'Sou eu que mando aqui'
 	};
 
-	res.render( './sign-account', { user, errorAction: '', backup: '' } );
+	res.render( './sign-account', { user, errorAction: '', backup: backup } );
 } );
 
 
 router.get( '/users/read', async ( req, res ) => {
-	var user = req.session.user
-	var users = await Model.readItems('users')
-	res.render('./list-users',{user, users})
-})
+	var user = req.session.user;
+	var users = await Model.readItems( 'users' );
+	res.render( './list-users', { user, users } );
+} );
 
 
 router.get( '/users/login', ( req, res ) => {
@@ -151,20 +152,20 @@ router.get( '/users/accept/:id', async ( req, res, next ) => {
 	} else if ( id == undefined ) {
 		return res.redirect( `/users/read` );
 	}
-	if(!user.administrator){
-		return res.redirect('/users/read')
+	if ( !user.administrator ) {
+		return res.redirect( '/users/read' );
 	}
-	if(id == 1){
-		return res.redirect('/users/read')
+	if ( id == 1 ) {
+		return res.redirect( '/users/read' );
 	}
 	var userDelete = await Model.readItem( 'users', 'id', id );
 	if ( userDelete == undefined ) {
-		return res.redirect('/users/read')
+		return res.redirect( '/users/read' );
 	}
 	await Model.updateItem( 'users', 'status', 'id', id, 0 );
 
-	return res.redirect('/users/read')
-})
+	return res.redirect( '/users/read' );
+} );
 
 router.get( '/users/delete/:id', async ( req, res, next ) => {
 	var id = req.params.id;
@@ -174,19 +175,19 @@ router.get( '/users/delete/:id', async ( req, res, next ) => {
 	} else if ( id == undefined ) {
 		return res.redirect( `/users/read` );
 	}
-	if(!user.administrator){
-		return res.redirect('/users/read')
+	if ( !user.administrator ) {
+		return res.redirect( '/users/read' );
 	}
-	if(id == 1){
-		return res.redirect('/users/read')
+	if ( id == 1 ) {
+		return res.redirect( '/users/read' );
 	}
 	var userDelete = await Model.readItem( 'users', 'id', id );
 	if ( userDelete == undefined ) {
-		return res.redirect('/users/read')
+		return res.redirect( '/users/read' );
 	}
 	Model.deleteItem( 'users', 'id', id );
-	return res.redirect('/users/read')
-})
+	return res.redirect( '/users/read' );
+} );
 
 /* ==================================================================== */
 
@@ -207,10 +208,6 @@ router.post( '/users/register', async ( req, res ) => {
 		return emailRegex.test( email );
 	};
 
-	var validatePassword = ( password ) => {
-		return password.length >= 8;
-	};
-
 	var validateNickname = ( nickname ) => {
 		return nickname.trim().split( ' ' ).length === 1;
 	};
@@ -223,7 +220,7 @@ router.post( '/users/register', async ( req, res ) => {
 		var existingUserByEmail = await Model.readItem( 'users', 'email', email );
 		if ( existingUserByEmail ) {
 			errorAction.email = 'Esse e-mail já está cadastrado';
-			if(!existingUserByEmail.status){
+			if ( !existingUserByEmail.status ) {
 				errorAction.email = 'E-mail em processo de aprovação';
 			}
 		}
@@ -237,14 +234,18 @@ router.post( '/users/register', async ( req, res ) => {
 			errorAction.nickname = 'Esse nickname já está em uso';
 		}
 	}
-
-	if ( !validatePassword( password ) ) {
-		errorAction.password = 'A senha deve conter pelo menos 8 dígitos';
+	async function hashPassword ( password ) {
+		try {
+			const hash = await bcrypt.hash( password, 10 );
+			return hash;
+		} catch ( err ) {
+			console.error( 'Erro ao criptografar a senha:', err );
+			throw err; // Você pode lidar com o erro ou lançá-lo novamente para tratamento posterior
+		}
 	}
+	const passwordHashed = await hashPassword( password );
+	console.log( `passwordHashed: ${ passwordHashed }` );
 
-	if ( password != confirmPassword ) {
-		errorAction.confirmPassword = 'A confirmação de senha está errada';
-	}
 	gender = gender == 1 ? 'Masculino' : 'Feminino';
 
 
@@ -255,30 +256,25 @@ router.post( '/users/register', async ( req, res ) => {
 		return res.render( './sign-account', { user, errorAction, backup } );
 	}
 
-	var moment = new Date().getTime();
 	var status = 1;
-	if(administrator == 1){
-		status = 0
+	if ( administrator == 1 ) {
+		status = 0;
 	}
-	var newUser = { nickname, name, email, password, birth, description, gender, administrator, status};
+	var newUser = { nickname, name, email, passwordHashed, birth, description, gender, administrator, status };
 
 	Model.createItem( 'users', newUser )
 		.then( async createdUser => {
 			try {
-				await prisma.user.deleteMany()
+				await prisma.user.deleteMany();
 				var newUserPrisma = await prisma.user.create( {
-				data: {
+					data: {
 						name,
 						email
 					}
 				} );
-					
-				if(!newUser.status){
-					return res.render( './confirm-email', { user: createdUser } );
-				}
 				req.session.user = createdUser;
 				return res.redirect( '/' );
-			} catch (error) {
+			} catch ( error ) {
 				req.session.user = createdUser;
 				return res.render( './confirm-email', { user: createdUser } );
 			}
@@ -292,19 +288,33 @@ router.post( '/users/register', async ( req, res ) => {
 router.post( '/users/login', async ( req, res ) => {
 	var { email, password } = req.body;
 	var errorActionActive = false;
+	var user = req.session.user;
 	var errorAction = { email, password };
-	var user = await Model.readItem( 'users', 'email', email );
+	var result = await Model.readItem( 'users', 'email', email );
 	for ( let key in errorAction ) {
 		if ( errorAction.hasOwnProperty( key ) ) {
 			errorAction[ key ] = '';
 		}
 	}
-	if ( user == undefined ) {
+	if ( result == undefined ) {
 		errorAction.email = 'Não existe nenhum cadastro com esse email...';
 	}
-	if ( user != undefined && user.password != password ) {
-		errorAction.password = 'A senha está incorreta...';
+
+	async function comparePasswords ( userPassword, hashedPassword ) {
+		try {
+			const result = await bcrypt.compare( userPassword, hashedPassword );
+			return result;
+		} catch ( err ) {
+			console.error( 'Erro ao comparar as senhas:', err );
+			throw err; // Você pode lidar com o erro ou lançá-lo novamente para tratamento posterior
+		}
 	}
+	var passwordsMatch = await comparePasswords( password, result.password );
+
+	if ( result != undefined && !passwordsMatch ) {
+		errorAction.password = 'A senha está incorreta';
+	}
+
 	for ( let key in errorAction ) {
 		if ( errorAction.hasOwnProperty( key ) ) {
 			if ( errorAction[ key ] != '' ) {
@@ -315,9 +325,9 @@ router.post( '/users/login', async ( req, res ) => {
 	}
 	if ( errorActionActive ) {
 		var backup = { email, password };
-		res.render( './login-account', { user, errorAction, backup } );
+		return res.render( './login-account', { user, errorAction, backup } );
 	} else {
-		req.session.user = user;
+		req.session.user = result;
 		return res.redirect( '/' );
 	}
 } );

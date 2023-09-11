@@ -1,0 +1,134 @@
+@import './partials/global.css';
+
+main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0px 5%;
+	
+	section {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		.img {
+			max-width: 550px;
+			min-width: 400px;
+
+			img {
+				width: 100%;
+			}
+		}
+
+		.status {
+			max-width: 550px;
+
+			h1 {
+				text-align: center;
+				font-size: 5rem;
+				color: #283A63;
+			}
+
+			h2 {
+				text-align: center;
+				color: rgb(80, 80, 80);
+				span{
+					text-decoration: underline;
+					color: rgb(80, 80, 80);
+				}
+			}
+			pre{
+				display: flex;
+				overflow-x: scroll;
+				padding: 20px 20px 15px;
+				background: #282C34;
+				color: #48c746;
+				font-family: monospace;
+				margin-top: 30px;
+				border-radius: 5px;
+
+				&::-webkit-scrollbar {
+					height: 5px;
+				}
+			
+				&::-webkit-scrollbar-track {
+					background: #282C34;
+				}
+			
+				&::-webkit-scrollbar-thumb {
+					background: #48c746;
+				}
+			}
+
+			blockquote {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				font-family: Courgette, cursive;
+				min-height: 140px;
+				font-size: 1.5rem;
+				
+				span{
+					font-family: Courgette, cursive;
+					font-size: 1.5rem;
+
+					&.del{
+						text-decoration: line-through;
+					}
+					&::before,
+					&::after{
+						content: '';
+					}
+					}
+			}
+
+			.actions {
+				display: flex;
+				justify-content: center;
+				align-items: center; 
+				flex-wrap: wrap;
+
+				button,
+				a {
+					margin: 20px;
+					width: 40%;
+					min-width: 220px;
+					padding: 10px 10px;
+					border-radius: 5px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					color: var(--color-white);
+					background: #283A63;
+					font-size: 1.3rem;
+
+
+					i {
+						color: var(--color-white);
+						margin-right: 10px;
+					}
+					&:hover{
+						letter-spacing: 1px;
+						background: var(--color-theme);
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 600px) {
+	main {
+		section {
+			&.status {
+				.actions {
+
+					button,
+					a {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}

@@ -25,13 +25,13 @@
 		<div>
 			<label for="password">Senha:</label>
 			<input required name="password" type="password" id="password" value="<%= backup.password%>" />
-			<span><%- errorAction.password %></span>
+			<span id="errorActionPassword"><%- errorAction.password %></span>
 		</div>
 
 		<div>
 			<label for="confirmPassword">Confirme a senha:</label>
 			<input required name="confirmPassword" type="password" id="confirmPassword" value="<%= backup.confirmPassword %>" />
-			<span><%- errorAction.confirmPassword %></span>
+			<span id="errorActionConfirmPassword"></span>
 		</div>
 
 		<div>
@@ -68,5 +68,57 @@
 		<span id="footer">Já tem uma conta? <a href="/users/login">Entrar com existente</a></span>
 	</form>
 </main>
+
+<script>
+	$(document).ready(() => {
+		$('#confirmPassword').on('input', compareInputs);
+		$('#password').on('input', check);
+	});
+
+	function check() {
+		if ($('#confirmPassword').val() != '') {
+			compareInputs()
+		}
+	}
+
+	function compareInputs() {
+		$('#confirmPassword').val() != $('#password').val() ?
+			$('#errorActionConfirmPassword').text('Senhas Não Conferem') :
+			$('#errorActionConfirmPassword').text('')
+	}
+</script>
+
+<script>
+	$(document).ready(function() {
+			const passwordField = $("#password");
+			const messageField = $("#errorActionPassword");
+
+			passwordField.on("input", function() {
+					const password = passwordField.val();
+					let messageError = ""
+
+					messageError = password.split('').length < 8 ? "A senha deve conter pelo menos 8 caracteres" : messageError
+
+					messageError =/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password) ? messageError : "A senha deve conter pelo menos 1 caractere especial"
+
+					messageError = /[A-Z]/.test(password)? messageError : "A senha deve conter pelo menos 1 letra maiúscula"
+					messageError = /[a-z]/.test(password)? messageError : "A senha deve conter pelo menos 1 letra minuscula"
+
+					messageError = /[0-9]/.test(password)? messageError : "A senha deve conter pelo menos 1 número"
+
+					messageError = /^(?!.*([A-Za-z])\1{1})/.test(password) ? messageError : "A senha não deve conter letras iguais seguidas"
+					
+					password.split('').forEach(element => {
+						if (element ==" ") {
+							messageError = "A senha não deve conter espaços em branco"
+						}
+					});
+
+					messageError = password == "" ? "Este campo não deve permanecer vazio" : messageError
+
+					messageField.text(messageError);
+			});
+	});
+</script>
 
 <%- include('partials/footer.ejs') %>

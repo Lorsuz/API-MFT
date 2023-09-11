@@ -1,0 +1,22 @@
+<%- include('partials/header', { pageTitle: "Página de erro" , styleSheet: "error-page" })%>
+
+<main>
+  <section>
+		<div class="img">
+			<img src="/images/macaco404.png" alt="">
+		</div>
+		<div class="status">
+			<h1><%= error.status %></h1>
+			<h2>Vishhh! Type Error: <span><%= error.name %></span></h2>
+				<pre><%= error.message %></pre>
+			<blockquote></blockquote>
+			<div class="actions">
+					<button><i class="fa-solid fa-backward"></i>Return to Prev</button>
+					<a href="/"><i class="fa-solid fa-house"></i>Back to Home</a>
+				</div>
+		</div>
+	</section>
+</main>
+<script src="/JavaScripts/Functions/errorPageQuotes.js"></script>
+
+<%- include('partials/footer') %>
