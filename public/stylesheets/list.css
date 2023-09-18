@@ -55,14 +55,12 @@ main section ul li .profile .img {
   width: 40px;
   margin-right: 10px;
   border-radius: 50%;
-  border: 2px solid var(--color-theme);
-  background-color: var(--color-theme);
 }
 main section ul li .profile .img img {
   width: 100%;
 }
 main section ul li .profile .nickname {
-  color: var(--color-black);
+  color: var(--color-theme);
 }
 main section ul li .profile .nickname:hover {
   text-decoration: underline;

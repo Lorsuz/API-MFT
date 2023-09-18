@@ -3,7 +3,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0px 5%;
+  padding: 100px 0;
 }
 main section {
   display: flex;
@@ -11,19 +11,24 @@ main section {
   flex-wrap: wrap;
 }
 main section .img {
-  max-width: 550px;
-  min-width: 400px;
+  max-width: 400px;
+  min-width: 300px;
+  margin: 0 50px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 main section .img img {
   width: 100%;
 }
 main section .status {
   max-width: 550px;
+  min-width: 300;
 }
 main section .status h1 {
   text-align: center;
   font-size: 5rem;
-  color: #283A63;
+  color: var(--color-theme);
 }
 main section .status h2 {
   text-align: center;
@@ -58,7 +63,7 @@ main section .status blockquote {
   justify-content: center;
   text-align: center;
   font-family: Courgette, cursive;
-  min-height: 140px;
+  margin-bottom: 20px;
   font-size: 1.5rem;
 }
 main section .status blockquote span {
@@ -88,7 +93,7 @@ main section .status .actions a {
   align-items: center;
   justify-content: center;
   color: var(--color-white);
-  background: #283A63;
+  background: var(--color-theme);
   font-size: 1.3rem;
 }
 main section .status .actions button i,
@@ -102,10 +107,12 @@ main section .status .actions a:hover {
   background: var(--color-theme);
 }
 
-@media (max-width: 600px) {
-  main section.status .actions button,
-  main section.status .actions a {
-    width: 100%;
+@media (max-width: 1140px) {
+  main section {
+    justify-content: center;
+  }
+  main section .img {
+    margin: 0;
   }
 }
 

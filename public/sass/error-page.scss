@@ -1,18 +1,23 @@
 @import './partials/global.css';
 
+*{
+	// outline: 1px dotted #000 !important;
+}
 main {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0px 5%;
+	padding: 100px 0;
 	
 	section {
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
 		.img {
-			max-width: 550px;
-			min-width: 400px;
+			max-width: 400px;
+			min-width: 300px;
+			margin: 0 50px 0 0;
+			display: flex;justify-content: center;align-items: center;
 
 			img {
 				width: 100%;
@@ -21,11 +26,13 @@ main {
 
 		.status {
 			max-width: 550px;
+			min-width: 300;
+			// width: 50%;
 
 			h1 {
 				text-align: center;
 				font-size: 5rem;
-				color: #283A63;
+				color: var(--color-theme);
 			}
 
 			h2 {
@@ -65,7 +72,8 @@ main {
 				justify-content: center;
 				text-align: center;
 				font-family: Courgette, cursive;
-				min-height: 140px;
+				// min-height: 00px;
+				margin-bottom: 20px;
 				font-size: 1.5rem;
 				
 				span{
@@ -99,7 +107,7 @@ main {
 					align-items: center;
 					justify-content: center;
 					color: var(--color-white);
-					background: #283A63;
+					background: var(--color-theme);
 					font-size: 1.3rem;
 
 
@@ -117,15 +125,20 @@ main {
 	}
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1140px) {
 	main {
 		section {
+			justify-content: center;
+			.img{
+				margin:0;
+			}
 			&.status {
+
 				.actions {
 
 					button,
 					a {
-						width: 100%;
+						// width: 100%;
 					}
 				}
 			}

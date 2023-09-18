@@ -89,10 +89,12 @@ router.get( '/users/register', async ( req, res ) => {
 		return res.redirect( `/users/dashboard/${ user.nickname }` );
 	}
 
+	// await Model.deleteItem('users', 'id', 1)
+
 	var backup = {
-		nickname: 'Administradore',
-		name: 'Administradore supreme',
-		email: 'administradore@gmail.com',
+		nickname: 'Administrador',
+		name: 'Administrador supremo',
+		email: 'administrador@gmail.com',
 		password: '#A1r2i3e4l5',
 		confirmPassword: '#A1r2i3e4l5',
 		birth: '2006-04-17',
@@ -240,11 +242,11 @@ router.post( '/users/register', async ( req, res ) => {
 			return hash;
 		} catch ( err ) {
 			console.error( 'Erro ao criptografar a senha:', err );
-			throw err; // Você pode lidar com o erro ou lançá-lo novamente para tratamento posterior
+			throw err;
 		}
 	}
+
 	const passwordHashed = await hashPassword( password );
-	console.log( `passwordHashed: ${ passwordHashed }` );
 
 	gender = gender == 1 ? 'Masculino' : 'Feminino';
 
@@ -296,9 +298,7 @@ router.post( '/users/login', async ( req, res ) => {
 			errorAction[ key ] = '';
 		}
 	}
-	if ( result == undefined ) {
-		errorAction.email = 'Não existe nenhum cadastro com esse email...';
-	}
+	
 
 	async function comparePasswords ( userPassword, hashedPassword ) {
 		try {
@@ -306,10 +306,16 @@ router.post( '/users/login', async ( req, res ) => {
 			return result;
 		} catch ( err ) {
 			console.error( 'Erro ao comparar as senhas:', err );
-			throw err; // Você pode lidar com o erro ou lançá-lo novamente para tratamento posterior
+			throw err; 
 		}
 	}
-	var passwordsMatch = await comparePasswords( password, result.password );
+	var passwordsMatch = undefined
+	if ( result == undefined ) {
+		errorAction.email = 'Não existe nenhum cadastro com esse email...';
+	}else{
+		passwordsMatch = await comparePasswords( password, result.password );
+	}
+
 
 	if ( result != undefined && !passwordsMatch ) {
 		errorAction.password = 'A senha está incorreta';
