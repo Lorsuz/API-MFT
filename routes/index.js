@@ -5,8 +5,10 @@ var Model = commonImports.Model;
 var parseISO = commonImports.parseISO;
 var format = commonImports.format;
 var HTTPError = commonImports.HTTPError;
+import isAuthenticated from "./middleware/auth.js"
 
 router.get( '/', async ( req, res ) => {
+
 	var user = req.session.user;
 	var search = req.query.search;
 	var results = await Model.readItems( 'news', 'verified', true );

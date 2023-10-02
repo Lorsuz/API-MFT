@@ -1,31 +1,61 @@
 <%- include('partials/header.ejs', { pageTitle: 'ExistindoNews | List Users' , styleSheet: 'list' }) %>
-	<main>
-		<section>
-			<h1>Usuários cadastrados</h1>
-			<ul>
-				<% users.forEach(function(element) { %>
-					<li>
-						<span class="id">
-							<%=element.id%>
-						</span>
-						<div class="profile">
-							<div class="img"><img src="/images/uploads/profiles/<%= element.profile%>" alt=""></div>
-							<a class="nickname" href="/users/dashboard/<%=element.nickname%>">
-								<%=element.nickname%>
-							</a>
-						</div>
-						<div class="birth"><span><%=element.birth%></span></div>
-						<div class="type"><span><%-element.administrator?'Administrador': 'Usuário'%></span></div>
-						<div class=" actions">
-							<%if(user !=undefined ){%>
-								<%if(user.administrator ){%>
-									<a class="delete" href="/users/delete/<%=element.id%>"><i class="fa-solid fa-trash"></i>Banir</a>
-									<%}%>
-										<%}%>
-						</div>
-					</li>
-					<%})%>
-			</ul>
-		</section>
-	</main>
-	<%- include('partials/footer.ejs') %>
+<main>
+  <section>
+    <h1>Usuários cadastrados</h1>
+    <ul id="userList">
+    </ul>
+  </section>
+</main>
+
+<script>
+  async function fetchData() {
+    try {
+      const response = await axios.get('http://localhost:3000/users');
+      return response.data;
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  function renderUserList(element) {
+    const userList = $('#userList');
+
+    console.log(element);
+    const userType = element.administrator ? 'Administrador' : 'Usuário';
+
+    const userItem = `
+							<li>
+									<span class="id">${element.id}</span>
+									<div class="profile">
+											<div class="img"><img src="/images/uploads/profiles/${element.profile}" alt=""></div>
+											<a class="nickname" href="/users/dashboard/${element.nickname}">
+													${element.nickname}
+											</a>
+									</div>
+									<div class="birth"><span>${element.birth}</span></div>
+									<div class="type"><span>${userType}</span></div>
+									<div class="actions">
+											${
+												element.administrator
+															? `<a class="delete" href="/users/delete/${element.id}"><i class="fa-solid fa-trash"></i>Banir</a>`
+															: '<a class="delete" href="/users/delete/${element.id}"><i class="fa-solid fa-trash"></i>Banir</a>'
+											}
+									</div>
+							</li>
+					`;
+
+    userList.append(userItem);
+
+  }
+  var usersData = fetchData()
+
+  usersData.then(result => {
+      result.forEach(element => {
+        renderUserList(element)
+      });
+    })
+    .catch(error => {
+      console.error(error);
+    });
+</script>
+<%- include('partials/footer.ejs') %>

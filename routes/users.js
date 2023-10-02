@@ -2,8 +2,14 @@ import { nextDay } from 'date-fns';
 import commonImports from './exports/router.js';
 import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
+import isAuthenticated from './middleware/auth.js';
+import validateLogin from './middleware/validateLogin.js';
+import jwt from 'jsonwebtoken';
+import { z } from 'zod'
+import cookie from 'cookie';
 
 var prisma = new PrismaClient();
+var tokenBlacklist = new Set();
 
 var router = commonImports.router;
 var Model = commonImports.Model;
@@ -13,13 +19,20 @@ var format = commonImports.format;
 var crypto = commonImports.crypto;
 var HTTPError = commonImports.HTTPError;
 
-router.get( '/users', async ( req, res ) => {
+router.get( '/users', isAuthenticated, async ( req, res ) => {
+	var users = await Model.readItems( 'users' );
+	var user = req.session.user;
+
+	res.json( users );
+} );
+
+router.get( '/users/page', async ( req, res ) => {
 	var users = await Model.readItems( 'users' );
 	var user = req.session.user;
 	if ( user == undefined ) {
 		return res.redirect( '/users/login' );
 	}
-	res.render( 'list-users', { user, users } );
+	res.render( 'list-users', { user } );
 } );
 
 router.get( '/users/prisma', async ( req, res ) => {
@@ -124,7 +137,7 @@ router.get( '/users/login', ( req, res ) => {
 	res.render( './login-account', { user, errorAction: '', backup: '' } );
 } );
 
-router.get( '/users/update', async ( req, res ) => {
+router.get( '/users/update', isAuthenticated, async ( req, res ) => {
 	req.session.user = await Model.readItem( 'users', 'id', 1 );
 	var user = req.session.user;
 	if ( user == undefined ) {
@@ -134,16 +147,21 @@ router.get( '/users/update', async ( req, res ) => {
 } );
 
 router.get( '/users/logout', ( req, res ) => {
-	var user = req.session.user;
-	if ( user == undefined ) {
-		return res.redirect( '/' );
-	}
-	req.session.destroy( ( err ) => {
-		if ( err ) {
-		} else {
-			return res.redirect( '/' );
-		}
-	} );
+	const token = req.cookies.jwt;
+
+  // Verifique se o token está na lista negra (revogado)
+  if (token && tokenBlacklist.has(token)) {
+    return res.status(401).json({ message: 'Token já foi revogado.' });
+  }
+
+  // Adicione o token à lista negra para revogá-lo
+  tokenBlacklist.add(token);
+
+  // Limpe o cookie no lado do cliente
+	res.clearCookie('jwt')
+	res.cookie('jwt', '', { expires: new Date(0) });
+	res.setHeader( 'Set-Cookie', cookie.serialize( 'jwt', '', { maxAge: -1 } ) );
+	req.session.destroy( ( err ) => { return res.redirect( '/' );	} );
 } );
 
 router.get( '/users/accept/:id', async ( req, res, next ) => {
@@ -275,6 +293,9 @@ router.post( '/users/register', async ( req, res ) => {
 					}
 				} );
 				req.session.user = createdUser;
+				const token = jwt.sign( createdUser, process.env.JWT_SECRET, { expiresIn: '1h' } );
+				res.cookie( 'jwt', token, { httpOnly: true, maxAge: 3600000 } );
+				req.session.user = createdUser;
 				return res.redirect( '/' );
 			} catch ( error ) {
 				req.session.user = createdUser;
@@ -287,8 +308,8 @@ router.post( '/users/register', async ( req, res ) => {
 } );
 
 
-router.post( '/users/login', async ( req, res ) => {
-	var { email, password } = req.body;
+router.post( '/users/login',validateLogin, async ( req, res ) => {
+	const { email, password } = req.inputData;
 	var errorActionActive = false;
 	var user = req.session.user;
 	var errorAction = { email, password };
@@ -298,7 +319,7 @@ router.post( '/users/login', async ( req, res ) => {
 			errorAction[ key ] = '';
 		}
 	}
-	
+
 
 	async function comparePasswords ( userPassword, hashedPassword ) {
 		try {
@@ -306,13 +327,13 @@ router.post( '/users/login', async ( req, res ) => {
 			return result;
 		} catch ( err ) {
 			console.error( 'Erro ao comparar as senhas:', err );
-			throw err; 
+			throw err;
 		}
 	}
-	var passwordsMatch = undefined
+	var passwordsMatch = undefined;
 	if ( result == undefined ) {
 		errorAction.email = 'Não existe nenhum cadastro com esse email...';
-	}else{
+	} else {
 		passwordsMatch = await comparePasswords( password, result.password );
 	}
 
@@ -333,7 +354,9 @@ router.post( '/users/login', async ( req, res ) => {
 		var backup = { email, password };
 		return res.render( './login-account', { user, errorAction, backup } );
 	} else {
+		const token = jwt.sign( result, process.env.JWT_SECRET, { expiresIn: '1h' } );
 		req.session.user = result;
+		res.cookie( 'jwt', token, { httpOnly: true, maxAge: 3600000 } );
 		return res.redirect( '/' );
 	}
 } );
