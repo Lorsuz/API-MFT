@@ -8,11 +8,11 @@ async function createNewUser ( to ) {
 		const transporter = nodemailer.createTransport( config );
 
 		const info = await transporter.sendMail( {
-			from: 'domap22290@ustorp.com',
-			to,
+			from: "domap22290@ustorp.com",
+			to: to,
 			subject: 'Conta criada no Invest App',
 			text: `Conta criada com sucesso.\n\nAcesse o aplicativo para gerenciar o cadastro de investimentos.`,
-			html: `<h1>Conta criada com sucesso.</h1><p>Acesse o aplicativo para gerenciar o cadastro de investimentos.</p>`,
+			html: `<h1>Conta criada com sucesso.</h1><p>Acesse o aplicativo.</p>`,
 		} );
 
 		if ( process.env.NODE_ENV === 'development' ) {

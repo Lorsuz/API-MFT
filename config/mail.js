@@ -17,6 +17,8 @@ async function mailConfig () {
 			user: testAccount.user,
 			pass: testAccount.pass,
 		};
+		console.log( JSON.stringify( testAccount ) );
+		
 	}
 
 	return config;
