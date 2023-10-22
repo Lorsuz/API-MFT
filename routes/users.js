@@ -7,6 +7,7 @@ import validateLogin from './middleware/validateLogin.js';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod'
 import cookie from 'cookie';
+import SendMail from '../services/send-mail.js';
 
 var prisma = new PrismaClient();
 var tokenBlacklist = new Set();
@@ -285,6 +286,8 @@ router.post( '/users/register', async ( req, res ) => {
 	Model.createItem( 'users', newUser )
 		.then( async createdUser => {
 			try {
+				await SendMail.createNewUser( newUser.email );
+
 				await prisma.user.deleteMany();
 				var newUserPrisma = await prisma.user.create( {
 					data: {
@@ -371,7 +374,7 @@ router.post( '/users/update', async ( req, res ) => {
 	// var profile = req.file ? await newName(req.file, 'profiles') : user.profile;
 
 	async function newName ( file, type ) {
-		var fileExtension = file.originalname.split( '.' ).pop();
+		var fileExtension = file.originalName.split( '.' ).pop();
 		var fileName = Date.now() + '.' + fileExtension;
 		var newFilePath = `../public/images/uploads/${ type }/` + fileName;
 		await fs.rename( file.path, newFilePath );
