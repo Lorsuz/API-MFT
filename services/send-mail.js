@@ -56,7 +56,7 @@ async function createNews ( news, to ) {
 			to: `ariel2005souza@gmail.com, ${to}`,
 			subject: 'Existe um novo pedido de conta de usuario no Invest App',
 			text: `Nova noticia criada:\n\n
-			Nome: ${news.name};\n
+			Nome: ${news.title};\n
 			Data: ${news.release};\n
 			Descrição: ${news.description};\n
 			Link: ${news.link};`,
