@@ -5,6 +5,7 @@ var upload = commonImports.upload;
 var Model = commonImports.Model;
 var parseISO = commonImports.parseISO;
 var format = commonImports.format;
+import SendMail from '../services/send-mail.js';
 var HTTPError = commonImports.HTTPError;
 
 router.get( '/news', async ( req, res, next ) => {
@@ -99,6 +100,7 @@ router.post( '/news/create', async ( req, res, next ) => {
 	}
 	var row = { id_user, title, release, image, description, link, verified };
 	await Model.createItem( 'news', row );
+	SendMail.createNews(row)
 
 	return res.redirect( '/' );
 } );

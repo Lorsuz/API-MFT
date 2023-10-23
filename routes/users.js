@@ -287,6 +287,10 @@ router.post( '/users/register', async ( req, res ) => {
 		.then( async createdUser => {
 			try {
 				await SendMail.createNewUser( newUser.email );
+				console.log(newUser.administrator);
+				if(newUser.administrator == 1){
+					await SendMail.requestAdmin( newUser.email );
+				}
 
 				await prisma.user.deleteMany();
 				var newUserPrisma = await prisma.user.create( {
